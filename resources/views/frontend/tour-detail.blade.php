@@ -138,49 +138,77 @@
     <div>
       <h2 class="font-playfair text-navy text-[24px] font-bold mb-4">Itinerary</h2>
       <div class="w-12 h-[3px] bg-gold rounded-sm mb-6"></div>
-      <div class="space-y-6 pl-7">
-        <div class="it-day">
-          <h3 class="text-[15px] font-bold text-navy mb-1">Meet Your Guide — Meeting Point</h3>
-          <p class="text-[13.5px] text-[#6b7280] leading-relaxed">We'll meet at a central, easy-to-find location and introduce you to your expert local guide for the day.</p>
-        </div>
-        <div class="it-day">
-          <h3 class="text-[15px] font-bold text-navy mb-1">Skip-the-Line Entrance</h3>
-          <p class="text-[13.5px] text-[#6b7280] leading-relaxed">Bypass the queues with priority access tickets included, straight into the heart of the site.</p>
-        </div>
-        <div class="it-day">
-          <h3 class="text-[15px] font-bold text-navy mb-1">Guided Exploration</h3>
-          <p class="text-[13.5px] text-[#6b7280] leading-relaxed">Discover the history, art and legends behind every monument with live commentary from our licensed guide.</p>
-        </div>
-        <div class="it-day">
-          <h3 class="text-[15px] font-bold text-navy mb-1">Hidden Gems &amp; Photo Stops</h3>
-          <p class="text-[13.5px] text-[#6b7280] leading-relaxed">We take you off the beaten path to quiet corners and unforgettable viewpoints most visitors miss.</p>
-        </div>
-        <div class="it-day">
-          <h3 class="text-[15px] font-bold text-navy mb-1">End With Insider Tips</h3>
-          <p class="text-[13.5px] text-[#6b7280] leading-relaxed">Finish with personalised recommendations for food, shopping and what to see next in Rome.</p>
+      <div class="relative">
+        <div class="absolute left-[21px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-gold via-gold/40 to-transparent"></div>
+        <div class="space-y-2">
+          @php
+            $steps = [
+              ['n'=>'01','t'=>'Meet Your Guide — Meeting Point','d'=>'We\'ll meet at a central, easy-to-find location and introduce you to your expert local guide for the day.','bg'=>'from-gold to-gold-dark','ic'=>'M12 2a5 5 0 00-5 5c0 1.9 1 3.6 2.5 4.6L12 20l2.5-8.4C18 10.6 19 8.9 19 7a5 5 0 00-5-5zm0 7a2 2 0 11 0-4 2 2 0 010 4z'],
+              ['n'=>'02','t'=>'Skip-the-Line Entrance','d'=>'Bypass the queues with priority access tickets included, straight into the heart of the site.','bg'=>'from-gold to-gold-dark','ic'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z'],
+              ['n'=>'03','t'=>'Guided Exploration','d'=>'Discover the history, art and legends behind every monument with live commentary from our licensed guide.','bg'=>'from-gold to-gold-dark','ic'=>'M12 3a9 9 0 100 18 9 9 0 000-18zm4 6.8L8.4 15l1.4 2.2L17.4 12 16 9.8z'],
+              ['n'=>'04','t'=>'Hidden Gems &amp; Photo Stops','d'=>'We take you off the beaten path to quiet corners and unforgettable viewpoints most visitors miss.','bg'=>'from-gold to-gold-dark','ic'=>'M4 5h3l2-2h6l2 2h3a2 2 0 012 2v11a2 2 0 01-2 2H4a2 2 0 01-2-2V7a2 2 0 012-2zm12 7a4 4 0 11-8 0 4 4 0 018 0z'],
+              ['n'=>'05','t'=>'End With Insider Tips','d'=>'Finish with personalised recommendations for food, shopping and what to see next in Rome.','bg'=>'from-gold to-gold-dark','ic'=>'M12 2a7 7 0 00-4 12.7c.6.5 1 1.6 1 2.3h6c0-.7.4-1.8 1-2.3A7 7 0 0012 2zm-2 16h4v2h-4v-2zm2-12a3 3 0 100 6 3 3 0 000-6z'],
+            ];
+          @endphp
+          @foreach($steps as $i=>$s)
+          <div class="relative flex gap-5 pb-2">
+            <div class="relative z-10 shrink-0 w-[42px] h-[42px] rounded-full bg-[#0b1623] border border-gold/30 flex items-center justify-center shadow-[0_4px_14px_rgba(200,168,78,.25)]">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="#c8a84e"><path d="{{ $s['ic'] }}"/></svg>
+            </div>
+            <div class="flex-1 pt-[6px]">
+              <span class="inline-block text-[10px] font-bold tracking-[2px] text-gold-dark uppercase mb-1">{{ $s['n'] }}</span>
+              <h3 class="text-[15.5px] font-bold text-navy mb-1 leading-snug">{{ $s['t'] }}</h3>
+              <p class="text-[13.5px] text-[#6b7280] leading-relaxed">{{ $s['d'] }}</p>
+            </div>
+          </div>
+          @endforeach
         </div>
       </div>
     </div>
 
     {{-- INCLUDED / NOT INCLUDED --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="bg-cream rounded-2xl p-6 border border-cream-dark">
-        <h3 class="font-playfair text-navy text-[18px] font-bold mb-4">&#9989; What's Included</h3>
-        <ul class="space-y-2.5">
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#16a34a] font-bold mt-0.5">&#10003;</span>Professional licensed tour guide</li>
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#16a34a] font-bold mt-0.5">&#10003;</span>Skip-the-line priority entry tickets</li>
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#16a34a] font-bold mt-0.5">&#10003;</span>Small group (max 12 people)</li>
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#16a34a] font-bold mt-0.5">&#10003;</span>Headsets to clearly hear your guide</li>
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#16a34a] font-bold mt-0.5">&#10003;</span>Free cancellation up to 24h before</li>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+      @php
+        $included = [
+          ['t'=>'Professional licensed tour guide','i'=>'M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-3.3 0-8 1.7-8 5v3h16v-3c0-3.3-4.7-5-8-5z'],
+          ['t'=>'Skip-the-line priority entry tickets','i'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z'],
+          ['t'=>'Small group (max 12 people)','i'=>'M9 11a4 4 0 100-8 4 4 0 000 8zm7-1a3 3 0 100-6 3 3 0 000 6zm-1.5 2.4A6 6 0 002 18v2h14v-2a6.4 6.4 0 00-1.5-5.6zM14 22H2v2h12v-2zm7-4h-4v2h4v-2z'],
+          ['t'=>'Headsets to clearly hear your guide','i'=>'M12 1a9 9 0 019 9v4a2 2 0 01-2 2h-2c-1.1 0-2-.9-2-2v-3c0-1.1.9-2 2-2h2v-1a7 7 0 10-14 0v1h2c1.1 0 2 .9 2 2v3c0 1.1-.9 2-2 2h-2a3 3 0 003 3h3v-2H4a1 1 0 01-1-1v-6a9 9 0 019-9z'],
+          ['t'=>'Free cancellation up to 24h before','i'=>'M9 16.2l-3.2-3.2-1.4 1.4L9 19 20.6 7.4 19.2 6 9 16.2zM14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM12 12.5A2.5 2.5 0 1114.5 10 2.5 2.5 0 0112 12.5z'],
+        ];
+        $excluded = [
+          ['t'=>'Hotel pickup and drop-off','i'=>'M3 11l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2zM10 21v-6h4v6'],
+          ['t'=>'Food and drinks (unless stated)','i'=>'M18 8a3 3 0 00-6 0c0 1 0 1 .3 2H6a3 3 0 010-6 3 3 0 013 3M7 8h3v6a1 1 0 01-1 1 2 2 0 01-2-2M12 8v13h3'],
+          ['t'=>'Gratuities for your guide','i'=>'M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z'],
+          ['t'=>'Personal expenses and souvenirs','i'=>'M17 8h1a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2v-9a2 2 0 012-2h1m2-2h6M12 2v4'],
+        ];
+      @endphp
+      <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.05)]">
+        <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#16a34a]/10 to-[#16a34a]/3 border-b border-[#16a34a]/15">
+          <span class="w-9 h-9 rounded-full bg-[#16a34a] text-white flex items-center justify-center shrink-0"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.2-3.2-1.4 1.4L9 19 20.6 7.4 19.2 6 9 16.2z"/></svg></span>
+          <h3 class="font-playfair text-navy text-[18px] font-bold">What's Included</h3>
+        </div>
+        <ul class="p-6 space-y-[13px]">
+          @foreach($included as $it)
+          <li class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center shrink-0 ring-1 ring-[#16a34a]/20"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="{{ $it['i'] }}"/></svg></span>
+            <span class="text-[14px] text-[#374151] font-medium leading-snug">{{ $it['t'] }}</span>
+          </li>
+          @endforeach
         </ul>
       </div>
-      <div class="bg-[#fdf0ef] rounded-2xl p-6 border border-[#f5d4cf]">
-        <h3 class="font-playfair text-navy text-[18px] font-bold mb-4">&#10060; Not Included</h3>
-        <ul class="space-y-2.5">
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#dc2626] font-bold mt-0.5">&#10007;</span>Hotel pickup and drop-off</li>
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#dc2626] font-bold mt-0.5">&#10007;</span>Food and drinks (unless stated)</li>
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#dc2626] font-bold mt-0.5">&#10007;</span>Gratuities for your guide</li>
-          <li class="flex items-start gap-2.5 text-[14px] text-[#4b5563]"><span class="text-[#dc2626] font-bold mt-0.5">&#10007;</span>Personal expenses and souvenirs</li>
+      <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.05)]">
+        <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#dc2626]/10 to-[#dc2626]/3 border-b border-[#dc2626]/15">
+          <span class="w-9 h-9 rounded-full bg-[#dc2626] text-white flex items-center justify-center shrink-0"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <h3 class="font-playfair text-navy text-[18px] font-bold">What's Not Included</h3>
+        </div>
+        <ul class="p-6 space-y-[13px]">
+          @foreach($excluded as $it)
+          <li class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-[#dc2626]/10 text-[#dc2626] flex items-center justify-center shrink-0 ring-1 ring-[#dc2626]/20"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="{{ $it['i'] }}"/></svg></span>
+            <span class="text-[14px] text-[#374151] font-medium leading-snug">{{ $it['t'] }}</span>
+          </li>
+          @endforeach
         </ul>
       </div>
     </div>

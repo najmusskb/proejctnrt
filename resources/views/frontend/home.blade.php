@@ -271,53 +271,54 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <!-- TOUR CATEGORIES -->
-<section class="py-20 px-6 bg-white" id="categories">
-  <div class="max-w-[1280px] mx-auto">
+<section class="py-20 px-6 relative" id="categories" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Rome_StPeter_Panorama_02_800.jpg/960px-Rome_StPeter_Panorama_02_800.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+  <div class="absolute inset-0 bg-[rgba(5,12,25,.82)]"></div>
+  <div class="relative max-w-[1280px] mx-auto">
     <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Explore Rome</p>
-    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Find Your Perfect Tour</h2>
+    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Find Your Perfect Tour</h2>
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[40px] leading-[1.7]">Browse by theme &mdash; from ancient monuments to candlelit food strolls, there's a Roman adventure for every traveller.</p>
+    <p class="text-[15px] text-white/75 text-center max-w-[560px] mx-auto mt-3.5 mb-[40px] leading-[1.7]">Browse by theme &mdash; from ancient monuments to candlelit food strolls, there's a Roman adventure for every traveller.</p>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127963;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Rome City Tours</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">12 tours &rarr;</span>
+      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127963;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Rome City Tours</h3>
+        <span class="text-[12px] text-gold-light font-semibold">12 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127858;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Food &amp; Wine Tours</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">6 tours &rarr;</span>
+      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127858;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Food &amp; Wine Tours</h3>
+        <span class="text-[12px] text-gold-light font-semibold">6 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128694;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Walking Tours</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">18 tours &rarr;</span>
+      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128694;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Walking Tours</h3>
+        <span class="text-[12px] text-gold-light font-semibold">18 tours &rarr;</span>
       </a>
-      <a href="{{ url('/services') }}" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128663;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Private Tours</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">8 tours &rarr;</span>
+      <a href="{{ url('/services') }}" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128663;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Private Tours</h3>
+        <span class="text-[12px] text-gold-light font-semibold">8 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127963;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Ancient Rome</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">10 tours &rarr;</span>
+      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127963;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Ancient Rome</h3>
+        <span class="text-[12px] text-gold-light font-semibold">10 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127769;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Night Tours</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">5 tours &rarr;</span>
+      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127769;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Night Tours</h3>
+        <span class="text-[12px] text-gold-light font-semibold">5 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128106;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Family Friendly</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">9 tours &rarr;</span>
+      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128106;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Family Friendly</h3>
+        <span class="text-[12px] text-gold-light font-semibold">9 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
-        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128332;</div>
-        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Vatican Tours</h3>
-        <span class="text-[12px] text-gold-dark font-semibold">7 tours &rarr;</span>
+      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+        <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128332;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Vatican Tours</h3>
+        <span class="text-[12px] text-gold-light font-semibold">7 tours &rarr;</span>
       </a>
     </div>
   </div>
@@ -341,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="tour-card bg-[#0b1623] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="{{ strtolower($tour->badge_type ?? 'popular') }}">
         <div class="tour-card-img relative h-[200px] overflow-hidden">
           <a href="{{ route('tour.detail', $tour->slug) }}">
-            <img src="{{ asset($tour->image ?? 'images/no.png') }}" alt="{{ $tour->name }}" class="w-full h-full object-cover transition-transform duration-300"/>
+            <img src="{{ asset($tour->image ?? 'images/no.png') }}" alt="{{ $tour->name }}" class="w-full h-full object-contain transition-transform duration-300" style="background:#0b1623;"/>
           </a>
           <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
           @if($tour->badge_type)
@@ -399,19 +400,20 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <!-- WHY CHOOSE US -->
-<section class="py-20 px-6 bg-white">
-  <div class="max-w-[1280px] mx-auto">
+<section class="py-20 px-6 relative" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Panorama_view_from_the_dome_of_the_St._Peter%27s_Basilica.jpg/960px-Panorama_view_from_the_dome_of_the_St._Peter%27s_Basilica.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+  <div class="absolute inset-0 bg-[rgba(8,16,30,.85)]"></div>
+  <div class="relative max-w-[1280px] mx-auto">
     <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Why Choose Us</p>
-    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Why Book With Nice In Rome Tour</h2>
+    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Why Book With Nice In Rome Tour</h2>
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">We make your Rome experience extraordinary with personalized service and instant booking.</p>
+    <p class="text-[15px] text-white/75 text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">We make your Rome experience extraordinary with personalized service and instant booking.</p>
     <div class="why-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#128172;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">WhatsApp Instant Booking</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Book your tour in seconds — availability confirmed instantly, 24/7. Chat like a friend, not a customer.</p></div>
-      <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127963;&#65039;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">Skip the Line Access</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Exclusive priority access to Rome's most visited monuments. No waiting, no stress — just pure history.</p></div>
-      <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127758;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">7 Languages Spoken</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Our expert guides speak Italian, English, Spanish, French, Arabic and more for a truly personal experience.</p></div>
-      <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#9989;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">Free Cancellation</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Flexible booking with free cancellation on all tours. Book with confidence — plans change, we understand.</p></div>
-      <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#11088;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">4.8&#9733; Average Rating</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Trusted by 35,000+ happy tourists worldwide. Our reputation is built on unforgettable experiences.</p></div>
-      <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127919;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">Small Group Tours</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Intimate small-group experiences that make you feel like a VIP, not just another tourist in the crowd.</p></div>
+      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#128172;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">WhatsApp Instant Booking</h3><p class="text-[14px] text-white/70 leading-[1.7]">Book your tour in seconds — availability confirmed instantly, 24/7. Chat like a friend, not a customer.</p></div>
+      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127963;&#65039;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Skip the Line Access</h3><p class="text-[14px] text-white/70 leading-[1.7]">Exclusive priority access to Rome's most visited monuments. No waiting, no stress — just pure history.</p></div>
+      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127758;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">7 Languages Spoken</h3><p class="text-[14px] text-white/70 leading-[1.7]">Our expert guides speak Italian, English, Spanish, French, Arabic and more for a truly personal experience.</p></div>
+      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#9989;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Free Cancellation</h3><p class="text-[14px] text-white/70 leading-[1.7]">Flexible booking with free cancellation on all tours. Book with confidence — plans change, we understand.</p></div>
+      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#11088;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">4.8&#9733; Average Rating</h3><p class="text-[14px] text-white/70 leading-[1.7]">Trusted by 35,000+ happy tourists worldwide. Our reputation is built on unforgettable experiences.</p></div>
+      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127919;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Small Group Tours</h3><p class="text-[14px] text-white/70 leading-[1.7]">Intimate small-group experiences that make you feel like a VIP, not just another tourist in the crowd.</p></div>
     </div>
   </div>
 </section>
@@ -465,46 +467,75 @@ document.addEventListener('DOMContentLoaded', function() {
     <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Rome Experience Packages</h2>
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
     <p class="text-[15px] text-white/60 text-center max-w-[560px] mx-auto mt-3.5 mb-10 leading-[1.7]">Discover Rome's greatest treasures — handcrafted full-day packages covering the Eternal City's must-see landmarks.</p>
-    <div class="pkg-slider-wrap relative">
-      <div class="pkg-track flex gap-5 overflow-x-auto scroll-smooth pb-4" id="pkgTrack" style="scrollbar-width:none;-ms-overflow-style:none">
-        @foreach($packages as $pkg)
-        <div class="pkg-card flex-shrink-0 w-[300px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer group">
-          <div class="relative h-[200px] overflow-hidden">
-            <img src="{{ asset($pkg->image ?? 'images/no.png') }}" alt="{{ $pkg->name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
-            @if($pkg->badge_label)
-            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px] uppercase">{{ $pkg->badge_label }}</span>
-            @endif
-            @if($pkg->badge_icon)
-            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">{{ $pkg->badge_icon }}</span>
-            @endif
-          </div>
-          <div class="p-5">
-            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">{{ $pkg->name }}</h3>
-            @if($pkg->subtitle)
-            <p class="text-[13px] text-white/50 mb-3">{{ $pkg->subtitle }}</p>
-            @endif
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              @if(!empty($pkg->highlights))
-                @foreach((array)$pkg->highlights as $highlight)
-                <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">{{ $highlight }}</span>
-                @endforeach
-              @endif
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/10">
-              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;{{ $pkg->price }}</span><span class="text-white/40 text-[12px]">/person</span></div>
-              <span class="text-gold text-[13px] font-semibold">Book &rarr;</span>
-            </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Package 1: Colosseum -->
+      <div class="group bg-white/5 rounded-2xl overflow-hidden border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer">
+        <div class="relative h-[200px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Colosseum_of_Rome%2C_Italy.jpg/960px-Colosseum_of_Rome%2C_Italy.jpg" alt="Ancient Rome Package" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px] uppercase">Bestseller</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Ancient Rome Package</h3>
+          <p class="text-[13px] text-white/50 mb-3">Colosseum, Roman Forum &amp; Palatine Hill</p>
+          <div class="flex items-center justify-between pt-3 border-t border-white/10">
+            <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;89</span><span class="text-white/40 text-[12px]">/person</span></div>
+            <span class="text-gold text-[13px] font-semibold">Book &rarr;</span>
           </div>
         </div>
-        @endforeach
       </div>
-      <!-- Slider Arrows -->
-      <button class="pkg-arrow pkg-arrow-l absolute top-1/2 -translate-y-1/2 left-0 w-[42px] h-[42px] rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:border-gold hover:text-navy z-10" onclick="slidePkg(-1)">&#10094;</button>
-      <button class="pkg-arrow pkg-arrow-r absolute top-1/2 -translate-y-1/2 right-0 w-[42px] h-[42px] rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:border-gold hover:text-navy z-10" onclick="slidePkg(1)">&#10095;</button>
+
+      <!-- Package 2: Vatican -->
+      <div class="group bg-white/5 rounded-2xl overflow-hidden border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer">
+        <div class="relative h-[200px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/960px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg" alt="Vatican Highlights Package" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px] uppercase">Popular</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Vatican Highlights Package</h3>
+          <p class="text-[13px] text-white/50 mb-3">Museums, Sistine Chapel &amp; St. Peter's</p>
+          <div class="flex items-center justify-between pt-3 border-t border-white/10">
+            <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;109</span><span class="text-white/40 text-[12px]">/person</span></div>
+            <span class="text-gold text-[13px] font-semibold">Book &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Package 3: Roman Forum -->
+      <div class="group bg-white/5 rounded-2xl overflow-hidden border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer">
+        <div class="relative h-[200px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/2002_Rome_Roman_Forum_%26_Palatine_01.jpg/960px-2002_Rome_Roman_Forum_%26_Palatine_01.jpg" alt="Roman Forum Walking Package" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px] uppercase">Small Group</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Forum &amp; Palatine Walk</h3>
+          <p class="text-[13px] text-white/50 mb-3">Guided walk through Ancient Rome's heart</p>
+          <div class="flex items-center justify-between pt-3 border-t border-white/10">
+            <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;59</span><span class="text-white/40 text-[12px]">/person</span></div>
+            <span class="text-gold text-[13px] font-semibold">Book &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Package 4: Twilight -->
+      <div class="group bg-white/5 rounded-2xl overflow-hidden border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer">
+        <div class="relative h-[200px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/The_Pantheon_at_dusk.jpg/960px-The_Pantheon_at_dusk.jpg" alt="Rome Twilight Package" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px] uppercase">Romantic</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Rome at Twilight</h3>
+          <p class="text-[13px] text-white/50 mb-3">Pantheon, piazzas &amp; glowing fountains</p>
+          <div class="flex items-center justify-between pt-3 border-t border-white/10">
+            <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;75</span><span class="text-white/40 text-[12px]">/person</span></div>
+            <span class="text-gold text-[13px] font-semibold">Book &rarr;</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- Dots -->
-    <div class="flex justify-center gap-2 mt-6" id="pkgDots"></div>
   </div>
 </section>
 
@@ -520,7 +551,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Luggage Storage -->
       <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
         <div class="relative h-[150px] overflow-hidden">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Roma_2013_-_Termini_rail.jpg/960px-Roma_2013_-_Termini_rail.jpg" alt="Luggage storage in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Main_entrance_hall_at_Roma_Termini_Railway_Station_in_Rome%2C_Italy.jpg/960px-Main_entrance_hall_at_Roma_Termini_Railway_Station_in_Rome%2C_Italy.jpg" alt="Luggage storage in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
           <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
             <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#128718;</div>
@@ -536,7 +567,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Airport Transfer -->
       <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
         <div class="relative h-[150px] overflow-hidden">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Aletti_Fiumicino_-_arrivi_14_(cropped).jpg/960px-Aletti_Fiumicino_-_arrivi_14_(cropped).jpg" alt="Airport transfer in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Rome_Fiumicino_international_airport_-_Main_entrance_with_streets.jpg/960px-Rome_Fiumicino_international_airport_-_Main_entrance_with_streets.jpg" alt="Airport transfer in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
           <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
             <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#9992;&#65039;</div>
@@ -552,7 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Private Taxi -->
       <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
         <div class="relative h-[150px] overflow-hidden">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Rome_taxi.jpg/960px-Rome_taxi.jpg" alt="Private taxi service in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Colosseum_of_Rome_and_Roman_forum.jpg/960px-Colosseum_of_Rome_and_Roman_forum.jpg" alt="Private taxi service in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
           <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
             <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#128663;</div>
@@ -568,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Golf Cart Tour -->
       <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
         <div class="relative h-[150px] overflow-hidden">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Colosseum_at_blue_hour.jpg/960px-Colosseum_at_blue_hour.jpg" alt="Golf cart tour in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/960px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg" alt="Golf cart tour in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
           <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
             <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#127937;</div>
@@ -627,15 +658,15 @@ document.addEventListener('DOMContentLoaded', function() {
     <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">Insider guides, travel tips and stories from Rome's hidden corners.</p>
     <div class="blog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)]">
-        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Colosseo_di_Roma_sotterranei.jpg/960px-Colosseo_di_Roma_sotterranei.jpg" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
+        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Colosseum_Arena_%285986632567%29.jpg/960px-Colosseum_Arena_%285986632567%29.jpg" alt="Colosseum underground and arena" class="w-full h-full object-cover transition-transform duration-300"/></div>
         <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">History</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">The Colosseum's Secret Underground — What Most Tourists Miss</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">Discover the hypogeum, the labyrinthine underground network where gladiators and wild animals once waited...</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; Aug 15, 2026 &nbsp;&middot;&nbsp; 5 min read</p><a href="#" class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</a></div>
       </div>
       <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)]">
-        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Vatican_Museum_Spiral_Staircase.jpg/960px-Vatican_Museum_Spiral_Staircase.jpg" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
+        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Vatican_Museums_Spiral_Staircase_Looking_Up_2012.jpg/960px-Vatican_Museums_Spiral_Staircase_Looking_Up_2012.jpg" alt="Vatican Museums spiral staircase" class="w-full h-full object-cover transition-transform duration-300"/></div>
         <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">Guide</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">Vatican Museums: The Complete Visitor's Guide for 2026</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">Everything you need to know about visiting the Vatican — best times, what to skip, and the must-sees...</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; Aug 10, 2026 &nbsp;&middot;&nbsp; 7 min read</p><a href="#" class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</a></div>
       </div>
       <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)]">
-        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Trevi_Fountain_-_Roma.jpg/960px-Trevi_Fountain_-_Roma.jpg" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
+        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Trevi_Fountain_-_Roma.jpg/960px-Trevi_Fountain_-_Roma.jpg" alt="Trevi Fountain in Rome" class="w-full h-full object-cover transition-transform duration-300"/></div>
         <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">Tips</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">Best Time to Visit Trevi Fountain Without the Crowds</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">The Trevi Fountain is magical — but when is the best time to visit and actually enjoy it in peace?...</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; Aug 5, 2026 &nbsp;&middot;&nbsp; 4 min read</p><a href="#" class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</a></div>
       </div>
     </div>
@@ -643,75 +674,112 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="py-20 px-6 bg-cream relative overflow-hidden" id="reviews">
+<section class="py-20 px-6 relative overflow-hidden" id="reviews" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Colosseum_of_Rome%2C_Italy.jpg/960px-Colosseum_of_Rome%2C_Italy.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+  <div class="absolute inset-0 bg-[rgba(7,14,26,.86)]"></div>
   <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
   <div class="max-w-[1280px] mx-auto relative z-10">
     <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Loved by Travellers</p>
-    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">What Our Guests Say</h2>
+    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">What Our Guests Say</h2>
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
     <div class="flex items-center justify-center gap-2 mt-4 mb-[38px]">
-      <span class="text-[18px] font-extrabold text-navy">4.8</span>
+      <span class="text-[18px] font-extrabold text-white">4.8</span>
       <span class="text-[#fbbf24] text-[15px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-      <span class="text-[13px] text-[#6b7280]">Based on 2,300+ verified reviews</span>
+      <span class="text-[13px] text-white/60">Based on 2,300+ verified reviews</span>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
-        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"The Colosseum tour with skip-the-line access was flawless. Mr. J's team made everything effortless — we booked on WhatsApp in under a minute!"</p>
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-gold to-gold-dark text-navy font-bold flex items-center justify-center text-[15px]">EL</div>
-          <div><div class="text-[14px] font-bold text-navy">Emily &amp; Luke</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, UK</div></div>
+    <div class="relative" id="tmSlider">
+      <div class="overflow-hidden">
+        <div class="tm-track flex" id="tmTrack" style="transition:transform .6s cubic-bezier(.22,1,.36,1)">
+          @php
+            $reviews = [
+              ['t'=>'The Colosseum tour with skip-the-line access was flawless. Mr. J\'s team made everything effortless — we booked on WhatsApp in under a minute!','i'=>'EL','n'=>'Emily &amp; Luke','c'=>'Verified Travellers, UK','g'=>'from-gold to-gold-dark text-navy'],
+              ['t'=>'Vatican Museums at opening was magical. Our guide spoke perfect English and Spanish for my parents. Worth every euro — book it!','i'=>'MC','n'=>'Marco &amp; Camila','c'=>'Verified Travellers, Spain','g'=>'from-navy to-navy-light text-gold'],
+              ['t'=>'Free cancellation saved my trip when my flight changed. The team rearranged everything instantly via WhatsApp. Truly premium service.','i'=>'SG','n'=>'Sarah Green','c'=>'Verified Traveller, USA','g'=>'from-gold to-gold-dark text-navy'],
+              ['t'=>'The golf cart tour was the highlight of our honeymoon! Covered more of Rome in one evening than days of walking. So romantic at sunset.','i'=>'PD','n'=>'Priya &amp; Daniel','c'=>'Verified Travellers, India / Canada','g'=>'from-navy to-navy-light text-gold'],
+              ['t'=>'Luggage storage + airport transfer package was genius. We landed, dropped bags, toured the Pantheon, and reached our hotel stress-free.','i'=>'HK','n'=>'Hiro &amp; Keiko','c'=>'Verified Travellers, Japan','g'=>'from-gold to-gold-dark text-navy'],
+              ['t'=>'As a solo traveller I felt completely safe and looked after. The small group size meant the guide could tailor everything to us. 10/10.','i'=>'AB','n'=>'Aisha B.','c'=>'Verified Traveller, Australia','g'=>'from-navy to-navy-light text-gold'],
+            ];
+            $perView = 3;
+          @endphp
+          @foreach($reviews as $rv)
+          <div class="tm-card flex-shrink-0 px-2.5 w-full sm:w-1/2 lg:w-1/3">
+            <div class="bg-white/7 backdrop-blur-sm rounded-2xl p-6 border border-white/15 h-full hover:border-gold/40 hover:bg-white/10 transition-all duration-300 xl:min-h-[280px]">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-1 text-[#fbbf24] text-[13px]">{!! str_repeat('&#9733;',5) !!}</div>
+                <span class="text-[#c8a84e]/40 text-[30px] leading-none">&ldquo;</span>
+              </div>
+              <p class="text-[14px] leading-[1.75] text-white/85 mb-4">"{{ $rv['t'] }}"</p>
+              <div class="flex items-center gap-3 mt-auto">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br {{ $rv['g'] }} font-bold flex items-center justify-center text-[15px] shrink-0">{{ $rv['i'] }}</div>
+                <div><div class="text-[14px] font-bold text-white">{{ $rv['n'] }}</div><div class="text-[12px] text-white/50">{{ $rv['c'] }}</div></div>
+              </div>
+            </div>
+          </div>
+          @endforeach
         </div>
       </div>
-      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
-        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"Vatican Museums at opening was magical. Our guide spoke perfect English and Spanish for my parents. Worth every euro — book it!"</p>
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-navy to-navy-light font-bold text-gold flex items-center justify-center text-[15px]">MC</div>
-          <div><div class="text-[14px] font-bold text-navy">Marco &amp; Camila</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, Spain</div></div>
-        </div>
-      </div>
-      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
-        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"Free cancellation saved my trip when my flight changed. The team rearranged everything instantly via WhatsApp. Truly premium service."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-gold to-gold-dark text-navy font-bold flex items-center justify-center text-[15px]">SG</div>
-          <div><div class="text-[14px] font-bold text-navy">Sarah Green</div><div class="text-[12px] text-[#9ca3af]">Verified Traveller, USA</div></div>
-        </div>
-      </div>
-      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
-        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"The golf cart tour was the highlight of our honeymoon! Covered more of Rome in one evening than days of walking. So romantic at sunset."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-navy to-navy-light font-bold text-gold flex items-center justify-center text-[15px]">PD</div>
-          <div><div class="text-[14px] font-bold text-navy">Priya &amp; Daniel</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, India / Canada</div></div>
-        </div>
-      </div>
-      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
-        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"Luggage storage + airport transfer package was genius. We landed, dropped bags, toured the Pantheon, and reached our hotel stress-free."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-gold to-gold-dark text-navy font-bold flex items-center justify-center text-[15px]">HK</div>
-          <div><div class="text-[14px] font-bold text-navy">Hiro &amp; Keiko</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, Japan</div></div>
-        </div>
-      </div>
-      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
-        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"As a solo traveller I felt completely safe and looked after. The small group size meant the guide could tailor everything to us. 10/10."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-navy to-navy-light font-bold text-gold flex items-center justify-center text-[15px]">AB</div>
-          <div><div class="text-[14px] font-bold text-navy">Aisha B.</div><div class="text-[12px] text-[#9ca3af]">Verified Traveller, Australia</div></div>
-        </div>
-      </div>
+
+      <!-- Arrows -->
+      <button class="absolute -left-2 lg:-left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:border-gold hover:text-navy" onclick="tmMove(-1)" aria-label="Previous">&#10094;</button>
+      <button class="absolute -right-2 lg:-right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:border-gold hover:text-navy" onclick="tmMove(1)" aria-label="Next">&#10095;</button>
     </div>
+
+    <!-- Dots -->
+    <div class="flex justify-center gap-2 mt-7" id="tmDots"></div>
 
     <div class="flex items-center justify-center gap-2.5 mt-9">
       <a href="#" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-3 px-7 rounded-[10px] text-[13px] font-bold no-underline transition-all hover:bg-gold-dark hover:-translate-y-0.5">&starf; Read All Reviews</a>
-      <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy py-3 px-7 rounded-[10px] text-[13px] font-semibold no-underline transition-all hover:bg-navy hover:text-white">&#128172; Share Your Experience</a>
+      <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center gap-2 bg-transparent text-white border-2 border-white/25 py-3 px-7 rounded-[10px] text-[13px] font-semibold no-underline transition-all hover:bg-white hover:text-navy">&#128172; Share Your Experience</a>
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var track=document.getElementById('tmTrack');
+  if(!track)return;
+  var cards=track.querySelectorAll('.tm-card');
+  var perView=3, cur=0, autoTimer=null;
+  var dotsWrap=document.getElementById('tmDots');
+
+  function perViewCount(){
+    if(window.innerWidth<640)return 1;
+    if(window.innerWidth<1024)return 2;
+    return 3;
+  }
+  function maxIndex(){return Math.max(0,cards.length-perViewCount());}
+  function render(){
+    perView=perViewCount();
+    if(cur>maxIndex())cur=maxIndex();
+    var card=cards[0].getBoundingClientRect();
+    track.style.transform='translateX('+(-cur*(card.width))+'px)';
+    renderDots();
+  }
+  function renderDots(){
+    dotsWrap.innerHTML='';
+    var total=maxIndex()+1;
+    for(var i=0;i<total;i++){
+      var d=document.createElement('button');
+      d.className='tm-dot'+(i===cur?' active':'')+' w-2.5 h-2.5 rounded-full border-none cursor-pointer transition-all';
+      d.style.background=(i===cur)?'#c8a84e':'rgba(255,255,255,.3)';
+      d.style.width=(i===cur)?'26px':'10px';
+      d.style.borderRadius=(i===cur)?'4px':'9999px';
+      (function(n){d.onclick=function(){cur=n;render();reset();};})(i);
+      d.setAttribute('aria-label','Review slide '+(i+1));
+      dotsWrap.appendChild(d);
+    }
+  }
+  function move(dir){cur+=dir;if(cur<0)cur=maxIndex();if(cur>maxIndex())cur=0;render();reset();}
+  window.tmMove=move;
+  function reset(){clearTimeout(autoTimer);autoTimer=setTimeout(function(){move(1);},5000);}
+  window.addEventListener('resize',render);
+  render();
+  reset();
+  var sec=document.getElementById('tmSlider');
+  sec.addEventListener('mouseenter',function(){clearTimeout(autoTimer);});
+  sec.addEventListener('mouseleave',reset);
+})();
+</script>
 
 <!-- SPECIAL OFFERS / DEALS -->
 <section class="py-20 px-6 bg-cream relative overflow-hidden" id="deals">
@@ -779,39 +847,33 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
 
-    <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2.5">
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/960px-Colosseo_2020.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+      @php
+        $shots = [
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/960px-Colosseo_2020.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1280px-Colosseo_2020.jpg','t'=>'Colosseum','l'=>1472,'c'=>218,'span'=>'lg:col-span-2 lg:row-span-2'],
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/960px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/1280px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg','t'=>'St. Peter\'s Basilica','l'=>2034,'c'=>322,'span'=>'md:col-span-2 lg:col-span-2'],
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/VaticanMuseumStaircase.jpg/960px-VaticanMuseumStaircase.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/VaticanMuseumStaircase.jpg/1280px-VaticanMuseumStaircase.jpg','t'=>'Vatican Museums','l'=>921,'c'=>187,'span'=>''],
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/960px-Fontana_di_Trevi_by_TC.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/1280px-Fontana_di_Trevi_by_TC.jpg','t'=>'Trevi Fountain','l'=>1108,'c'=>241,'span'=>''],
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Foro_Romano_Musei_Capitolini_Roma.jpg/960px-Foro_Romano_Musei_Capitolini_Roma.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Foro_Romano_Musei_Capitolini_Roma.jpg/1280px-Foro_Romano_Musei_Capitolini_Roma.jpg','t'=>'Roman Forum','l'=>763,'c'=>129,'span'=>''],
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Galleria_borghese_facade.jpg/960px-Galleria_borghese_facade.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Galleria_borghese_facade.jpg/1280px-Galleria_borghese_facade.jpg','t'=>'Galleria Borghese','l'=>583,'c'=>96,'span'=>''],
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg/960px-Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg/1280px-Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg','t'=>'Colosseum at Night','l'=>1987,'c'=>354,'span'=>''],
+          ['img'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg/960px-Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg','full'=>'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg/1280px-Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg','t'=>'Via dei Fori Imperiali','l'=>884,'c'=>160,'span'=>''],
+        ];
+      @endphp
+      @foreach($shots as $i=>$s)
+      <a href="#" onclick="return gOpen({{ $i }})" class="group relative overflow-hidden rounded-xl {{ $s['span'] }}" style="height:{{ $i===0?'100%':'170px' }}">
+        <img src="{{ $s['img'] }}" alt="{{ $s['t'] }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/85 via-transparent to-[#bc1888]/0 opacity-70 group-hover:opacity-90 transition-opacity"></span>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-gradient-to-tr group-hover:from-[#bc1888]/40 group-hover:via-[#dc2743]/25 group-hover:to-[#f09433]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><span class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span></span>
+        <span class="absolute bottom-0 inset-x-0 p-3 flex items-center justify-between">
+          <span class="text-[12px] font-bold text-white tracking-wide drop-shadow">{{ $s['t'] }}</span>
+          <span class="flex items-center gap-2.5 text-white">
+            <span class="flex items-center gap-1 text-[11px]"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.7-4.35-9.33-8.11C.9 10.34 1.36 6.6 4.06 5.02 6.9 3.36 9.6 4.42 12 7.1c2.4-2.68 5.1-3.74 7.94-2.08 2.7 1.58 3.16 5.32.39 7.87C18.7 16.65 12 21 12 21z"/></svg>{{ number_format($s['l']) }}</span>
+            <span class="flex items-center gap-1 text-[11px]"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21a9 9 0 1 1 9-9 9 9 0 0 1-9 9zm0-1.5A7.5 7.5 0 1 0 4.5 12 7.5 7.5 0 0 0 12 19.5zm-3.3-3.5L12 14l3.3 2-.9-3.7 3-2.6-3.9-.3-1.5-3.6-1.5 3.6-3.9.3 3 2.6z"/></svg>{{ number_format($s['c']) }}</span>
+          </span>
+        </span>
       </a>
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/VaticanMuseumStaircase.jpg/960px-VaticanMuseumStaircase.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
-      </a>
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Foro_Romano_Musei_Capitolini_Roma.jpg/960px-Foro_Romano_Musei_Capitolini_Roma.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
-      </a>
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/960px-Fontana_di_Trevi_by_TC.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
-      </a>
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Galleria_borghese_facade.jpg/960px-Galleria_borghese_facade.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
-      </a>
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/960px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
-      </a>
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg/960px-Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
-      </a>
-      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg/960px-Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
-      </a>
+      @endforeach
     </div>
 
     <div class="text-center mt-8">
@@ -819,6 +881,48 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </section>
+
+<!-- Instagram-style Lightbox -->
+<div id="gLightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-[rgba(5,10,20,.95)] backdrop-blur-sm" style="display:none">
+  <button id="gClose" class="absolute top-5 right-6 w-11 h-11 rounded-full bg-white/10 border border-white/25 text-white text-xl flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:text-navy" aria-label="Close">&times;</button>
+  <button id="gPrev" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:border-gold hover:text-navy z-10" aria-label="Previous">&#10094;</button>
+  <button id="gNext" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:border-gold hover:text-navy z-10" aria-label="Next">&#10095;</button>
+  <div class="max-w-[900px] w-[92%] mx-auto text-center">
+    <img id="gImg" src="" alt="" class="max-h-[76vh] w-auto max-w-full rounded-xl shadow-[0_20px_60px_rgba(0,0,0,.6)] mx-auto object-contain"/>
+    <div id="gTitle" class="text-white font-semibold text-[14px] mt-5 tracking-wide"></div>
+    <div id="gCount" class="text-[12px] text-white/50 mt-1.5"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var shots=@json($shots);
+  var box=document.getElementById('gLightbox'), img=document.getElementById('gImg'),
+      ttl=document.getElementById('gTitle'), cnt=document.getElementById('gCount'),
+      cur=0;
+  window.gOpen=function(i){
+    cur=i; show(); box.style.display='flex';
+    return false;
+  };
+  function show(){
+    img.src=shots[cur].full;
+    img.alt=shots[cur].t;
+    ttl.textContent=shots[cur].t;
+    cnt.textContent='@niceinrometour · '+(cur+1)+' / '+shots.length;
+  }
+  document.getElementById('gClose').onclick=function(){box.style.display='none';};
+  document.getElementById('gPrev').onclick=function(){cur=(cur-1+shots.length)%shots.length;show();};
+  document.getElementById('gNext').onclick=function(){cur=(cur+1)%shots.length;show();};
+  box.onclick=function(e){if(e.target===box){box.style.display='none';}};
+  document.addEventListener('keydown',function(e){
+    if(box.style.display==='flex'){
+      if(e.key==='Escape')box.style.display='none';
+      if(e.key==='ArrowLeft'){cur=(cur-1+shots.length)%shots.length;show();}
+      if(e.key==='ArrowRight'){cur=(cur+1)%shots.length;show();}
+    }
+  });
+})();
+</script>
 
 <!-- CTA -->
 <section class="bg-navy py-[90px] px-6 text-center relative overflow-hidden" id="cta">

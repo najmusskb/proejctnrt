@@ -103,12 +103,7 @@
   </div>
 
   <!-- Bottom bar -->
-  <div class="footer-grid max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between flex-wrap gap-[15px]">
-    <p class="text-[12px] text-white/45 text-center md:text-left">&copy; {{ date('Y') }} {{ $content->com_name ?? 'Nice In Rome Tour' }}. All rights reserved.</p>
-    <div class="flex flex-wrap justify-center gap-[18px]">
-      <a href="#" class="text-[12px] text-white/45 no-underline transition-colors hover:text-gold">Privacy Policy</a>
-      <a href="#" class="text-[12px] text-white/45 no-underline transition-colors hover:text-gold">Terms &amp; Conditions</a>
-      <a href="#" class="text-[12px] text-white/45 no-underline transition-colors hover:text-gold">Cancellation Policy</a>
-    </div>
+  <div class="footer-grid max-w-[1280px] mx-auto text-center">
+    <p class="text-[12px] text-white/45">&copy; {{ date('Y') }} {{ $content->com_name ?? 'Nice In Rome Tour' }}. All rights reserved.</p>
   </div>
 </footer>

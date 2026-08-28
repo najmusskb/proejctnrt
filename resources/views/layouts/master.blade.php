@@ -253,8 +253,6 @@
             <div id="layoutSidenav_content">
 
                 @yield('main-content') 
-                
-                @include('partials.footer')
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
