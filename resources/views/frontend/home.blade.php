@@ -104,6 +104,10 @@
 .filter-submit-btn:hover { background: #133866; }
 @media (max-width: 768px) {
     .filter-input, .filter-submit-btn { width: 100%; }
+    .custom-wow-overlay { top: 15%; left: 5%; width: 90%; }
+    .cst-title { font-size: clamp(32px, 8vw, 45px); margin-bottom: 15px; }
+    .cst-buttons { flex-direction: column; gap: 12px; }
+    .cst-btn { width: 100%; justify-content: center; }
 }
 /* Hide default wowslider titles and controls */
 .ws-title { display: none !important; }

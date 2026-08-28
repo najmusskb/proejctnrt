@@ -842,7 +842,15 @@ body{font-family:'Inter',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x:
 
 /* Responsive */
 @media(max-width:1100px){.tour-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.hero-title{font-size:clamp(32px,7vw,56px) !important}}
+@media(max-width:900px){
+  .blog-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hero-title{font-size:clamp(32px,7vw,56px) !important}
+  .nav-links, .nav-search-inline, .nav-lang-btn, .nav-account-btn, .nav-divider { display: none !important; }
+  .nav-ham { display: flex !important; margin-left: auto; }
+  .nav-inner { padding: 0 16px; }
+  .nav-logo { margin-right: auto; }
+}
 @media(max-width:768px){.tour-grid{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:1fr}}
 @media(max-width:580px){.blog-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.tour-grid{grid-template-columns:1fr}}
