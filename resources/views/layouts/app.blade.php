@@ -230,6 +230,22 @@ body{font-family:'Inter',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x:
   border:2px solid #0b1623;
   line-height:1;
 }
+.nav-search-btn{
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.82);
+  width:40px;height:40px;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:all .25s;
+}
+.nav-search-btn:hover{
+  background:rgba(200,168,78,.12);
+  border-color:rgba(200,168,78,.4);
+  color:#c8a84e;
+  transform:translateY(-1px);
+}
 .nav-account-btn{
   display:flex;
   align-items:center;
@@ -469,6 +485,8 @@ body{font-family:'Inter',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x:
   border-color:rgba(200,168,78,.35);
   color:#c8a84e;
 }
+.bg-tour-card { background: #0b1623; }
+.bg-cream { background: #fdfbf7; }
 .nav-search-tag svg{width:12px;height:12px;margin-right:4px;vertical-align:-1px}
 
 /* Hero Search Section */
@@ -533,11 +551,11 @@ body{font-family:'Inter',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x:
 /* === DESTINATION SLIDER === */
 #destinations{
   position:relative;
-  background:url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1920&q=80&fit=crop') center/cover no-repeat fixed;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/960px-Colosseo_2020.jpg') center/cover no-repeat fixed;
 }
 #destinations::before{
   content:'';position:absolute;inset:0;
-  background:rgba(11,22,35,.45);
+  background:rgba(5,12,25,.72);
   z-index:0;
 }
 #destinations .dest-bg-overlay{
@@ -841,19 +859,24 @@ body{font-family:'Inter',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x:
 .about-search-overlay{position:fixed;inset:0;background:rgba(11,22,35,.4);z-index:9;opacity:0;pointer-events:none;transition:opacity .4s;backdrop-filter:blur(4px)}
 
 /* Responsive */
-@media(max-width:1100px){.tour-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){
-  .blog-grid{grid-template-columns:1fr 1fr}
-  .footer-grid{grid-template-columns:1fr 1fr}
   .hero-title{font-size:clamp(32px,7vw,56px) !important}
   .nav-links, .nav-search-inline, .nav-lang-btn, .nav-account-btn, .nav-divider { display: none !important; }
   .nav-ham { display: flex !important; margin-left: auto; }
   .nav-inner { padding: 0 16px; }
-  .nav-logo { margin-right: auto; }
+  .nav-logo { margin-right: auto; gap: 8px; flex-shrink: 0; min-width: max-content; }
+  .nav-logo-text { display: flex !important; }
+  .nav-logo-title { font-size: 16px !important; letter-spacing: 0.5px; white-space: nowrap !important; line-height: 1.1; display: block !important; visibility: visible !important; opacity: 1 !important; }
+  .nav-logo img { height: 38px !important; }
+  .nav-logo-badge { width: 38px; height: 38px; }
 }
-@media(max-width:768px){.tour-grid{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:1fr}}
-@media(max-width:580px){.blog-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
-@media(max-width:480px){.tour-grid{grid-template-columns:1fr}}
+@media(max-width:480px){
+  .nav-logo { min-width: auto; max-width: 70%; overflow: hidden; }
+  .nav-logo-text { display: flex !important; }
+  .nav-logo-title { font-size: 13px !important; white-space: normal !important; display: block !important; visibility: visible !important; opacity: 1 !important; }
+  .nav-logo img { height: 32px !important; }
+  .nav-logo-badge { width: 32px; height: 32px; min-width: 32px; }
+}
 
 /* PREMIUM FLOATING SOCIAL BAR (Vertical Middle Right) */
 .fs-bar {
@@ -981,6 +1004,7 @@ function showMore(){
 (function(){
   var slider=document.getElementById('smartSlider');
   var track=document.getElementById('ssTrack');
+  if(!slider || !track) return;
   var slides=track.querySelectorAll('.ss-slide');
   var bar=document.getElementById('ssBar');
   var numEl=document.getElementById('ssNum');

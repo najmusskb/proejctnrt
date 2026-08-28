@@ -35,6 +35,11 @@
     <div class="nav-divider"></div>
     <div class="nav-actions">
 
+      <!-- Search -->
+      <button class="nav-search-btn" aria-label="Search tours" onclick="toggleNavSearch()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+
       <!-- Language -->
       <button class="nav-lang-btn" aria-label="Change language">
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
@@ -60,6 +65,26 @@
     </div>
   </div>
 </nav>
+
+<!-- Header Search Overlay & Dropdown -->
+<div class="nav-search-overlay" id="navSearchOverlay" onclick="toggleNavSearch()"></div>
+<div class="nav-search-dropdown" id="navSearchDropdown">
+  <button class="nav-search-close" onclick="toggleNavSearch()" aria-label="Close search">&#10005;</button>
+  <div class="nav-search-inner">
+    <div class="nav-search-input-wrap">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" class="nav-search-input" id="navSearchInput" placeholder="Search tours, destinations, experiences..." onkeydown="if(event.key==='Enter'){toggleNavSearch();document.getElementById('tours').scrollIntoView({behavior:'smooth'});}" autocomplete="off"/>
+    </div>
+    <div class="nav-search-suggestions">
+      <button class="nav-search-tag" onclick="fillSearch('Colosseum')">Colosseum</button>
+      <button class="nav-search-tag" onclick="fillSearch('Vatican')">Vatican</button>
+      <button class="nav-search-tag" onclick="fillSearch('Roman Forum')">Roman Forum</button>
+      <button class="nav-search-tag" onclick="fillSearch('Trevi Fountain')">Trevi Fountain</button>
+      <button class="nav-search-tag" onclick="fillSearch('Golf Cart')">Golf Cart</button>
+      <button class="nav-search-tag" onclick="fillSearch('St. Peter\'s')">St. Peter's</button>
+    </div>
+  </div>
+</div>
 
 <!-- Mobile Drawer -->
 <div class="nav-mobile-drawer" id="navMobileDrawer">

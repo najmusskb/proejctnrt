@@ -106,8 +106,9 @@
     .filter-input, .filter-submit-btn { width: 100%; }
     .custom-wow-overlay { top: 15%; left: 5%; width: 90%; }
     .cst-title { font-size: clamp(32px, 8vw, 45px); margin-bottom: 15px; }
-    .cst-buttons { flex-direction: column; gap: 12px; }
-    .cst-btn { width: 100%; justify-content: center; }
+    .cst-buttons { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+    .cst-btn { width: auto; padding: 12px 20px; font-size: 11px; justify-content: center; flex: 1; min-width: 130px; letter-spacing: 1px; }
+    .cst-btn svg { width: 14px; height: 14px; }
 }
 /* Hide default wowslider titles and controls */
 .ws-title { display: none !important; }
@@ -250,92 +251,75 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="ds-section" id="dsSection">
     <div class="ds-viewport" id="dsViewport">
       <div class="ds-track" id="dsTrack">
+        @foreach($destinations as $dest)
         <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=900&q=85&fit=crop" alt="Colosseum"/>
+          <img src="{{ asset($dest->image) }}" alt="{{ $dest->name }}"/>
           <div class="ds-frame"></div>
-          <span class="ds-name">The Colosseum</span>
+          <span class="ds-name">{{ $dest->name }}</span>
           <div class="ds-bottom-panel">
-            <p class="ds-info-desc">Step into the arena where gladiators once fought. Skip-the-line access included.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
+            <p class="ds-info-desc">{{ $dest->description }}</p>
+            <a href="{{ $dest->link ?? '#tours' }}" class="ds-info-btn">View Tours & Tickets</a>
           </div>
         </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=900&q=85&fit=crop" alt="Vatican"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">Vatican Museums</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">Marvel at Michelangelo's Sistine Chapel ceiling and priceless masterpieces.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=900&q=85&fit=crop" alt="Trevi Fountain"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">Trevi Fountain</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">Toss a coin and make a wish at Rome's most iconic Baroque masterpiece.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1604580864964-0462f5d5b1a8?w=900&q=85&fit=crop" alt="Pantheon"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">Pantheon</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">Awe at the world's largest unreinforced concrete dome — 2000 years old.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=900&q=85&fit=crop" alt="Roman Forum"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">Roman Forum</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">Walk the ancient streets where Caesar once stood and senators debated.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=900&q=85&fit=crop" alt="St Peters"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">St. Peter's Basilica</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">The crown jewel of Vatican City — climb the dome for panoramic views.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1529245019870-59b249281fd3?w=900&q=85&fit=crop" alt="Spanish Steps"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">Spanish Steps</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">Climb 135 steps to the top for stunning views over Piazza di Spagna.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1560717789-0ac7c58ac90a?w=900&q=85&fit=crop" alt="Palatine Hill"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">Palatine Hill</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">The birthplace of Rome — explore imperial palaces with breathtaking views.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=900&q=85&fit=crop" alt="Piazza Navona"/>
-          <div class="ds-frame"></div>
-          <span class="ds-name">Piazza Navona</span>
-          <div class="ds-bottom-panel">
-            <p class="ds-info-desc">Rome's most elegant square — Bernini's Fountain of the Four Rivers awaits.</p>
-            <a href="#tours" class="ds-info-btn">View Tours & Tickets</a>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
     <button class="ds-arrow ds-arrow-l" id="dsPrev" aria-label="Previous">&#10094;</button>
     <button class="ds-arrow ds-arrow-r" id="dsNext" aria-label="Next">&#10095;</button>
     <div class="ds-dots" id="dsDots"></div>
+  </div>
+</section>
+
+<!-- TOUR CATEGORIES -->
+<section class="py-20 px-6 bg-white" id="categories">
+  <div class="max-w-[1280px] mx-auto">
+    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Explore Rome</p>
+    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Find Your Perfect Tour</h2>
+    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
+    <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[40px] leading-[1.7]">Browse by theme &mdash; from ancient monuments to candlelit food strolls, there's a Roman adventure for every traveller.</p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127963;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Rome City Tours</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">12 tours &rarr;</span>
+      </a>
+      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127858;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Food &amp; Wine Tours</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">6 tours &rarr;</span>
+      </a>
+      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128694;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Walking Tours</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">18 tours &rarr;</span>
+      </a>
+      <a href="{{ url('/services') }}" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128663;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Private Tours</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">8 tours &rarr;</span>
+      </a>
+      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127963;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Ancient Rome</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">10 tours &rarr;</span>
+      </a>
+      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127769;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Night Tours</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">5 tours &rarr;</span>
+      </a>
+      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128106;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Family Friendly</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">9 tours &rarr;</span>
+      </a>
+      <a href="#tours" class="group bg-cream rounded-2xl border border-cream-dark p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-[#fbf4e3] hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]">
+        <div class="w-[54px] h-[54px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128332;</div>
+        <h3 class="font-playfair text-[16px] font-bold text-navy mb-1">Vatican Tours</h3>
+        <span class="text-[12px] text-gold-dark font-semibold">7 tours &rarr;</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -352,159 +336,63 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="py-[9px] px-5 rounded-full border-[1.5px] border-cream-dark bg-white text-[13px] font-semibold text-[#6b7280] cursor-pointer transition-all ft" onclick="ft2('new',this)">New</button>
       <button class="py-[9px] px-5 rounded-full border-[1.5px] border-cream-dark bg-white text-[13px] font-semibold text-[#6b7280] cursor-pointer transition-all ft" onclick="ft2('popular',this)">Popular</button>
     </div>
-    <div class="tour-grid grid grid-cols-4 gap-[17px] mb-[30px]">
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="bestseller">
+    <div class="tour-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[17px] mb-[30px]">
+      @foreach($tours as $tour)
+      <div class="tour-card bg-[#0b1623] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="{{ strtolower($tour->badge_type ?? 'popular') }}">
         <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1553697388-94e804e2de06?w=600&h=400&fit=crop&auto=format" alt="Colosseum" class="w-full h-full object-cover transition-transform duration-300"/>
+          <a href="{{ route('tour.detail', $tour->slug) }}">
+            <img src="{{ asset($tour->image ?? 'images/no.png') }}" alt="{{ $tour->name }}" class="w-full h-full object-cover transition-transform duration-300"/>
+          </a>
           <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">BESTSELLER</span>
+          @if($tour->badge_type)
+          <span class="absolute top-3 left-3 {{ $tour->badge_type == 'Bestseller' ? 'bg-gold text-navy' : ($tour->badge_type == 'New' ? 'bg-[#16a34a] text-white' : 'bg-[#f97316] text-white') }} text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px] uppercase">{{ $tour->badge_type }}</span>
+          @endif
           <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
         </div>
         <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Colosseum Skip-the-Line</h3>
+          <a href="{{ route('tour.detail', $tour->slug) }}" class="no-underline block"><h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px] hover:text-gold transition-colors">{{ $tour->name }}</h3></a>
+          
+          @if($tour->rating)
+          <div class="flex items-center gap-1.5 mb-2.5">
+            <span class="text-[#fbbf24] text-[12px]">{!! str_repeat('&#9733;', round($tour->rating)) !!}</span>
+            <span class="text-white text-[13px] font-bold">{{ $tour->rating }}</span>
+            <span class="text-white text-[12px]">({{ $tour->reviews_count ?? 0 }})</span>
+          </div>
+          @else
           <div class="inline-flex items-center gap-1 bg-gold/12 border border-gold/26 text-gold text-[11px] font-semibold py-1 px-2.5 rounded-full mb-2.5">&#10022; New experience</div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; 2 hours</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
+          @endif
+          
+          <div class="flex gap-3 mb-3">
+            @if($tour->duration)
+            <div class="flex items-center gap-1 text-[12px] text-white">&#128336; {{ $tour->duration }}</div>
+            @endif
+            @if($tour->group_size)
+            <div class="flex items-center gap-1 text-[12px] text-white">&#128101; {{ $tour->group_size }}</div>
+            @endif
+          </div>
           <div class="h-px bg-white/8 mb-3"></div>
           <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[11px] text-white/36">per person</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€29</span></div></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
+            <div class="flex flex-col">
+              @if($tour->old_price && $tour->old_price > $tour->price)
+                <span class="text-[12px] text-white/36 line-through">€{{ $tour->old_price }}</span>
+                <div class="flex items-baseline gap-1.5">
+                  <span class="text-[22px] font-extrabold text-white">€{{ $tour->price }}</span>
+                  <span class="text-[11px] font-bold text-[#4ade80] bg-[rgba(74,222,128,.1)] py-0.5 px-1.5 rounded">-{{ round((($tour->old_price - $tour->price)/$tour->old_price)*100) }}%</span>
+                </div>
+              @else
+                <span class="text-[11px] text-white/36">per person</span>
+                <div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€{{ $tour->price }}</span></div>
+              @endif
+              @if($tour->old_price && $tour->old_price > $tour->price)
+                <span class="text-[11px] text-white/36">per person</span>
+              @endif
+            </div>
+            <a href="{{ route('tour.detail', $tour->slug) }}" class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase no-underline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</a>
           </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
+          <a href="https://wa.me/1234567890?text={{ urlencode('Hello! I want to book the tour: '.$tour->name) }}" target="_blank" class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold no-underline transition-all uppercase tracking-[.5px] hover:border-[#25d366]/60 hover:text-[#25d366] hover:shadow-[0_0_16px_rgba(37,211,102,.15)]"><svg width="15" height="15" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> WhatsApp</a>
         </div>
       </div>
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="bestseller">
-        <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=600&h=400&fit=crop&auto=format" alt="Vatican" class="w-full h-full object-cover transition-transform duration-300"/>
-          <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">BESTSELLER</span>
-          <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
-        </div>
-        <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Vatican Museums &amp; Sistine Chapel</h3>
-          <div class="inline-flex items-center gap-1 bg-gold/12 border border-gold/26 text-gold text-[11px] font-semibold py-1 px-2.5 rounded-full mb-2.5">&#10022; New experience</div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; 3 hours</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
-          <div class="h-px bg-white/8 mb-3"></div>
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[11px] text-white/36">per person</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€45</span></div></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
-          </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
-        </div>
-      </div>
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="popular">
-        <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&h=400&fit=crop&auto=format" alt="Pantheon" class="w-full h-full object-cover transition-transform duration-300"/>
-          <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-[#f97316] text-white text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">POPULAR</span>
-          <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
-        </div>
-        <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Pantheon Priority Access</h3>
-          <div class="flex items-center gap-1.5 mb-2.5"><span class="text-[#fbbf24] text-[12px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="text-white text-[13px] font-bold">4.5</span><span class="text-white/46 text-[12px]">(421)</span></div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; 1 hour</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
-          <div class="h-px bg-white/8 mb-3"></div>
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[12px] text-white/36 line-through">€22</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€18</span><span class="text-[11px] font-bold text-[#4ade80] bg-[rgba(74,222,128,.1)] py-0.5 px-1.5 rounded">-18%</span></div><span class="text-[11px] text-white/36">per person</span></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
-          </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
-        </div>
-      </div>
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="new">
-        <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=600&h=400&fit=crop&auto=format" alt="Roman Forum" class="w-full h-full object-cover transition-transform duration-300"/>
-          <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-[#16a34a] text-white text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">NEW</span>
-          <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
-        </div>
-        <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Roman Forum &amp; Palatine Hill</h3>
-          <div class="inline-flex items-center gap-1 bg-gold/12 border border-gold/26 text-gold text-[11px] font-semibold py-1 px-2.5 rounded-full mb-2.5">&#10022; New experience</div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; 2.5 hours</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
-          <div class="h-px bg-white/8 mb-3"></div>
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[11px] text-white/36">per person</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€25</span></div></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
-          </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
-        </div>
-      </div>
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="bestseller">
-        <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=600&h=400&fit=crop&auto=format" alt="Trevi Fountain" class="w-full h-full object-cover transition-transform duration-300"/>
-          <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">BESTSELLER</span>
-          <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
-        </div>
-        <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Trevi Fountain Night Experience</h3>
-          <div class="flex items-center gap-1.5 mb-2.5"><span class="text-[#fbbf24] text-[12px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="text-white text-[13px] font-bold">4.8</span><span class="text-white/46 text-[12px]">(389)</span></div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; 1.5 hours</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
-          <div class="h-px bg-white/8 mb-3"></div>
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[12px] text-white/36 line-through">€55</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€45</span><span class="text-[11px] font-bold text-[#4ade80] bg-[rgba(74,222,128,.1)] py-0.5 px-1.5 rounded">-18%</span></div><span class="text-[11px] text-white/36">per person</span></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
-          </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
-        </div>
-      </div>
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="popular">
-        <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1529245019870-59b249281fd3?w=600&h=400&fit=crop&auto=format" alt="Rome Bus" class="w-full h-full object-cover transition-transform duration-300"/>
-          <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-[#f97316] text-white text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">POPULAR</span>
-          <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
-        </div>
-        <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Rome Hop-On Hop-Off Bus</h3>
-          <div class="flex items-center gap-1.5 mb-2.5"><span class="text-[#fbbf24] text-[12px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="text-white text-[13px] font-bold">4.6</span><span class="text-white/46 text-[12px]">(512)</span></div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; Flexible</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
-          <div class="h-px bg-white/8 mb-3"></div>
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[12px] text-white/36 line-through">€30</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€25</span><span class="text-[11px] font-bold text-[#4ade80] bg-[rgba(74,222,128,.1)] py-0.5 px-1.5 rounded">-17%</span></div><span class="text-[11px] text-white/36">per person</span></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
-          </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
-        </div>
-      </div>
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="new">
-        <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1546587348-d12660c30c50?w=600&h=400&fit=crop&auto=format" alt="Vatican Basilica" class="w-full h-full object-cover transition-transform duration-300"/>
-          <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-[#16a34a] text-white text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">NEW</span>
-          <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
-        </div>
-        <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Vatican &amp; St. Peter's Basilica Tour</h3>
-          <div class="inline-flex items-center gap-1 bg-gold/12 border border-gold/26 text-gold text-[11px] font-semibold py-1 px-2.5 rounded-full mb-2.5">&#10022; New experience</div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; 3 hours</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
-          <div class="h-px bg-white/8 mb-3"></div>
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[12px] text-white/36 line-through">€55</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€45</span><span class="text-[11px] font-bold text-[#4ade80] bg-[rgba(74,222,128,.1)] py-0.5 px-1.5 rounded">-18%</span></div><span class="text-[11px] text-white/36">per person</span></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
-          </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
-        </div>
-      </div>
-      <div class="tour-card bg-tour-card rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="bestseller">
-        <div class="tour-card-img relative h-[200px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1560717789-0ac7c58ac90a?w=600&h=400&fit=crop&auto=format" alt="Colosseum Full" class="w-full h-full object-cover transition-transform duration-300"/>
-          <span class="absolute bottom-3 left-3 bg-[#16a34a] text-white text-[11px] font-bold py-[5px] px-2.5 rounded-full">&#10004; Free cancellation</span>
-          <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">BESTSELLER</span>
-          <button class="absolute top-3 right-3 w-[31px] h-[31px] bg-white/15 backdrop-blur-sm border-none rounded-full flex items-center justify-center cursor-pointer text-white text-[15px] transition-colors hover:bg-white/30" onclick="tw(this)">&#9825;</button>
-        </div>
-        <div class="p-[15px]">
-          <h3 class="text-[15px] font-bold text-white mb-2.5 leading-snug min-h-[40px]">Rome: Colosseum, Forum &amp; Palatine Entry</h3>
-          <div class="inline-flex items-center gap-1 bg-gold/12 border border-gold/26 text-gold text-[11px] font-semibold py-1 px-2.5 rounded-full mb-2.5">&#10022; New experience</div>
-          <div class="flex gap-3 mb-3"><div class="flex items-center gap-1 text-[12px] text-white/56">&#128336; 3 hours</div><div class="flex items-center gap-1 text-[12px] text-white/56">&#128101; Small group</div></div>
-          <div class="h-px bg-white/8 mb-3"></div>
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col"><span class="text-[12px] text-white/36 line-through">€33</span><div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€27</span><span class="text-[11px] font-bold text-[#4ade80] bg-[rgba(74,222,128,.1)] py-0.5 px-1.5 rounded">-18%</span></div><span class="text-[11px] text-white/36">per person</span></div>
-            <button class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</button>
-          </div>
-          <button class="flex items-center justify-center gap-[8px] w-full mt-[9px] bg-transparent text-white/70 border-[1.5px] border-white/13 py-2.5 rounded-[10px] text-[12px] font-semibold cursor-pointer transition-all uppercase tracking-[.5px] hover:border-gold/50 hover:text-gold hover:shadow-[0_0_16px_rgba(200,168,78,.12)]"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart</button>
-        </div>
-      </div>
+      @endforeach
     </div>
     <div class="text-center mt-1.5"><button class="bg-transparent text-navy border-2 border-navy py-3 px-[34px] rounded-[10px] text-[14px] font-bold cursor-pointer transition-all hover:bg-navy hover:text-white" id="smBtn" onclick="showMore()">Show More Tours</button></div>
   </div>
@@ -514,23 +402,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="py-20 px-6 bg-white">
   <div class="max-w-[1280px] mx-auto">
     <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Why Choose Us</p>
-    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Why Book With Mr. J?</h2>
+    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Why Book With Nice In Rome Tour</h2>
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
     <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">We make your Rome experience extraordinary with personalized service and instant booking.</p>
-    <div class="about-search-wrap" id="aboutSearch">
-      <button class="about-search-icon" onclick="toggleAboutSearch()" aria-label="Search tours">
-        <svg width="22" height="22" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </button>
-      <div class="about-search-bar">
-        <svg width="18" height="18" fill="none" stroke="#999" stroke-width="2" viewBox="0 0 24 24" class="shrink-0 ml-1"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" placeholder="Search tours, destinations, experiences..." id="aboutSearchInput"/>
-        <button class="search-close" onclick="toggleAboutSearch()">
-          <svg width="16" height="16" fill="none" stroke="#666" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="about-search-overlay" id="aboutOverlay" onclick="toggleAboutSearch()"></div>
-    <div class="why-grid grid grid-cols-3 gap-6">
+    <div class="why-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#128172;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">WhatsApp Instant Booking</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Book your tour in seconds — availability confirmed instantly, 24/7. Chat like a friend, not a customer.</p></div>
       <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127963;&#65039;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">Skip the Line Access</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Exclusive priority access to Rome's most visited monuments. No waiting, no stress — just pure history.</p></div>
       <div class="bg-cream rounded-2xl py-7 px-6 text-center border border-cream-dark transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.08)]"><div class="w-[60px] h-[60px] bg-navy rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127758;</div><h3 class="font-playfair text-[18px] font-bold text-navy mb-[9px]">7 Languages Spoken</h3><p class="text-[14px] text-[#6b7280] leading-[1.7]">Our expert guides speak Italian, English, Spanish, French, Arabic and more for a truly personal experience.</p></div>
@@ -541,155 +416,88 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
-<!-- INTERNATIONAL PACKAGES -->
+<!-- EXPERIENCE ROME / ABOUT -->
+<section class="py-20 px-6 bg-white overflow-hidden">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[50px] items-center">
+    <div class="relative">
+      <div class="relative rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,.2)]">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/960px-Colosseo_2020.jpg" alt="Experience Rome with Nice in Rome Tour" class="w-full h-[420px] object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/50 to-transparent"></div>
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <div class="bg-white/90 backdrop-blur rounded-2xl px-5 py-3.5 text-center shadow-lg">
+            <div class="text-[26px] font-extrabold text-navy leading-none">35K<span class="text-gold-dark text-[18px]">+</span></div>
+            <div class="text-[10px] font-semibold text-[#6b7280] tracking-wide uppercase">Happy Travellers</div>
+          </div>
+          <div class="bg-gold/95 rounded-2xl px-5 py-3.5 text-center shadow-lg">
+            <div class="text-[26px] font-extrabold text-navy leading-none">4.8<span class="text-[18px]">&#9733;</span></div>
+            <div class="text-[10px] font-semibold text-navy/70 tracking-wide uppercase">Avg. Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute -top-5 -right-4 bg-navy text-gold rounded-[14px] px-4 py-3 text-center shadow-xl rotate-2">
+        <div class="text-[20px] font-extrabold leading-none">12<span class="text-[13px]">+</span></div>
+        <div class="text-[9px] font-semibold tracking-widest uppercase">Years Exp.</div>
+      </div>
+    </div>
+    <div>
+      <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase mb-3">Experience Rome</p>
+      <h2 class="font-playfair text-navy font-bold leading-tight mb-5 text-[clamp(28px,4vw,42px)]">See Rome Through The Eyes Of A Local</h2>
+      <div class="w-12 h-[3px] bg-gold rounded-sm mb-5"></div>
+      <p class="text-[15px] text-[#6b7280] leading-[1.8] mb-6">Nice in Rome Tour is more than a booking service &mdash; we're a family of passionate Roman guides who have spent a decade uncovering the Eternal City's secrets. Every experience is hand-crafted, authentic and personal.</p>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-7">
+        <li class="flex items-start gap-2.5"><span class="w-6 h-6 rounded-full bg-gold/15 text-gold-dark flex items-center justify-center text-[13px] shrink-0 mt-0.5">&#10003;</span><span class="text-[14px] font-medium text-navy">Deep local knowledge of Rome</span></li>
+        <li class="flex items-start gap-2.5"><span class="w-6 h-6 rounded-full bg-gold/15 text-gold-dark flex items-center justify-center text-[13px] shrink-0 mt-0.5">&#10003;</span><span class="text-[14px] font-medium text-navy">Experienced, licensed guides</span></li>
+        <li class="flex items-start gap-2.5"><span class="w-6 h-6 rounded-full bg-gold/15 text-gold-dark flex items-center justify-center text-[13px] shrink-0 mt-0.5">&#10003;</span><span class="text-[14px] font-medium text-navy">Authentic, hand-crafted experiences</span></li>
+        <li class="flex items-start gap-2.5"><span class="w-6 h-6 rounded-full bg-gold/15 text-gold-dark flex items-center justify-center text-[13px] shrink-0 mt-0.5">&#10003;</span><span class="text-[14px] font-medium text-navy">Personalised, concierge service</span></li>
+      </ul>
+      <div class="flex gap-3.5 flex-wrap">
+        <a href="#" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-3.5 px-8 rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(200,168,78,.4)]">Discover Our Story &rarr;</a>
+        <a href="#tours" class="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy py-3.5 px-8 rounded-[10px] text-[14px] font-semibold no-underline transition-all hover:bg-navy hover:text-white">Browse All Tours</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROME EXPERIENCE PACKAGES -->
 <section class="py-20 px-6 bg-[#0b1623] overflow-hidden">
   <div class="max-w-[1280px] mx-auto">
-    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Multi-City Adventures</p>
-    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">International Packages</h2>
+    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Explore Rome</p>
+    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Rome Experience Packages</h2>
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <p class="text-[15px] text-white/60 text-center max-w-[560px] mx-auto mt-3.5 mb-10 leading-[1.7]">Explore beyond Rome — curated multi-city packages across Italy &amp; Europe.</p>
+    <p class="text-[15px] text-white/60 text-center max-w-[560px] mx-auto mt-3.5 mb-10 leading-[1.7]">Discover Rome's greatest treasures — handcrafted full-day packages covering the Eternal City's must-see landmarks.</p>
     <div class="pkg-slider-wrap relative">
       <div class="pkg-track flex gap-5 overflow-x-auto scroll-smooth pb-4" id="pkgTrack" style="scrollbar-width:none;-ms-overflow-style:none">
-        <!-- Package 1 -->
+        @foreach($packages as $pkg)
         <div class="pkg-card flex-shrink-0 w-[300px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer group">
           <div class="relative h-[200px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&h=400&fit=crop&auto=format" alt="Venice" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <img src="{{ asset($pkg->image ?? 'images/no.png') }}" alt="{{ $pkg->name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
             <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">7 DAYS</span>
-            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">&#127758; 3 Cities</span>
+            @if($pkg->badge_label)
+            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px] uppercase">{{ $pkg->badge_label }}</span>
+            @endif
+            @if($pkg->badge_icon)
+            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">{{ $pkg->badge_icon }}</span>
+            @endif
           </div>
           <div class="p-5">
-            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Rome &rarr; Florence &rarr; Venice</h3>
-            <p class="text-[13px] text-white/50 mb-3">The Classic Italian Trio</p>
+            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">{{ $pkg->name }}</h3>
+            @if($pkg->subtitle)
+            <p class="text-[13px] text-white/50 mb-3">{{ $pkg->subtitle }}</p>
+            @endif
             <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Colosseum</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Uffizi Gallery</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">St. Mark's</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Gondola Ride</span>
+              @if(!empty($pkg->highlights))
+                @foreach((array)$pkg->highlights as $highlight)
+                <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">{{ $highlight }}</span>
+                @endforeach
+              @endif
             </div>
             <div class="flex items-center justify-between pt-3 border-t border-white/10">
-              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;899</span><span class="text-white/40 text-[12px]">/person</span></div>
-              <span class="text-gold text-[13px] font-semibold">View &rarr;</span>
+              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;{{ $pkg->price }}</span><span class="text-white/40 text-[12px]">/person</span></div>
+              <span class="text-gold text-[13px] font-semibold">Book &rarr;</span>
             </div>
           </div>
         </div>
-        <!-- Package 2 -->
-        <div class="pkg-card flex-shrink-0 w-[300px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer group">
-          <div class="relative h-[200px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1534113414509-0eec2bfb493f?w=600&h=400&fit=crop&auto=format" alt="Amalfi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">5 DAYS</span>
-            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">&#127754; Coastal</span>
-          </div>
-          <div class="p-5">
-            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Rome &rarr; Amalfi &rarr; Positano</h3>
-            <p class="text-[13px] text-white/50 mb-3">Sun, Sea &amp; Italian Coast</p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Pompeii</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Ravello</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Boat Tour</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Limoncello</span>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/10">
-              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;749</span><span class="text-white/40 text-[12px]">/person</span></div>
-              <span class="text-gold text-[13px] font-semibold">View &rarr;</span>
-            </div>
-          </div>
-        </div>
-        <!-- Package 3 -->
-        <div class="pkg-card flex-shrink-0 w-[300px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer group">
-          <div class="relative h-[200px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&h=400&fit=crop&auto=format" alt="Tuscany" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">4 DAYS</span>
-            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">&#127806; Wine</span>
-          </div>
-          <div class="p-5">
-            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Rome &rarr; Siena &rarr; Florence</h3>
-            <p class="text-[13px] text-white/50 mb-3">Tuscany Wine &amp; Art Trail</p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Wine Tasting</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Duomo</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Chianti</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Siena Piazza</span>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/10">
-              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;649</span><span class="text-white/40 text-[12px]">/person</span></div>
-              <span class="text-gold text-[13px] font-semibold">View &rarr;</span>
-            </div>
-          </div>
-        </div>
-        <!-- Package 4 -->
-        <div class="pkg-card flex-shrink-0 w-[300px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer group">
-          <div class="relative h-[200px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&h=400&fit=crop&auto=format" alt="Paris" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">10 DAYS</span>
-            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">&#9992; 2 Countries</span>
-          </div>
-          <div class="p-5">
-            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Rome &rarr; Milan &rarr; Paris</h3>
-            <p class="text-[13px] text-white/50 mb-3">Italy to France Grand Tour</p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Eiffel Tower</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Louvre</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Milan Duomo</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">High-Speed Train</span>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/10">
-              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;1,499</span><span class="text-white/40 text-[12px]">/person</span></div>
-              <span class="text-gold text-[13px] font-semibold">View &rarr;</span>
-            </div>
-          </div>
-        </div>
-        <!-- Package 5 -->
-        <div class="pkg-card flex-shrink-0 w-[300px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer group">
-          <div class="relative h-[200px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&h=400&fit=crop&auto=format" alt="Swiss Alps" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">8 DAYS</span>
-            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">&#9968; Alps</span>
-          </div>
-          <div class="p-5">
-            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Rome &rarr; Zurich &rarr; Lucerne</h3>
-            <p class="text-[13px] text-white/50 mb-3">Italian Riviera to Swiss Alps</p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Matterhorn</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Lake Lucerne</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Glacier Express</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Chocolate Tour</span>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/10">
-              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;1,299</span><span class="text-white/40 text-[12px]">/person</span></div>
-              <span class="text-gold text-[13px] font-semibold">View &rarr;</span>
-            </div>
-          </div>
-        </div>
-
-      
-        <!-- Package 6 -->
-        <div class="pkg-card flex-shrink-0 w-[300px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer group">
-          <div class="relative h-[200px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&h=400&fit=crop&auto=format" alt="Greek Islands" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-gold text-navy text-[10px] font-extrabold py-1 px-2.5 rounded-full tracking-[0.5px]">9 DAYS</span>
-            <span class="absolute top-3 right-3 bg-white/15 backdrop-blur-sm text-white text-[11px] font-semibold py-1 px-2.5 rounded-full">&#9992; 2 Countries</span>
-          </div>
-          <div class="p-5">
-            <h3 class="font-playfair text-[18px] font-bold text-white mb-1">Rome &rarr; Athens &rarr; Santorini</h3>
-            <p class="text-[13px] text-white/50 mb-3">Ancient Wonders &amp; Island Bliss</p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Acropolis</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Parthenon</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Oia Sunset</span>
-              <span class="bg-white/8 text-white/70 text-[11px] py-1 px-2 rounded-full">Island Hop</span>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/10">
-              <div><span class="text-white/40 text-[12px]">From</span><span class="text-gold text-[22px] font-extrabold ml-1">&euro;1,199</span><span class="text-white/40 text-[12px]">/person</span></div>
-              <span class="text-gold text-[13px] font-semibold">View &rarr;</span>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
       <!-- Slider Arrows -->
       <button class="pkg-arrow pkg-arrow-l absolute top-1/2 -translate-y-1/2 left-0 w-[42px] h-[42px] rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center cursor-pointer transition-all hover:bg-gold hover:border-gold hover:text-navy z-10" onclick="slidePkg(-1)">&#10094;</button>
@@ -697,6 +505,86 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <!-- Dots -->
     <div class="flex justify-center gap-2 mt-6" id="pkgDots"></div>
+  </div>
+</section>
+
+<!-- CONCIERGE SERVICES -->
+<section class="py-20 px-6 bg-white" id="services">
+  <div class="max-w-[1280px] mx-auto">
+    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">More Than Tours</p>
+    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Travel Services Built Around You</h2>
+    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
+    <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">Beyond our signature tours, we handle every detail of your Rome stay &mdash; seamless, stress-free, first-class.</p>
+
+    <div class="service-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Luggage Storage -->
+      <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
+        <div class="relative h-[150px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Roma_2013_-_Termini_rail.jpg/960px-Roma_2013_-_Termini_rail.jpg" alt="Luggage storage in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#128718;</div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[17px] font-bold text-navy mb-1.5">Luggage Storage</h3>
+          <p class="text-[13px] text-[#6b7280] leading-[1.7] mb-3.5">Drop your bags before your tour and explore hands-free. Secure storage right in the heart of the city, open daily.</p>
+          <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-bold text-gold-dark no-underline transition-all group-hover:gap-2.5">Learn more &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Airport Transfer -->
+      <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
+        <div class="relative h-[150px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Aletti_Fiumicino_-_arrivi_14_(cropped).jpg/960px-Aletti_Fiumicino_-_arrivi_14_(cropped).jpg" alt="Airport transfer in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#9992;&#65039;</div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[17px] font-bold text-navy mb-1.5">Airport Transfer</h3>
+          <p class="text-[13px] text-[#6b7280] leading-[1.7] mb-3.5">Private, punctual transfers to and from Fiumicino &amp; Ciampino. A chauffeur meets you at arrivals &mdash; no queues, no hassle.</p>
+          <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-bold text-gold-dark no-underline transition-all group-hover:gap-2.5">Learn more &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Private Taxi -->
+      <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
+        <div class="relative h-[150px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Rome_taxi.jpg/960px-Rome_taxi.jpg" alt="Private taxi service in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#128663;</div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[17px] font-bold text-navy mb-1.5">Private Taxi &amp; Transfers</h3>
+          <p class="text-[13px] text-[#6b7280] leading-[1.7] mb-3.5">Book a private car for any journey &mdash; hotel-to-hotel, cruise port, or a night out. Fixed fares, professional drivers.</p>
+          <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-bold text-gold-dark no-underline transition-all group-hover:gap-2.5">Learn more &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Golf Cart Tour -->
+      <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
+        <div class="relative h-[150px] overflow-hidden">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Colosseum_at_blue_hour.jpg/960px-Colosseum_at_blue_hour.jpg" alt="Golf cart tour in Rome" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-[15px] flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-gold flex items-center justify-center text-navy text-[17px] shrink-0">&#127937;</div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-playfair text-[17px] font-bold text-navy mb-1.5">Golf Cart Tours</h3>
+          <p class="text-[13px] text-[#6b7280] leading-[1.7] mb-3.5">Glide through the cobbled lanes of the Eternal City in style. A fun, effortless way to see Rome's hidden gems.</p>
+          <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-bold text-gold-dark no-underline transition-all group-hover:gap-2.5">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#" class="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy py-3 px-[34px] rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-navy hover:text-white">View All Services &#8594;</a>
+    </div>
   </div>
 </section>
 
@@ -737,18 +625,122 @@ document.addEventListener('DOMContentLoaded', function() {
     <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Travel Stories &amp; Tips</h2>
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
     <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">Insider guides, travel tips and stories from Rome's hidden corners.</p>
-    <div class="blog-grid grid grid-cols-3 gap-5">
+    <div class="blog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)]">
-        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://images.unsplash.com/photo-1584479898061-1c3d46c35783?w=600&h=400&fit=crop&auto=format" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
+        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Colosseo_di_Roma_sotterranei.jpg/960px-Colosseo_di_Roma_sotterranei.jpg" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
         <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">History</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">The Colosseum's Secret Underground — What Most Tourists Miss</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">Discover the hypogeum, the labyrinthine underground network where gladiators and wild animals once waited...</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; Aug 15, 2026 &nbsp;&middot;&nbsp; 5 min read</p><a href="#" class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</a></div>
       </div>
       <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)]">
-        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://images.unsplash.com/photo-1602087594264-e35b170f5016?w=600&h=400&fit=crop&auto=format" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
+        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Vatican_Museum_Spiral_Staircase.jpg/960px-Vatican_Museum_Spiral_Staircase.jpg" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
         <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">Guide</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">Vatican Museums: The Complete Visitor's Guide for 2026</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">Everything you need to know about visiting the Vatican — best times, what to skip, and the must-sees...</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; Aug 10, 2026 &nbsp;&middot;&nbsp; 7 min read</p><a href="#" class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</a></div>
       </div>
       <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)]">
-        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&h=400&fit=crop&auto=format" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
+        <div class="blog-card-img h-[194px] overflow-hidden"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Trevi_Fountain_-_Roma.jpg/960px-Trevi_Fountain_-_Roma.jpg" alt="" class="w-full h-full object-cover transition-transform duration-300"/></div>
         <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">Tips</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">Best Time to Visit Trevi Fountain Without the Crowds</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">The Trevi Fountain is magical — but when is the best time to visit and actually enjoy it in peace?...</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; Aug 5, 2026 &nbsp;&middot;&nbsp; 4 min read</p><a href="#" class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-20 px-6 bg-cream relative overflow-hidden" id="reviews">
+  <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+  <div class="max-w-[1280px] mx-auto relative z-10">
+    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Loved by Travellers</p>
+    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">What Our Guests Say</h2>
+    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
+    <div class="flex items-center justify-center gap-2 mt-4 mb-[38px]">
+      <span class="text-[18px] font-extrabold text-navy">4.8</span>
+      <span class="text-[#fbbf24] text-[15px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="text-[13px] text-[#6b7280]">Based on 2,300+ verified reviews</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
+        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"The Colosseum tour with skip-the-line access was flawless. Mr. J's team made everything effortless — we booked on WhatsApp in under a minute!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-gold to-gold-dark text-navy font-bold flex items-center justify-center text-[15px]">EL</div>
+          <div><div class="text-[14px] font-bold text-navy">Emily &amp; Luke</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, UK</div></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
+        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"Vatican Museums at opening was magical. Our guide spoke perfect English and Spanish for my parents. Worth every euro — book it!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-navy to-navy-light font-bold text-gold flex items-center justify-center text-[15px]">MC</div>
+          <div><div class="text-[14px] font-bold text-navy">Marco &amp; Camila</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, Spain</div></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
+        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"Free cancellation saved my trip when my flight changed. The team rearranged everything instantly via WhatsApp. Truly premium service."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-gold to-gold-dark text-navy font-bold flex items-center justify-center text-[15px]">SG</div>
+          <div><div class="text-[14px] font-bold text-navy">Sarah Green</div><div class="text-[12px] text-[#9ca3af]">Verified Traveller, USA</div></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
+        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"The golf cart tour was the highlight of our honeymoon! Covered more of Rome in one evening than days of walking. So romantic at sunset."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-navy to-navy-light font-bold text-gold flex items-center justify-center text-[15px]">PD</div>
+          <div><div class="text-[14px] font-bold text-navy">Priya &amp; Daniel</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, India / Canada</div></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
+        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"Luggage storage + airport transfer package was genius. We landed, dropped bags, toured the Pantheon, and reached our hotel stress-free."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-gold to-gold-dark text-navy font-bold flex items-center justify-center text-[15px]">HK</div>
+          <div><div class="text-[14px] font-bold text-navy">Hiro &amp; Keiko</div><div class="text-[12px] text-[#9ca3af]">Verified Travellers, Japan</div></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-cream-dark shadow-[0_2px_12px_rgba(0,0,0,.05)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,.1)]">
+        <div class="flex items-center gap-1 text-[#fbbf24] text-[13px] mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-[14px] leading-[1.75] text-[#4b5563] mb-4">"As a solo traveller I felt completely safe and looked after. The small group size meant the guide could tailor everything to us. 10/10."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-navy to-navy-light font-bold text-gold flex items-center justify-center text-[15px]">AB</div>
+          <div><div class="text-[14px] font-bold text-navy">Aisha B.</div><div class="text-[12px] text-[#9ca3af]">Verified Traveller, Australia</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center gap-2.5 mt-9">
+      <a href="#" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-3 px-7 rounded-[10px] text-[13px] font-bold no-underline transition-all hover:bg-gold-dark hover:-translate-y-0.5">&starf; Read All Reviews</a>
+      <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy py-3 px-7 rounded-[10px] text-[13px] font-semibold no-underline transition-all hover:bg-navy hover:text-white">&#128172; Share Your Experience</a>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIAL OFFERS / DEALS -->
+<section class="py-20 px-6 bg-cream relative overflow-hidden" id="deals">
+  <div class="max-w-[1100px] mx-auto relative">
+    <div class="bg-gradient-to-br from-[#0b1623] via-[#123052] to-[#0b1623] rounded-[26px] overflow-hidden relative px-8 py-12 lg:px-16 lg:py-14">
+      <div class="absolute inset-0 opacity-[0.07] pointer-events-none" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+      <div class="absolute -top-16 -right-16 w-64 h-64 bg-gold/20 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-16 w-72 h-72 bg-gold/10 rounded-full blur-3xl"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative">
+        <div>
+          <span class="inline-flex items-center gap-2 bg-gold/15 border border-gold/40 text-gold text-[11px] font-bold tracking-[2px] uppercase py-2 px-4 rounded-full mb-4">&#127881; Limited Time Offer</span>
+          <h2 class="font-playfair text-white font-bold leading-tight text-[clamp(28px,4vw,42px)] mb-4">Explore Rome &amp; <span class="text-gold">Save 15%</span></h2>
+          <p class="text-[15px] text-white/70 leading-[1.8] mb-6">Book any featured tour before the end of the month and unlock an exclusive discount on your entire booking &mdash; seamless, secure and instantly confirmed.</p>
+          <div class="flex flex-wrap gap-3 items-center">
+            <a href="#tours" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-3.5 px-8 rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(200,168,78,.5)]">&#127915; Book Now</a>
+            <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white py-3.5 px-8 rounded-[10px] text-[14px] font-semibold no-underline transition-all hover:bg-white hover:text-navy">&#128172; WhatsApp A Deal</a>
+          </div>
+        </div>
+        <div class="flex justify-center lg:justify-end">
+          <div class="bg-white/[0.06] backdrop-blur border border-white/15 rounded-3xl px-9 py-8 text-center w-full max-w-[300px]">
+            <p class="text-[13px] text-white/60 font-semibold tracking-[2px] uppercase mb-2">Use Code</p>
+            <div class="font-playfair text-[42px] font-extrabold text-gold tracking-[3px] leading-none mb-1">ROME15</div>
+            <div class="h-px bg-white/15 my-4"></div>
+            <p class="text-[12px] text-white/60 mb-1">Valid on all Rome tours</p>
+            <p class="text-[12px] text-gold font-semibold" style="font-family:monospace;letter-spacing:1px">book.niceinrometour.com/rome15</p>
+            <button onclick="navigator.clipboard.writeText('ROME15');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Code',1500);" class="mt-4 w-full bg-gold text-navy border-none py-3 rounded-[10px] text-[13px] font-bold cursor-pointer transition-all hover:bg-gold-light">Copy Code</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -771,15 +763,81 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
+<!-- INSTAGRAM / SOCIAL PROOF -->
+<section class="py-20 px-6 bg-[#0b1623] relative overflow-hidden" id="follow">
+  <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+  <div class="max-w-[1280px] mx-auto relative">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-[38px]">
+      <div>
+        <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase mb-3">Follow The Adventure</p>
+        <h2 class="font-playfair text-white font-bold leading-tight text-[clamp(28px,4vw,40px)]">@niceinrometour</h2>
+        <div class="w-12 h-[3px] bg-gold rounded-sm mt-5"></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 bg-white/5 border border-white/15 rounded-[10px] py-2.5 px-4"><span class="text-[13px] font-bold text-white">12.4K</span><span class="text-[12px] text-white/50">Followers</span></div>
+        <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] text-white py-2.5 px-5 rounded-[10px] text-[13px] font-bold no-underline transition-all hover:scale-105 hover:shadow-[0_8px_24px_rgba(220,39,67,.35)]"><svg width="16" height="16" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg> Follow Us</a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2.5">
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/960px-Colosseo_2020.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/VaticanMuseumStaircase.jpg/960px-VaticanMuseumStaircase.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Foro_Romano_Musei_Capitolini_Roma.jpg/960px-Foro_Romano_Musei_Capitolini_Roma.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/960px-Fontana_di_Trevi_by_TC.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Galleria_borghese_facade.jpg/960px-Galleria_borghese_facade.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/960px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg/960px-Colosseum_exterior_at_night%2C_Rome%2C_Italy_%28Ank_Kumar%29_11.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+      <a href="#" target="_blank" class="group relative overflow-hidden rounded-xl aspect-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg/960px-Sidewalk_of_Via_dei_Fori_Imperiali%2C_Roma%2C_Italy.jpg" alt="Instagram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+        <span class="absolute inset-0 bg-[#bc1888]/0 group-hover:bg-[#bc1888]/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.1.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.1-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.1-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.1 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5z"/></svg></span>
+      </a>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#" target="_blank" class="text-[13px] font-semibold text-gold no-underline transition-colors hover:text-gold-light">Tag @niceinrometour in your photos to be featured &#8594;</a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
-<section class="bg-navy py-[78px] px-6 text-center">
-  <div class="max-w-[1280px] mx-auto">
-    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Ready to Explore?</p>
-    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Start Planning Your Rome Adventure</h2>
-    <p class="text-[15px] text-white/68 text-center max-w-[560px] mx-auto mt-3.5 mb-0 leading-[1.7]">Join 35,000+ happy travellers who discovered Rome with Mr. J. Book your perfect tour in seconds via WhatsApp.</p>
-    <div class="flex gap-[13px] justify-center flex-wrap mt-[28px]">
-      <a href="#tours" class="bg-gold text-navy border-none py-[15px] px-8 rounded-[10px] text-[15px] font-bold cursor-pointer flex items-center gap-2 transition-all no-underline hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,168,76,.4)]">&#127915; Browse All Tours</a>
-      <a href="https://wa.me/1234567890" class="bg-transparent text-white border-2 border-white/48 py-[15px] px-8 rounded-[10px] text-[15px] font-semibold cursor-pointer flex items-center gap-2 transition-all no-underline hover:border-white hover:bg-white/10" target="_blank">&#128172; Chat on WhatsApp</a>
+<section class="bg-navy py-[90px] px-6 text-center relative overflow-hidden" id="cta">
+  <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+  <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="max-w-[720px] mx-auto relative">
+    <span class="inline-flex items-center gap-2 bg-gold/10 border border-gold/40 text-gold text-[11px] font-bold tracking-[3px] uppercase py-2 px-5 rounded-full mb-5">&#127759; Ready for Your Roman Holiday?</span>
+    <h2 class="font-playfair text-white font-bold text-center mb-4 leading-[1.1] text-[clamp(30px,5vw,52px)]">Ready to <span class="text-gold">Explore Rome</span>?</h2>
+    <p class="text-[16px] text-white/70 text-center max-w-[520px] mx-auto mb-8 leading-[1.8]">Choose your perfect experience and start your Roman adventure today &mdash; secure, instant and unforgettable.</p>
+    <div class="flex gap-[14px] justify-center flex-wrap mb-[30px]">
+      <a href="#tours" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-[16px] px-9 rounded-[12px] text-[15px] font-bold no-underline transition-all hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(201,168,76,.5)]">&#127915; Explore Tours</a>
+      <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center gap-2 bg-transparent text-white border-2 border-white/40 py-[16px] px-9 rounded-[12px] text-[15px] font-semibold no-underline transition-all hover:border-[#25d366] hover:bg-[#25d366]/10 hover:shadow-[0_10px_30px_rgba(37,211,102,.2)]"><svg width="17" height="17" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> WhatsApp Us</a>
+    </div>
+    <div class="flex items-center justify-center gap-5 flex-wrap text-[12px] text-white/50">
+      <span class="flex items-center gap-1.5">&#128274; Secure Booking</span>
+      <span class="w-1 h-1 rounded-full bg-white/30"></span>
+      <span class="flex items-center gap-1.5">&#9889; Instant Confirmation</span>
+      <span class="w-1 h-1 rounded-full bg-white/30"></span>
+      <span class="flex items-center gap-1.5">&#9989; Free Cancellation</span>
     </div>
   </div>
 </section>

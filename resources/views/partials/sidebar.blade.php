@@ -8,17 +8,28 @@
                     Dashboard
                 </a>
 
-                <div class="sb-sidenav-menu-heading">Shop</div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#shopLayouts" aria-expanded="false" aria-controls="shopLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
-                    Manage Shop
+                <div class="sb-sidenav-menu-heading">Rome Tours</div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#toursLayouts" aria-expanded="false" aria-controls="toursLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    Manage Tours
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="shopLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Route::is('product.*') || Route::is('category.*') || Route::is('brand.*') ? 'show' : '' }}" id="toursLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link {{ Route::is('product.index') || Route::is('product.*') ? 'active' : '' }}" href="{{ route('product.index') }}"><i class="sb-mini-icon fas fa-couch"></i> Products</a>
-                        <a class="nav-link {{ Route::is('category.index') || Route::is('category.*') ? 'active' : '' }}" href="{{ route('category.index') }}"><i class="sb-mini-icon fas fa-layer-group"></i> Categories</a>
-                        <a class="nav-link {{ Route::is('brands.index') || Route::is('brand.*') ? 'active' : '' }}" href="{{ route('brands.index') }}"><i class="sb-mini-icon fas fa-tag"></i> Brands</a>
+                        <a class="nav-link {{ Route::is('product.*') ? 'active' : '' }}" href="{{ route('product.index') }}"><i class="sb-mini-icon fas fa-ticket-alt"></i> Tour Tickets</a>
+                        <a class="nav-link {{ Route::is('category.*') ? 'active' : '' }}" href="{{ route('category.index') }}"><i class="sb-mini-icon fas fa-layer-group"></i> Categories</a>
+                    </nav>
+                </div>
+
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#destLayouts" aria-expanded="false" aria-controls="destLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    Destinations & Packages
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse {{ Route::is('destination.*') || Route::is('package.*') ? 'show' : '' }}" id="destLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link {{ Route::is('destination.*') ? 'active' : '' }}" href="{{ route('destination.index') }}"><i class="sb-mini-icon fas fa-map-pin"></i> Destinations</a>
+                        <a class="nav-link {{ Route::is('package.*') ? 'active' : '' }}" href="{{ route('package.index') }}"><i class="sb-mini-icon fas fa-box-open"></i> Packages</a>
                     </nav>
                 </div>
 
@@ -30,12 +41,8 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ route('slider.index') }}"><i class="sb-mini-icon fas fa-sliders-h"></i> Add Slider</a>
-                        {{-- <a class="nav-link" href="{{ route('category.index') }}">Add Category</a> --}}
-                        {{-- <a class="nav-link" href="{{ route('brands.index') }}">Add Brand</a> --}}
-                        {{-- <a class="nav-link" href="{{ route('product.index') }}">Add Product</a> --}}
+                        <a class="nav-link" href="{{ route('slider.index') }}"><i class="sb-mini-icon fas fa-sliders-h"></i> Banner Sliders</a>
                         <a class="nav-link" href="{{ route('abouts') }}"><i class="sb-mini-icon fas fa-building"></i> About Us</a>
-                        {{-- <a class="nav-link" href="{{ route('management.index') }}"><i class="sb-mini-icon fas fa-user-tie"></i> Management</a> --}}
                         <a class="nav-link" href="{{ route('gallery.index') }}"><i class="sb-mini-icon fas fa-images"></i> Gallery</a>
                         <a class="nav-link" href="{{ route('service.index') }}"><i class="sb-mini-icon fas fa-concierge-bell"></i> Services</a>
                         <a class="nav-link" href="{{ route('testimonial.index') }}"><i class="sb-mini-icon fas fa-comment-dots"></i> Testimonials</a>

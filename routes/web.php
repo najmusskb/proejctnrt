@@ -9,9 +9,11 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CompanyprofileController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\NewseventController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SliderController;
@@ -29,6 +31,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+
+Route::get('/tour/{slug}', [HomeController::class, 'show'])->name('tour.detail');
 
 Route::group(['middleware' => 'guest'], function() {
     Route::get('/login', [AuthenticationController::class, 'login'])->name('login');
@@ -119,4 +123,18 @@ Route::group(['middleware' => 'auth'], function() {
     
     Route::get('/messages', [ContactController::class, 'index'])->name('messages.index');
     Route::post('/message/delete', [ContactController::class, 'destroy'])->name('message.delete');
+
+    // Destinations
+    Route::get('/destinations', [DestinationController::class, 'index'])->name('destination.index');
+    Route::post('/destination/store', [DestinationController::class, 'store'])->name('destination.store');
+    Route::get('/destination/edit/{id}', [DestinationController::class, 'edit'])->name('destination.edit');
+    Route::post('/destination/update/{id}', [DestinationController::class, 'update'])->name('destination.update');
+    Route::post('/destination/delete', [DestinationController::class, 'destroy'])->name('destination.delete');
+
+    // Packages
+    Route::get('/packages', [PackageController::class, 'index'])->name('package.index');
+    Route::post('/package/store', [PackageController::class, 'store'])->name('package.store');
+    Route::get('/package/edit/{id}', [PackageController::class, 'edit'])->name('package.edit');
+    Route::post('/package/update/{id}', [PackageController::class, 'update'])->name('package.update');
+    Route::post('/package/delete', [PackageController::class, 'destroy'])->name('package.delete');
 });
