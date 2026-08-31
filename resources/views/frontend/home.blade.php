@@ -25,14 +25,22 @@
     z-index: 55;
     pointer-events: none;
 }
-#wowslider-container1 .ws_images { height: 100vh !important; display: block !important; overflow: hidden !important; }
-.ws_images ul { height: 100% !important; }
-.ws_images ul li { height: 100% !important; position: relative !important; }
-.ws_images ul li img { 
-    height: 100% !important; width: 100% !important; object-fit: cover !important; 
-    margin: 0 !important; padding: 0 !important; 
-    position: absolute !important; top: 0 !important; left: 0 !important; 
-    max-width: none !important; max-height: none !important; transform: none !important;
+#wowslider-container1 .ws_images { height: 100% !important; display: block !important; overflow: hidden !important; }
+#wowslider-container1 .ws_images > ul,
+#wowslider-container1 .ws_images > ul > li { 
+    height: 100% !important; 
+    margin: 0 !important;
+}
+/* Only force 100% cover on the MAIN images, not on wowslider animation slices */
+#wowslider-container1 .ws_images > ul > li > img,
+#wowslider-container1 .ws_images > ul > li > a > img { 
+    height: 100% !important; 
+    width: 100% !important; 
+    object-fit: cover !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    max-width: none !important; 
+    max-height: none !important; 
 }
 /* Custom Slider Overlay syncing with WOW Slider */
 .custom-wow-overlay {
@@ -46,24 +54,23 @@
     pointer-events: none;
 }
 .custom-slide-text {
-    position: absolute;
-    top: 0; left: 0;
+    position: relative;
     width: 100%;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(30px);
-    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
-.cst-subtitle { font-size: 15px; font-weight: 800; letter-spacing: 4px; color: #FFD700; text-transform: uppercase; margin-bottom: 12px; line-height: 1.2; text-align: left; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.cst-title { font-family: "Playfair Display", serif; font-size: clamp(45px, 6vw, 80px); font-weight: bold; color: white; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.8); margin-top: 0; text-align: left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.cst-heading { font-size: 20px; color: rgba(255,255,255,0.95); margin-bottom: 40px; line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.8); margin-top: 0; text-align: left; max-width: 90%; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.cst-buttons { display: flex; gap: 20px; margin-top: 10px; justify-content: flex-start; }
-.cst-btn { font-weight: 900; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; padding: 18px 45px; border-radius: 50px; pointer-events: auto; text-transform: uppercase; letter-spacing: 2px; font-size: 15px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-.cst-btn-primary { background: linear-gradient(135deg, #FFD700, #DAA520); color: #000; box-shadow: 0 10px 30px rgba(218, 165, 32, 0.5); border: 2px solid #FFD700; }
-.cst-btn-primary:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 15px 40px rgba(218, 165, 32, 0.8); background: linear-gradient(135deg, #FFF8DC, #FFD700); color: #000; }
+.cst-subtitle { font-size: 14px; font-weight: 800; letter-spacing: 3px; color: #ffffff; text-transform: uppercase; margin-bottom: 12px; line-height: 1.2; text-align: left; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.cst-title { font-family: "Cormorant Garamond", serif; font-size: clamp(40px, 7vw, 75px); font-weight: 900; line-height: 1.05; margin-bottom: 20px; margin-top: 0; text-align: left; color: #ffffff; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+.cst-title-highlight { background: linear-gradient(135deg, #ffffff 0%, #fde047 30%, #f59e0b 70%, #ffffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.6)); }
+.cst-heading { font-size: 16px; color: rgba(255,255,255,0.95); margin-bottom: 30px; line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.8); margin-top: 0; text-align: left; max-width: 90%; }
+.cst-buttons { display: flex; gap: 16px; margin-top: 15px; justify-content: flex-start; }
+.cst-btn { font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; padding: 12px 32px; border-radius: 50px; pointer-events: auto; text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.cst-btn-primary { background: linear-gradient(135deg, #FFD700, #DAA520); color: #000; box-shadow: 0 6px 20px rgba(218, 165, 32, 0.35); border: 1.5px solid #FFD700; }
+.cst-btn-primary:hover { background: transparent; color: #FFD700; transform: translateY(-4px); box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2); }
 .cst-btn-secondary { background: rgba(255,255,255,0.15); border: 2px solid #ffffff; color: #ffffff; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 .cst-btn-secondary:hover { background: #ffffff; color: #000; transform: translateY(-6px) scale(1.03); box-shadow: 0 15px 40px rgba(255,255,255,0.5); }
-/* Premium Filter Section - RomexTours Style */
+/* Premium Filter Section - Glassmorphism Style */
 .cst-filter-section {
     margin-top: 30px;
     width: 100%;
@@ -71,74 +78,181 @@
 .cst-filter-form { 
     display: flex; 
     align-items: center; 
-    gap: 15px; 
+    gap: 12px; 
     flex-wrap: wrap; 
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
 .filter-input { 
-    background: #f8f9fa; 
-    border: 1px solid #ced4da;
-    border-radius: 6px;
+    background: #ffffff; 
+    border: 1px solid transparent;
+    border-radius: 10px;
     font-size: 15px; 
-    color: #000; 
+    color: #0b1623; 
     outline: none; 
     cursor: pointer; 
     font-family: inherit; 
     padding: 16px 20px; 
-    width: 250px; 
+    width: 240px; 
     font-weight: 600; 
     appearance: auto;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.filter-input:focus {
+    border-color: #c8a84e;
+    box-shadow: 0 0 0 3px rgba(200,168,78,0.2);
 }
 .filter-submit-btn {
-    background: #09203f; /* Dark Navy */
-    color: #fff; 
+    background: linear-gradient(135deg, #c8a84e, #a58530);
+    color: #0b1623; 
     border: none;
-    padding: 16px 35px; 
-    border-radius: 6px; 
+    padding: 12px 28px; 
+    border-radius: 8px; 
     font-weight: 700; 
     cursor: pointer; 
-    transition: all 0.3s ease;
-    font-size: 16px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 13.5px; 
+    box-shadow: 0 4px 12px rgba(200,168,78,0.25);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex: 1;
+    min-width: 130px;
 }
-.filter-submit-btn:hover { background: #133866; }
 @media (max-width: 768px) {
-    .filter-input, .filter-submit-btn { width: 100%; }
-    .custom-wow-overlay { top: 15%; left: 5%; width: 90%; }
-    .cst-title { font-size: clamp(32px, 8vw, 45px); margin-bottom: 15px; }
-    .cst-buttons { flex-direction: row; flex-wrap: wrap; gap: 10px; }
-    .cst-btn { width: auto; padding: 12px 20px; font-size: 11px; justify-content: center; flex: 1; min-width: 130px; letter-spacing: 1px; }
-    .cst-btn svg { width: 14px; height: 14px; }
+    .hero-section-wrapper { 
+        height: 100vh !important; 
+        min-height: 600px !important; 
+        position: relative;
+    }
+    #wowslider-container1 { 
+        height: 100vh !important; 
+        min-height: 600px !important;
+    }
+    #wowslider-container1 .ws_images { 
+        height: 100% !important; 
+    }
+    #wowslider-container1 .ws_images ul {
+        height: 100% !important;
+    }
+    #wowslider-container1 .ws_images ul li {
+        height: 100% !important;
+    }
+    #wowslider-container1 .ws_images img { 
+        height: 100vh !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+    #wowslider-container1 .ws_images .ws_list,
+    #wowslider-container1 .ws_images .ws_effect,
+    #wowslider-container1 .ws_images .ws_effect > div { 
+        height: 100% !important; 
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    .custom-wow-overlay { 
+        top: 24%; left: 5%; width: 90%; 
+        padding: 0; display: flex; flex-direction: column; align-items: center; text-align: center; 
+        box-sizing: border-box;
+    }
+    .cst-title { 
+        font-size: 32px; margin-bottom: 12px; display: block; overflow: visible; 
+        line-height: 1.1; text-align: center; 
+        width: 100%; padding: 0 10px; box-sizing: border-box;
+    }
+    .cst-subtitle { 
+        font-size: 9.5px; margin-bottom: 18px !important; color: #ffffff !important; 
+        text-shadow: 0 4px 15px rgba(0,0,0,0.8); text-align: center; width: 100%; 
+        line-height: 1.5; padding: 0 10px; box-sizing: border-box;
+    }
+    .cst-buttons { 
+        flex-direction: row; width: 100%; justify-content: center; gap: 12px; 
+        margin-bottom: 0 !important; margin-top: 5px; flex-wrap: wrap;
+    }
+    .cst-btn-primary, .cst-btn-secondary { 
+        display: inline-flex !important; 
+        font-size: 10px; 
+        padding: 9px 18px; 
+        background: rgba(255,255,255,0.15) !important; 
+        border: 1px solid rgba(255,255,255,0.4) !important; 
+        color: #fff !important; 
+        backdrop-filter: blur(8px); 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        letter-spacing: 1px;
+    }
+    .cst-btn-primary:hover, .cst-btn-secondary:hover { background: rgba(255,255,255,0.3) !important; }
 }
 /* Hide default wowslider titles and controls */
-.ws-title { display: none !important; }
+.ws-title, .ws_title, .ws-title-wrapper { display: none !important; visibility: hidden !important; opacity: 0 !important; }
 #wowslider-container1 a.ws_next,
 #wowslider-container1 a.ws_prev,
 #wowslider-container1 .ws_playpause { display: none !important; }
+
+/* Premium Mobile Minimized Filter */
+.mobile-slide-filter { margin-top: 12px; width: 100%; margin-left: auto; margin-right: auto; padding: 0 10px; }
+.msf-form { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 270px; margin: 0 auto; align-items: center; background: rgba(11, 22, 35, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.12); padding: 10px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.msf-selects { display: flex; gap: 8px; width: 100%; justify-content: space-between; }
+.msf-select-wrapper { flex: 1; position: relative; }
+.msf-select-wrapper::after { content: ''; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg>'); background-repeat: no-repeat; background-position: center; pointer-events: none; }
+.msf-select { width: 100%; background: rgba(255, 255, 255, 0.95); color: #0b1623; font-size: 11px; font-weight: 700; padding: 8px 20px 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.8); appearance: none; -webkit-appearance: none; outline: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); text-align: left; height: 32px; transition: all 0.3s ease; }
+.msf-select:focus { background: #fff; box-shadow: 0 0 0 2px rgba(200, 168, 78, 0.5); }
+.msf-btn { background: linear-gradient(135deg, #FFD700, #DAA520); color: #0b1623; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; border: none; border-radius: 6px; padding: 0 24px; height: 32px; box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4); cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); margin: 2px 0 0 0; width: max-content; }
+.msf-btn:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(218, 165, 32, 0.3); }
+.desktop-global-filter { display: none; }
+
+@media (min-width: 769px) {
+    .mobile-slide-filter { display: none !important; }
+    .desktop-global-filter { 
+        display: block;
+        position: relative;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 700px;
+        padding: 0; 
+        background-color: transparent; 
+        z-index: 65;
+    }
+    .desktop-global-filter .cst-global-form { display: flex; align-items: center; padding: 8px 12px; border-radius: 12px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: none; }
+    .desktop-global-filter .cst-global-select { flex: 1; border: none; background: transparent; outline: none; -webkit-appearance: none; appearance: none; font-size: 14px; padding: 12px 20px; color: #333; cursor: pointer; }
+    .desktop-global-filter .border-right { border-right: 1px solid #eee; }
+    .desktop-global-filter .cst-global-btn { background: linear-gradient(135deg, #ddb94e, #c8a84e); border: none; display: flex; align-items: center; justify-content: center; border-radius: 50%; width: 44px; height: 44px; color: #0b1623; box-shadow: 0 2px 8px rgba(200,168,78,0.4); cursor: pointer; transition: transform 0.2s; flex-shrink: 0; }
+    .desktop-global-filter .cst-global-btn:active { transform: scale(0.95); }
+    .desktop-global-filter .cst-global-btn svg { width: 18px; height: 18px; }
+}
 </style>
 
-<div id="wowslider-container1">
-    <div class="ws_images">
-        <ul>
-            @foreach($sliders as $idx => $slider)
-            <li>
-                <img src="{{ asset($slider->image) }}" alt="{{ $slider->title }}" title="" id="wows1_{{ $idx }}"/>
-            </li>
-            @endforeach
-        </ul>
-    </div>
-    <div class="ws_bullets">
-        <div>
-            @foreach($sliders as $idx => $slider)
-            <a href="#" title="{{ $slider->title }}"><span>{{ $idx + 1 }}</span></a>
-            @endforeach
+<div class="hero-section-wrapper" style="position: relative; width: 100%;">
+    <div id="wowslider-container1">
+        <div class="ws_images">
+            <ul>
+                @foreach($sliders as $idx => $slider)
+                <li>
+                    <img src="{{ asset($slider->image) }}" alt="{{ $slider->title }}" title="" id="wows1_{{ $idx }}"/>
+                </li>
+                @endforeach
+            </ul>
         </div>
+        <div class="ws_bullets">
+            <div>
+                @foreach($sliders as $idx => $slider)
+                <a href="#" title="{{ $slider->title }}"><span>{{ $idx + 1 }}</span></a>
+                @endforeach
+            </div>
+        </div>
+        <div class="ws_shadow"></div>
     </div>
     
-    <!-- Custom text overlay -->
+    <!-- Custom static text overlay OUTSIDE wowslider so it never resets or moves -->
     <div class="custom-wow-overlay">
-        @foreach($sliders as $idx => $slider)
-        <div class="custom-slide-text" id="cst-{{ $idx }}">
+        @if($sliders && count($sliders) > 0)
+        @php $slider = $sliders[0]; @endphp
+        <div class="custom-slide-text">
             <h1 class="cst-title">{!! nl2br(e($slider->title)) !!}</h1>
             <div class="cst-subtitle" style="margin-bottom: 20px;">{{ $slider->subtitle }}</div>
             <div class="cst-buttons" style="margin-bottom: 25px;">
@@ -146,36 +260,61 @@
                     <svg viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z'/><path d='M13 5v2'/><path d='M13 17v2'/><path d='M13 11v2'/></svg> BUY TICKETS
                 </a>
                 <a href="https://wa.me/1234567890" target="_blank" class="cst-btn cst-btn-secondary">
-                    <svg viewBox='0 0 24 24' width='20' height='20' fill='currentColor'><path d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z'/></svg> WhatsApp Us
+                    <svg viewBox='0 0 24 24' width='20' height='20' fill='currentColor'><path d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z'/></svg> WhatsApp
                 </a>
             </div>
             
-            <!-- RomexTours Style Filter Section -->
-            <div class="cst-filter-section">
-                <form action="#" method="GET" class="cst-filter-form">
-                    <select name="attraction" class="filter-input">
-                        <option value="">Select Attraction</option>
+            <!-- Mobile Minimized Filter (Visible only on mobile) -->
+            <div class="mobile-slide-filter">
+                <form action="#" method="GET" class="msf-form">
+                    <div class="msf-selects">
+                        <div class="msf-select-wrapper">
+                            <select name="attraction" class="msf-select">
+                                <option value="">Select Attraction</option>
+                                <option value="colosseum">Colosseum</option>
+                                <option value="vatican">Vatican</option>
+                                <option value="pantheon">Pantheon</option>
+                            </select>
+                        </div>
+                        <div class="msf-select-wrapper">
+                            <select name="type" class="msf-select">
+                                <option value="">Select Type</option>
+                                <option value="guided">Guided</option>
+                                <option value="audio">Audio</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="msf-btn">Search Tour</button>
+                </form>
+            </div>
+            
+            <!-- BEAUTIFUL OVERLAPPING FILTER SECTION (Desktop only) -->
+            <div class="global-filter-wrapper desktop-global-filter">
+                <form action="#" method="GET" class="cst-global-form">
+                    <select name="attraction" class="cst-global-select border-right">
+                        <option value="">Attraction?</option>
                         <option value="colosseum">Colosseum</option>
                         <option value="vatican">Vatican Museums</option>
                         <option value="pantheon">Pantheon</option>
                         <option value="st-peters">St. Peter's Basilica</option>
                     </select>
                     
-                    <select name="type" class="filter-input">
-                        <option value="">Select...</option>
+                    <select name="type" class="cst-global-select">
+                        <option value="">Tour Type?</option>
                         <option value="guided">Guided Tour</option>
                         <option value="audio">Audio Guide</option>
                         <option value="ticket">Entry Ticket</option>
                     </select>
 
-                    <button type="submit" class="filter-submit-btn">Search Tour</button>
+                    <button type="submit" class="cst-global-btn" aria-label="Search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
                 </form>
             </div>
+            
         </div>
-        @endforeach
+        @endif
     </div>
-
-    <div class="ws_shadow"></div>
 </div>
 
 <script type="text/javascript" src="{{ asset('engine1/jquery.js') }}"></script>
@@ -183,35 +322,24 @@
 <script type="text/javascript" src="{{ asset('engine1/script.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var checkInterval = setInterval(function() {
-        var bullets = document.querySelectorAll('.ws_bullets a');
-        var texts = document.querySelectorAll('.custom-slide-text');
-        if(bullets.length > 0 && texts.length > 0) {
-            bullets.forEach(function(bull, idx) {
-                if(bull.classList.contains('ws_selbull')) {
-                    texts.forEach(function(t, i) {
-                        if(i === idx) {
-                            t.style.opacity = '1';
-                            t.style.pointerEvents = 'auto';
-                            t.style.transform = 'translateY(0)';
-                            t.style.zIndex = '2';
-                        } else {
-                            t.style.opacity = '0';
-                            t.style.pointerEvents = 'none';
-                            t.style.transform = 'translateY(20px)';
-                            t.style.zIndex = '1';
-                        }
-                    });
-                }
-            });
-        }
-    }, 100);
+    // Sync mobile filter select values across all slider forms (if any)
+    var msfSelects = document.querySelectorAll('.msf-select');
+    msfSelects.forEach(function(select) {
+        select.addEventListener('change', function() {
+            var name = this.name;
+            var val = this.value;
+            document.querySelectorAll('.msf-select[name="'+name+'"]').forEach(function(s) {
+                if(s !== this) s.value = val;
+            }, this);
+        });
+    });
 });
 </script>
 
 
+
 <!-- STATS TICKER -->
-<div class="bg-navy overflow-hidden">
+<div class="bg-navy overflow-hidden" data-aos="fade-in">
   <div class="ticker-track">
     <div class="inline-flex items-center gap-2 px-[35px] text-white text-[12px] font-semibold tracking-[1.5px] uppercase whitespace-nowrap"><span class="text-gold text-[9px]">&#10022;</span><span class="text-gold text-[15px] font-bold">35,000+</span> TOURISTS SERVED</div>
     <div class="inline-flex items-center gap-2 px-[35px] text-white text-[12px] font-semibold tracking-[1.5px] uppercase whitespace-nowrap"><span class="text-gold text-[9px]">&#10022;</span> MOST VISITED MONUMENTS</div>
@@ -239,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="dest-bg-img"></div>
   <div class="dest-bg-overlay"></div>
   <div class="max-w-[1280px] mx-auto relative z-10">
-    <div class="text-center mb-3">
+    <div class="text-center mb-3" data-aos="fade-up">
       <p class="text-[10px] font-bold tracking-[3px] text-gold uppercase mb-1">Best Places For You</p>
       <h2 class="font-playfair text-white font-bold leading-none text-[clamp(24px,3.5vw,38px)] mb-1" style="text-shadow:0 2px 12px rgba(0,0,0,.5)">Popular Destinations</h2>
       <div class="w-8 h-[2px] bg-gold mx-auto mb-1 rounded-sm"></div>
@@ -274,28 +402,30 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="py-20 px-6 relative" id="categories" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Rome_StPeter_Panorama_02_800.jpg/960px-Rome_StPeter_Panorama_02_800.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
   <div class="absolute inset-0 bg-[rgba(5,12,25,.82)]"></div>
   <div class="relative max-w-[1280px] mx-auto">
-    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Explore Rome</p>
-    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Find Your Perfect Tour</h2>
-    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <p class="text-[15px] text-white/75 text-center max-w-[560px] mx-auto mt-3.5 mb-[40px] leading-[1.7]">Browse by theme &mdash; from ancient monuments to candlelit food strolls, there's a Roman adventure for every traveller.</p>
+    <div data-aos="fade-up">
+      <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Explore Rome</p>
+      <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Find Your Perfect Tour</h2>
+      <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
+      <p class="text-[15px] text-white/75 text-center max-w-[560px] mx-auto mt-3.5 mb-[40px] leading-[1.7]">Browse by theme &mdash; from ancient monuments to candlelit food strolls, there's a Roman adventure for every traveller.</p>
+    </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+      <a href="#tours" data-aos="fade-right" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
         <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127963;</div>
         <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Rome City Tours</h3>
         <span class="text-[12px] text-gold-light font-semibold">12 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+      <a href="#tours" data-aos="fade-down" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
         <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#127858;</div>
         <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Food &amp; Wine Tours</h3>
         <span class="text-[12px] text-gold-light font-semibold">6 tours &rarr;</span>
       </a>
-      <a href="#tours" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+      <a href="#tours" data-aos="fade-up" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
         <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128694;</div>
         <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Walking Tours</h3>
         <span class="text-[12px] text-gold-light font-semibold">18 tours &rarr;</span>
       </a>
-      <a href="{{ url('/services') }}" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
+      <a href="{{ url('/services') }}" data-aos="fade-left" class="group relative bg-white/8 backdrop-blur-sm rounded-2xl border border-white/15 p-6 text-center no-underline transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:bg-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]">
         <div class="w-[54px] h-[54px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-3.5 text-[26px] transition-transform duration-300 group-hover:scale-110">&#128663;</div>
         <h3 class="font-playfair text-[16px] font-bold text-white mb-1">Private Tours</h3>
         <span class="text-[12px] text-gold-light font-semibold">8 tours &rarr;</span>
@@ -327,10 +457,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- TOURS SECTION -->
 <section id="tours" class="py-20 px-6 bg-cream">
   <div class="max-w-[1280px] mx-auto">
-    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Curated Experiences</p>
-    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Discover Rome's Best Experiences</h2>
-    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">Hand-picked tours led by Rome's top licensed guides &mdash; bookable instantly via WhatsApp.</p>
+    <div data-aos="fade-up">
+      <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Curated Experiences</p>
+      <h2 class="font-playfair text-navy font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Discover Rome's Best Experiences</h2>
+      <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
+      <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">Hand-picked tours led by Rome's top licensed guides &mdash; bookable instantly via WhatsApp.</p>
+    </div>
     <div class="flex gap-2.5 justify-center flex-wrap mb-[30px]">
       <button class="py-[9px] px-5 rounded-full border-[1.5px] border-cream-dark bg-white text-[13px] font-semibold text-[#6b7280] cursor-pointer transition-all ft active" onclick="ft2('all',this)">All Tours</button>
       <button class="py-[9px] px-5 rounded-full border-[1.5px] border-cream-dark bg-white text-[13px] font-semibold text-[#6b7280] cursor-pointer transition-all ft" onclick="ft2('bestseller',this)">Bestsellers</button>
@@ -339,7 +471,14 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="tour-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[17px] mb-[30px]">
       @foreach($tours as $tour)
-      <div class="tour-card bg-[#0b1623] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="{{ strtolower($tour->badge_type ?? 'popular') }}">
+      @php
+        $animClass = 'fade-up';
+        if ($loop->iteration % 4 == 1) $animClass = 'fade-right';
+        elseif ($loop->iteration % 4 == 2) $animClass = 'fade-down';
+        elseif ($loop->iteration % 4 == 3) $animClass = 'fade-up';
+        else $animClass = 'fade-left';
+      @endphp
+      <div class="tour-card bg-[#0b1623] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,.14)] transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]" data-tag="{{ strtolower($tour->badge_type ?? 'popular') }}" data-aos="{{ $animClass }}">
         <div class="tour-card-img relative h-[200px] overflow-hidden">
           <a href="{{ route('tour.detail', $tour->slug) }}">
             <img src="{{ asset($tour->image ?? 'images/no.png') }}" alt="{{ $tour->name }}" class="w-full h-full object-contain transition-transform duration-300" style="background:#0b1623;"/>
@@ -373,20 +512,9 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="h-px bg-white/8 mb-3"></div>
           <div class="flex items-center justify-between">
-            <div class="flex flex-col">
-              @if($tour->old_price && $tour->old_price > $tour->price)
-                <span class="text-[12px] text-white/36 line-through">€{{ $tour->old_price }}</span>
-                <div class="flex items-baseline gap-1.5">
-                  <span class="text-[22px] font-extrabold text-white">€{{ $tour->price }}</span>
-                  <span class="text-[11px] font-bold text-[#4ade80] bg-[rgba(74,222,128,.1)] py-0.5 px-1.5 rounded">-{{ round((($tour->old_price - $tour->price)/$tour->old_price)*100) }}%</span>
-                </div>
-              @else
-                <span class="text-[11px] text-white/36">per person</span>
-                <div class="flex items-baseline gap-1.5"><span class="text-[22px] font-extrabold text-white">€{{ $tour->price }}</span></div>
-              @endif
-              @if($tour->old_price && $tour->old_price > $tour->price)
-                <span class="text-[11px] text-white/36">per person</span>
-              @endif
+            <div class="flex items-center gap-1.5">
+              <span class="text-[14px] text-white/70 font-medium">Start from</span>
+              <span class="text-[22px] font-extrabold text-gold">€{{ $tour->price }}</span>
             </div>
             <a href="{{ route('tour.detail', $tour->slug) }}" class="bg-gradient-to-r from-gold to-gold-dark text-navy border-none py-[11px] px-[18px] rounded-[10px] text-[12px] font-bold cursor-pointer transition-all whitespace-nowrap hover:shadow-[0_4px_18px_rgba(200,168,78,.45)] hover:-translate-y-px flex items-center gap-[6px] tracking-[.3px] uppercase no-underline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5Z"/><path d="M9 12h.01M15 12h.01"/><path d="M9 16c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg> Book Now</a>
           </div>
@@ -403,17 +531,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="py-20 px-6 relative" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Panorama_view_from_the_dome_of_the_St._Peter%27s_Basilica.jpg/960px-Panorama_view_from_the_dome_of_the_St._Peter%27s_Basilica.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
   <div class="absolute inset-0 bg-[rgba(8,16,30,.85)]"></div>
   <div class="relative max-w-[1280px] mx-auto">
-    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Why Choose Us</p>
-    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Why Book With Nice In Rome Tour</h2>
-    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <p class="text-[15px] text-white/75 text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">We make your Rome experience extraordinary with personalized service and instant booking.</p>
+    <div data-aos="fade-up">
+      <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Why Choose Us</p>
+      <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Why Book With Nice In Rome Tour</h2>
+      <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
+      <p class="text-[15px] text-white/75 text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">We make your Rome experience extraordinary with personalized service and instant booking.</p>
+    </div>
     <div class="why-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#128172;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">WhatsApp Instant Booking</h3><p class="text-[14px] text-white/70 leading-[1.7]">Book your tour in seconds — availability confirmed instantly, 24/7. Chat like a friend, not a customer.</p></div>
-      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127963;&#65039;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Skip the Line Access</h3><p class="text-[14px] text-white/70 leading-[1.7]">Exclusive priority access to Rome's most visited monuments. No waiting, no stress — just pure history.</p></div>
-      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127758;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">7 Languages Spoken</h3><p class="text-[14px] text-white/70 leading-[1.7]">Our expert guides speak Italian, English, Spanish, French, Arabic and more for a truly personal experience.</p></div>
-      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#9989;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Free Cancellation</h3><p class="text-[14px] text-white/70 leading-[1.7]">Flexible booking with free cancellation on all tours. Book with confidence — plans change, we understand.</p></div>
-      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#11088;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">4.8&#9733; Average Rating</h3><p class="text-[14px] text-white/70 leading-[1.7]">Trusted by 35,000+ happy tourists worldwide. Our reputation is built on unforgettable experiences.</p></div>
-      <div class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127919;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Small Group Tours</h3><p class="text-[14px] text-white/70 leading-[1.7]">Intimate small-group experiences that make you feel like a VIP, not just another tourist in the crowd.</p></div>
+      <div data-aos="fade-right" class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#128172;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">WhatsApp Instant Booking</h3><p class="text-[14px] text-white/70 leading-[1.7]">Book your tour in seconds — availability confirmed instantly, 24/7. Chat like a friend, not a customer.</p></div>
+      <div data-aos="zoom-in" class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127963;&#65039;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Skip the Line Access</h3><p class="text-[14px] text-white/70 leading-[1.7]">Exclusive priority access to Rome's most visited monuments. No waiting, no stress — just pure history.</p></div>
+      <div data-aos="fade-left" class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127758;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">7 Languages Spoken</h3><p class="text-[14px] text-white/70 leading-[1.7]">Our expert guides speak Italian, English, Spanish, French, Arabic and more for a truly personal experience.</p></div>
+      <div data-aos="fade-right" class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#9989;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Free Cancellation</h3><p class="text-[14px] text-white/70 leading-[1.7]">Flexible booking with free cancellation on all tours. Book with confidence — plans change, we understand.</p></div>
+      <div data-aos="zoom-in" class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#11088;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">4.8&#9733; Average Rating</h3><p class="text-[14px] text-white/70 leading-[1.7]">Trusted by 35,000+ happy tourists worldwide. Our reputation is built on unforgettable experiences.</p></div>
+      <div data-aos="fade-left" class="bg-white/8 backdrop-blur-sm rounded-2xl py-7 px-6 text-center border border-white/15 transition-all hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,.35)]"><div class="w-[60px] h-[60px] bg-gold/15 border border-gold/30 rounded-[15px] flex items-center justify-center mx-auto mb-4 text-[27px]">&#127919;</div><h3 class="font-playfair text-[18px] font-bold text-white mb-[9px]">Small Group Tours</h3><p class="text-[14px] text-white/70 leading-[1.7]">Intimate small-group experiences that make you feel like a VIP, not just another tourist in the crowd.</p></div>
     </div>
   </div>
 </section>
@@ -421,7 +551,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- EXPERIENCE ROME / ABOUT -->
 <section class="py-20 px-6 bg-white overflow-hidden">
   <div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[50px] items-center">
-    <div class="relative">
+    <div class="relative" data-aos="fade-right">
       <div class="relative rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,.2)]">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/960px-Colosseo_2020.jpg" alt="Experience Rome with Nice in Rome Tour" class="w-full h-[420px] object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/50 to-transparent"></div>
@@ -441,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="text-[9px] font-semibold tracking-widest uppercase">Years Exp.</div>
       </div>
     </div>
-    <div>
+    <div data-aos="fade-left">
       <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase mb-3">Experience Rome</p>
       <h2 class="font-playfair text-navy font-bold leading-tight mb-5 text-[clamp(28px,4vw,42px)]">See Rome Through The Eyes Of A Local</h2>
       <div class="w-12 h-[3px] bg-gold rounded-sm mb-5"></div>
@@ -463,10 +593,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ROME EXPERIENCE PACKAGES -->
 <section class="py-20 px-6 bg-[#0b1623] overflow-hidden">
   <div class="max-w-[1280px] mx-auto">
-    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Explore Rome</p>
-    <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Rome Experience Packages</h2>
-    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <p class="text-[15px] text-white/60 text-center max-w-[560px] mx-auto mt-3.5 mb-10 leading-[1.7]">Discover Rome's greatest treasures — handcrafted full-day packages covering the Eternal City's must-see landmarks.</p>
+    <div data-aos="fade-up">
+      <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Explore Rome</p>
+      <h2 class="font-playfair text-white font-bold text-center mb-2.5 leading-tight text-[clamp(28px,4vw,44px)]">Rome Experience Packages</h2>
+      <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
+      <p class="text-[15px] text-white/60 text-center max-w-[560px] mx-auto mt-3.5 mb-10 leading-[1.7]">Discover Rome's greatest treasures — handcrafted full-day packages covering the Eternal City's must-see landmarks.</p>
+    </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <!-- Package 1: Colosseum -->
       <div class="group bg-white/5 rounded-2xl overflow-hidden border border-white/10 backdrop-blur-sm transition-all hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(200,168,78,.15)] cursor-pointer">
@@ -946,4 +1078,25 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Highlight last two words of the banner title
+    var titleEls = document.querySelectorAll('.cst-title');
+    titleEls.forEach(function(el) {
+        // Strip out HTML tags first if needed, but since it has <br>, we should split by spaces/br
+        var html = el.innerHTML.trim();
+        var parts = html.split(' ');
+        if (parts.length > 2) {
+            var lastTwo = parts.slice(-2).join(' ');
+            var rest = parts.slice(0, -2).join(' ');
+            el.innerHTML = rest + ' <span class="cst-title-highlight">' + lastTwo + '</span>';
+        } else if (parts.length > 0) {
+            el.innerHTML = '<span class="cst-title-highlight">' + html + '</span>';
+        }
+    });
+});
+</script>
 @endsection
