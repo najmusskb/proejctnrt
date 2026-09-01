@@ -32,8 +32,8 @@ tailwind.config = {
 }
 </script>
 <style>
-html{scroll-behavior:smooth}
-body{font-family:'Mulish',sans-serif;background:#f4efe6;color:#1a1a2e; /* Removed overflow-x: hidden to fix iOS position:fixed bug */}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{font-family:'Mulish',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x:hidden;max-width:100%;}
 
 /* ===== PREMIUM NAVBAR ===== */
 #mainNav{
@@ -171,6 +171,100 @@ body{font-family:'Mulish',sans-serif;background:#f4efe6;color:#1a1a2e; /* Remove
   color:#c8a84e;
   background:rgba(200,168,78,.1);
   font-weight:600;
+}
+
+/* Nav Dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(12,22,38,.98);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(200,168,78,.15);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  padding: 8px 0;
+  min-width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s cubic-bezier(.22,1,.36,1);
+  z-index: 200;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+.dropdown-menu.mega-menu {
+  width: 600px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.mega-menu-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 12px !important;
+  text-decoration: none;
+  border-radius: 12px !important;
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  transition: all .3s cubic-bezier(.22,1,.36,1) !important;
+}
+.mega-menu-item::after { display: none !important; }
+.mega-menu-item:hover {
+  background: rgba(200,168,78,0.08) !important;
+  border-color: rgba(200,168,78,0.3) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.mega-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-right: 16px;
+  border: 2px solid rgba(255,255,255,0.1);
+  transition: border-color .3s;
+}
+.mega-menu-item:hover .mega-img {
+  border-color: #c8a84e;
+}
+.mega-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mega-title {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+.mega-subtitle {
+  color: #c8a84e;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  transition: opacity .3s, transform .3s;
+}
+.mega-menu-item:hover .mega-subtitle {
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 /* Divider */

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\HomePageSettingController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\NewseventController;
 use App\Http\Controllers\Admin\PackageController;
@@ -31,9 +32,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-
+Route::get('/all-destinations', [HomeController::class, 'destinations'])->name('destinations');
+Route::get('/destination/{slug}', [HomeController::class, 'destination'])->name('destination.detail');
+Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.detail');
 Route::get('/tour/{slug}', [HomeController::class, 'show'])->name('tour.detail');
-
+Route::get('/tickets', [HomeController::class, 'tickets'])->name('tickets');
+Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact-us/submit', [HomeController::class, 'contactSubmit'])->name('contact.submit');
 Route::group(['middleware' => 'guest'], function() {
     Route::get('/login', [AuthenticationController::class, 'login'])->name('login');
     Route::post('/login', [AuthenticationController::class, 'authCheck'])->name('login.check');
@@ -48,11 +53,24 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/profile', [AuthenticationController::class, 'profileUpdate'])->name('profile.update');
     Route::get('/logout', [AuthenticationController::class, 'logout'])->name('admin.logout');
 
+    Route::get('/destinations', [DestinationController::class, 'index'])->name('destination.index');
+    Route::post('/destination/store', [DestinationController::class, 'store'])->name('destination.store');
+    Route::get('/destination/edit/{id}', [DestinationController::class, 'edit'])->name('destination.edit');
+    Route::post('/destination/update/{id}', [DestinationController::class, 'update'])->name('destination.update');
+    Route::post('/destination/delete', [DestinationController::class, 'delete'])->name('destination.delete');
+
     Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::post('/category/delete', [CategoryController::class, 'destroy'])->name('category.delete');
+    Route::post('/category/delete', [CategoryController::class, 'delete'])->name('category.delete');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::post('/product/delete', [ProductController::class, 'delete'])->name('product.delete');
+    Route::post('/product/image/delete', [ProductController::class, 'deleteImage'])->name('product.image.delete');
     
     Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
     Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
@@ -60,12 +78,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::post('/brand/delete', [BrandController::class, 'destroy'])->name('brand.delete');
 
-    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
-    Route::post('/product/delete', [ProductController::class, 'destroy'])->name('product.delete');
-    Route::get('/remove-image/{id}', [ProductController::class, 'removeImage'])->name('product.remove.image');
+
 
     Route::get('/sliders', [SliderController::class, 'index'])->name('slider.index');
     Route::post('/slider/store', [SliderController::class, 'store'])->name('slider.store');
@@ -124,17 +137,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/messages', [ContactController::class, 'index'])->name('messages.index');
     Route::post('/message/delete', [ContactController::class, 'destroy'])->name('message.delete');
 
-    // Destinations
-    Route::get('/destinations', [DestinationController::class, 'index'])->name('destination.index');
-    Route::post('/destination/store', [DestinationController::class, 'store'])->name('destination.store');
-    Route::get('/destination/edit/{id}', [DestinationController::class, 'edit'])->name('destination.edit');
-    Route::post('/destination/update/{id}', [DestinationController::class, 'update'])->name('destination.update');
-    Route::post('/destination/delete', [DestinationController::class, 'destroy'])->name('destination.delete');
 
-    // Packages
-    Route::get('/packages', [PackageController::class, 'index'])->name('package.index');
-    Route::post('/package/store', [PackageController::class, 'store'])->name('package.store');
-    Route::get('/package/edit/{id}', [PackageController::class, 'edit'])->name('package.edit');
-    Route::post('/package/update/{id}', [PackageController::class, 'update'])->name('package.update');
-    Route::post('/package/delete', [PackageController::class, 'destroy'])->name('package.delete');
+
+
+
+    // Home Page Settings
+    Route::get('/home-page-settings', [HomePageSettingController::class, 'index'])->name('home_page_settings.index');
+    Route::post('/home-page-settings/update', [HomePageSettingController::class, 'update'])->name('home_page_settings.update');
 });

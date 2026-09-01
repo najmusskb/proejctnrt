@@ -23,13 +23,45 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#" class="nav-active" id="navHome">Home</a></li>
       <li><a href="#" id="navAbout">About Us</a></li>
-      <li><a href="#destinations" id="navDestinations">Destinations</a></li>
-      <li><a href="#tours" id="navTours">Tours</a></li>
-      <li><a href="#" id="navTickets">Tickets</a></li>
-      <li><a href="#" id="navContact">Contact Us</a></li>
+      <li class="nav-dropdown">
+        <a href="{{ route('destinations') }}" id="navDestinations" style="display:flex; align-items:center; gap:4px;">
+          Destinations
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown-menu mega-menu">
+          @php $navDestinations = \App\Models\Destination::where('status', 1)->get(); @endphp
+          @foreach($navDestinations as $d)
+          <a href="{{ route('destination.detail', $d->slug) }}" class="mega-menu-item">
+            <img src="{{ asset($d->image) }}" alt="{{ $d->name }}" class="mega-img">
+            <div class="mega-text">
+              <span class="mega-title">{{ $d->name }}</span>
+              <span class="mega-subtitle">Explore Tours &rarr;</span>
+            </div>
+          </a>
+          @endforeach
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="#tours" id="navTours" style="display:flex; align-items:center; gap:4px;">
+          Tours
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown-menu mega-menu">
+          @php $navCategories = \App\Models\Category::where('status', 1)->take(6)->get(); @endphp
+          @foreach($navCategories as $cat)
+          <a href="{{ route('category.detail', $cat->slug) }}" class="mega-menu-item">
+            <img src="{{ asset($cat->image) }}" alt="{{ $cat->name }}" class="mega-img">
+            <div class="mega-text">
+              <span class="mega-title" style="font-size: 14px; line-height: 1.3; margin-bottom: 6px;">{{ $cat->name }}</span>
+              <span class="mega-subtitle" style="font-size: 11px;">Explore Tours &rarr;</span>
+            </div>
+          </a>
+          @endforeach
+        </div>
+      </li>
+      <li><a href="{{ route('tickets') }}" id="navTickets">Tickets</a></li>
+      <li><a href="{{ route('contact') }}" id="navContact">Contact Us</a></li>
     </ul>
-
-
 
     <!-- Right Side Actions -->
     <div class="nav-divider"></div>

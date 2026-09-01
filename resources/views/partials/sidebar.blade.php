@@ -14,22 +14,11 @@
                     Manage Tours
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse {{ Route::is('product.*') || Route::is('category.*') || Route::is('brand.*') ? 'show' : '' }}" id="toursLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Route::is('product.*') || Route::is('destination.*') || Route::is('category.*') ? 'show' : '' }}" id="toursLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link {{ Route::is('product.*') ? 'active' : '' }}" href="{{ route('product.index') }}"><i class="sb-mini-icon fas fa-ticket-alt"></i> Tour Tickets</a>
+                        <a class="nav-link {{ Route::is('product.*') ? 'active' : '' }}" href="{{ route('product.index') }}"><i class="sb-mini-icon fas fa-ticket-alt"></i> Products</a>
                         <a class="nav-link {{ Route::is('category.*') ? 'active' : '' }}" href="{{ route('category.index') }}"><i class="sb-mini-icon fas fa-layer-group"></i> Categories</a>
-                    </nav>
-                </div>
-
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#destLayouts" aria-expanded="false" aria-controls="destLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    Destinations & Packages
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse {{ Route::is('destination.*') || Route::is('package.*') ? 'show' : '' }}" id="destLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link {{ Route::is('destination.*') ? 'active' : '' }}" href="{{ route('destination.index') }}"><i class="sb-mini-icon fas fa-map-pin"></i> Destinations</a>
-                        <a class="nav-link {{ Route::is('package.*') ? 'active' : '' }}" href="{{ route('package.index') }}"><i class="sb-mini-icon fas fa-box-open"></i> Packages</a>
+                        <a class="nav-link {{ Route::is('destination.*') ? 'active' : '' }}" href="{{ route('destination.index') }}"><i class="sb-mini-icon fas fa-map-marker-alt"></i> Destinations</a>
                     </nav>
                 </div>
 
@@ -60,6 +49,7 @@
                 </a>
                 <div class="collapse" id="settingLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ route('home_page_settings.index') }}"><i class="sb-mini-icon fas fa-home"></i> Home Page Settings</a>
                         <a class="nav-link" href="{{ route('company.profile') }}"><i class="sb-mini-icon fas fa-address-card"></i> Company Profile</a>
                     </nav>
                 </div>

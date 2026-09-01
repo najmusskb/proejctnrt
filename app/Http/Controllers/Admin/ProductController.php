@@ -2,206 +2,154 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
-use App\Models\Category;
-use Illuminate\Support\Str;
-use App\Models\ProductImage;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\Category;
+use App\Models\Destination;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $product = Product::latest()->get();
-        $category = Category::all();
-        $brand = Brand::all();
-        $gen_product_code = $this->generateCode('Product', 'P-');
-        return view('admin.product', compact('product', 'category', 'brand', 'gen_product_code'));
+        $products = Product::with(['category', 'destination'])->latest()->get();
+        $categories = Category::all();
+        $destinations = Destination::all();
+        return view('admin.product', compact('products', 'categories', 'destinations'));
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $this->validate($request,[
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'name' => 'required|max:100',
-            'description' => 'required',
-            'image' => 'required|Image|mimes:jpg,jpeg,png,gif,webp',
-            'other_img.*' => 'mimes:jpg,jpeg,png,bmp,gif,webp'
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        try {
-            DB::beginTransaction();
-            $product = new Product();
-            $product->category_id = $request->category_id;
-            $product->brand_id = $request->brand_id;
-            $product->name = $request->name;
-            $product->product_code = $request->product_code;
-            $product->slug = Str::slug($request->name.'-'.uniqid());
-            $product->price = $request->price;
-            $product->old_price = $request->old_price;
-            $product->description = $request->description;
-            $product->is_hot = $request->is_hot;
-            $product->image = $this->imageUpload($request, 'image', 'uploads/product');
-            $product->created_by = Auth::id();
-            $product->ip_address = $request->ip();
-            $product->save();
+        $product = new Product();
+        $this->saveProduct($product, $request);
 
-            $othersImage = $this->imageUpload($request, 'other_img', 'uploads/product');
-            if (is_array($othersImage) && count($othersImage)) {
-                foreach ($othersImage as $image) {
-                    $productImage = new ProductImage();
-                    $productImage->product_id = $product->id;
-                    $productImage->other_img = $image;
-                    $productImage->save();
-                }
-            }
-
-            DB::commit();
-            $notification=array(
-                'message'=>'Product Added Successfully',
-                'alert-type'=>'success'
-            );
-            return Redirect()->back()->with($notification);
-
-        } catch (\Exception $e) {
-            return $e->getMessage();
-            DB::rollBack();
-            $notification=array(
-                'message'=>'Something went wrong!',
-                'alert-type'=>'error'
-            );
-            return Redirect()->back()->with($notification);
-        }
+        return redirect()->route('product.index')->with('success', 'Product created successfully');
     }
 
     public function edit($id)
     {
-        $product = Product::latest()->get();
-        $productData = Product::with('images')->find($id);
-        $category = Category::all();
-        $brand = Brand::all();
-        $gen_product_code = $this->generateCode('Product', 'P-');
-        return view('admin.product', compact('product', 'category', 'productData', 'brand', 'gen_product_code'));
+        $productData = Product::findOrFail($id);
+        $products = Product::with(['category', 'destination'])->latest()->get();
+        $categories = Category::all();
+        $destinations = Destination::all();
+        return view('admin.product', compact('productData', 'products', 'categories', 'destinations'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'name' => 'required|max:100',
-            'description' => 'required',
-            'image' => 'Image|mimes:jpg,jpeg,png,gif,webp',
-            'other_img.*' => 'mimes:jpg,jpeg,png,bmp,gif,webp'
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        try {
-            DB::beginTransaction();
-            $product = Product::find($id);
-            $proImg = $product->image;
-            if ($request->hasFile('image')) {
-                if (!empty($product->image) && file_exists($product->image)) 
-                    unlink($product->image);
-                    $proImg = $this->imageUpload($request, 'image', 'uploads/product');
-            }
+        $product = Product::findOrFail($id);
+        $this->saveProduct($product, $request);
 
-            $product->category_id = $request->category_id;
-            $product->brand_id = $request->brand_id;
-            $product->name = $request->name;
-            $product->product_code = $request->product_code;
-            $product->slug = Str::slug($request->name.'-'.uniqid());
-            $product->price = $request->price;
-            $product->old_price = $request->old_price;
-            $product->description = $request->description;
-            $product->is_hot = $request->is_hot;
-            $product->image = $proImg;
-            $product->updated_by = Auth::id();
-            $product->ip_address = $request->ip();
-            $product->save();
+        return redirect()->route('product.index')->with('success', 'Product updated successfully');
+    }
 
-            $othersImage = $this->imageUpload($request, 'other_img', 'uploads/product');
-            if (is_array($othersImage) && count($othersImage)) {
-                foreach ($othersImage as $image) {
-                    $productImage = new ProductImage();
-                    $productImage->product_id = $product->id;
-                    $productImage->other_img = $image;
-                    $productImage->save();
+    private function saveProduct($product, $request)
+    {
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->category_id = $request->category_id;
+        $product->destination_id = $request->destination_id;
+        $product->price = $request->price;
+        $product->old_price = $request->old_price;
+        $product->badge_type = $request->badge_type;
+        $product->rating = $request->rating;
+        $product->reviews_count = $request->reviews_count ?? 0;
+        $product->duration = $request->duration;
+        $product->group_size = $request->group_size;
+        $product->free_cancellation = $request->has('free_cancellation') ? 1 : 0;
+        $product->short_description = $request->short_description;
+        $product->description = $request->description;
+        
+        // Handle JSON fields (if they send array from form, or if just text, encode it)
+        $product->included = $request->included ? json_encode(explode("\n", str_replace("\r", "", $request->included))) : null;
+        $product->excluded = $request->excluded ? json_encode(explode("\n", str_replace("\r", "", $request->excluded))) : null;
+        $product->itinerary = $request->itinerary ? json_encode(explode("\n", str_replace("\r", "", $request->itinerary))) : null;
+        
+        $product->status = $request->status ?? 1;
+        $product->sort_order = $request->sort_order ?? 0;
+
+        $product->map_iframe = $request->map_iframe;
+        $product->meeting_point = $request->meeting_point;
+        
+        if ($request->cancellation_policy) {
+            $product->cancellation_policy = json_encode(explode("\n", str_replace("\r", "", $request->cancellation_policy)));
+        } else {
+            $product->cancellation_policy = null;
+        }
+
+        if ($request->faqs_q && $request->faqs_a) {
+            $faqs = [];
+            foreach ($request->faqs_q as $i => $q) {
+                if (!empty($q) && !empty($request->faqs_a[$i])) {
+                    $faqs[] = ['q' => $q, 'a' => $request->faqs_a[$i]];
                 }
             }
+            $product->faqs = json_encode($faqs);
+        } else {
+            $product->faqs = null;
+        }
 
-            DB::commit();
-            $notification=array(
-                'message'=>'Product Updated Successfully',
-                'alert-type'=>'success'
-            );
-            return Redirect()->route('product.index')->with($notification);
+        if ($request->hasFile('image')) {
+            if ($product->image && file_exists(public_path($product->image))) {
+                unlink(public_path($product->image));
+            }
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/products'), $imageName);
+            $product->image = 'uploads/products/' . $imageName;
+        }
 
-        } catch (\Exception $e) {
-            return $e->getMessage();
-            DB::rollBack();
-            $notification=array(
-                'message'=>'Something went wrong!',
-                'alert-type'=>'error'
-            );
-            return Redirect()->back()->with($notification);
+        $product->save();
+
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $key => $gImage) {
+                $gImageName = time() . $key . '.' . $gImage->extension();
+                $gImage->move(public_path('uploads/products/gallery'), $gImageName);
+                
+                $productImage = new ProductImage();
+                $productImage->product_id = $product->id;
+                $productImage->image = 'uploads/products/gallery/' . $gImageName;
+                $productImage->save();
+            }
         }
     }
 
-    public function destroy(Request $request)
+    public function delete(Request $request)
     {
-        try {
-            $product = Product::find($request->id);
-            if($product){
-                if(file_exists($product->image) AND !empty($product->image)){
-                    unlink($product->image);
-                }
-                
-                $subImage = ProductImage::where('product_id', $product->id)->get();
-                if($subImage->count() > 0){
-                    foreach ($subImage as $value) {
-                        if(!empty($value)){
-                            unlink($value->other_img);
-                        }
-                    } 
-                    ProductImage::where('product_id', $product->id)->delete();
-                }
-                
-                $product->delete();
-            }
-            
-            return response()->json([
-                'message'=>'Data Deleted Successfully',
-                'success'=> true
-            ]);
-            
-        } catch (\Exception $e) {
-            return response()->json([
-                'message'=>'Something went wrong!',
-                'success'=> false
-            ]);
+        $product = Product::findOrFail($request->id);
+        if ($product->image && file_exists(public_path($product->image))) {
+            unlink(public_path($product->image));
         }
         
+        foreach ($product->images as $img) {
+            if ($img->image && file_exists(public_path($img->image))) {
+                unlink(public_path($img->image));
+            }
+            $img->delete();
+        }
+
+        $product->delete();
+        return response()->json(['success' => 'Deleted successfully']);
     }
 
-
-    // Remove Image
-    public function removeImage($id)
+    public function deleteImage(Request $request)
     {
-        try {
-            $image = ProductImage::find($id);
-            $image->delete();
-            if(file_exists($image->other_img) && !empty($image->other_img)) {
-                unlink($image->other_img);
-            }
-            return response(true);
-        } catch (\Exception $e) {
-            return response(false);
+        $productImage = ProductImage::findOrFail($request->id);
+        if ($productImage->image && file_exists(public_path($productImage->image))) {
+            unlink(public_path($productImage->image));
         }
+        $productImage->delete();
+        return response()->json(['success' => 'Deleted successfully']);
     }
 }

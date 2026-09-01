@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Destination;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class DestinationController extends Controller
 {
@@ -16,60 +17,67 @@ class DestinationController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name'  => 'required|max:100',
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif,webp',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $dest = new Destination();
-        $dest->name        = $request->name;
-        $dest->description = $request->description;
-        $dest->link        = $request->link ?? '#tours';
-        $dest->is_active   = $request->is_active ?? 1;
-        $dest->sort_order  = $request->sort_order ?? 0;
-        $dest->image       = $this->imageUpload($request, 'image', 'uploads/destination');
-        $dest->save();
+        $destination = new Destination();
+        $destination->name = $request->name;
+        $destination->slug = Str::slug($request->name);
+        $destination->status = $request->status ?? 1;
+        $destination->sort_order = $request->sort_order ?? 0;
 
-        return redirect()->back()->with(['message' => 'Destination Added!', 'alert-type' => 'success']);
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/destinations'), $imageName);
+            $destination->image = 'uploads/destinations/' . $imageName;
+        }
+
+        $destination->save();
+        return redirect()->route('destination.index')->with('success', 'Destination created successfully');
     }
 
     public function edit($id)
     {
-        $destinations = Destination::orderBy('sort_order')->get();
         $destinationData = Destination::findOrFail($id);
-        return view('admin.destination', compact('destinations', 'destinationData'));
+        $destinations = Destination::orderBy('sort_order')->get();
+        return view('admin.destination', compact('destinationData', 'destinations'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name'  => 'required|max:100',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $dest = Destination::findOrFail($id);
-        $dest->name        = $request->name;
-        $dest->description = $request->description;
-        $dest->link        = $request->link ?? '#tours';
-        $dest->is_active   = $request->is_active ?? 1;
-        $dest->sort_order  = $request->sort_order ?? 0;
+        $destination = Destination::findOrFail($id);
+        $destination->name = $request->name;
+        $destination->slug = Str::slug($request->name);
+        $destination->status = $request->status ?? 1;
+        $destination->sort_order = $request->sort_order ?? 0;
 
         if ($request->hasFile('image')) {
-            if (!empty($dest->image) && file_exists($dest->image)) unlink($dest->image);
-            $dest->image = $this->imageUpload($request, 'image', 'uploads/destination');
+            if ($destination->image && file_exists(public_path($destination->image))) {
+                unlink(public_path($destination->image));
+            }
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/destinations'), $imageName);
+            $destination->image = 'uploads/destinations/' . $imageName;
         }
-        $dest->save();
 
-        return redirect()->route('destination.index')->with(['message' => 'Destination Updated!', 'alert-type' => 'success']);
+        $destination->save();
+        return redirect()->route('destination.index')->with('success', 'Destination updated successfully');
     }
 
-    public function destroy(Request $request)
+    public function delete(Request $request)
     {
-        $dest = Destination::find($request->id);
-        if ($dest) {
-            if (!empty($dest->image) && file_exists($dest->image)) unlink($dest->image);
-            $dest->delete();
+        $destination = Destination::findOrFail($request->id);
+        if ($destination->image && file_exists(public_path($destination->image))) {
+            unlink(public_path($destination->image));
         }
-        return response()->json(['message' => 'Deleted Successfully', 'success' => true]);
+        $destination->delete();
+        return response()->json(['success' => 'Deleted successfully']);
     }
 }

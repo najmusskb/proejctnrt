@@ -41,11 +41,17 @@
         <div class="dash-grid">
             <div class="card mb-3 dash-card g-blue">
                 <a href="{{ route('product.index') }}">
-                    <div class="dash-ico"><i class="fas fa-couch"></i></div>
+                    <div class="dash-ico"><i class="fas fa-ticket-alt"></i></div>
                     <p class="dash-card-text">Products ({{ \App\Models\Product::count() }})</p>
                 </a>
             </div>
             <div class="card mb-3 dash-card g-purple">
+                <a href="{{ route('destination.index') }}">
+                    <div class="dash-ico"><i class="fas fa-map-marker-alt"></i></div>
+                    <p class="dash-card-text">Destinations ({{ \App\Models\Destination::count() }})</p>
+                </a>
+            </div>
+            <div class="card mb-3 dash-card g-teal">
                 <a href="{{ route('category.index') }}">
                     <div class="dash-ico"><i class="fas fa-layer-group"></i></div>
                     <p class="dash-card-text">Categories ({{ \App\Models\Category::count() }})</p>
