@@ -51,6 +51,15 @@ class HomeController extends Controller
         ));
     }
 
+    public function tours()
+    {
+        $tours = Product::with(['category', 'destination'])->where('status', 1)->latest()->get();
+        $company = Companyprofile::first();
+        $content = $company;
+
+        return view('frontend.tours', compact('tours', 'company', 'content'));
+    }
+
     public function tickets()
     {
         // For demonstration, we fetch all products or filter by category 'tickets' if it exists.

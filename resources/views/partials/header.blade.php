@@ -42,7 +42,7 @@
         </div>
       </li>
       <li class="nav-dropdown">
-        <a href="#tours" id="navTours" style="display:flex; align-items:center; gap:4px;">
+        <a href="{{ route('tours') }}" id="navTours" style="display:flex; align-items:center; gap:4px;">
           Tours
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </a>

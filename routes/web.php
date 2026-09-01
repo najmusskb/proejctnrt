@@ -37,6 +37,7 @@ Route::get('/destination/{slug}', [HomeController::class, 'destination'])->name(
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.detail');
 Route::get('/tour/{slug}', [HomeController::class, 'show'])->name('tour.detail');
 Route::get('/tickets', [HomeController::class, 'tickets'])->name('tickets');
+Route::get('/tours', [HomeController::class, 'tours'])->name('tours');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact-us/submit', [HomeController::class, 'contactSubmit'])->name('contact.submit');
 Route::group(['middleware' => 'guest'], function() {
