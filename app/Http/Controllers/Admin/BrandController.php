@@ -19,13 +19,15 @@ class BrandController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|min:3|unique:brands,name',
-            'image' => 'required|Image|mimes:jpg,jpeg,png,gif,webp'
+            'image' => 'nullable|Image|mimes:jpg,jpeg,png,gif,webp'
         ]);
         
         try {
             $brand = new Brand();
             $brand->name = $request->name;
-            $brand->image = $this->imageUpload($request, 'image', 'uploads/brand');
+            if ($request->hasFile('image')) {
+                $brand->image = $this->imageUpload($request, 'image', 'uploads/brand');
+            }
             $brand->created_by = Auth::id();
             $brand->ip_address = $request->ip();
             $brand->save();
@@ -56,15 +58,13 @@ class BrandController extends Controller
         
         try {
             $brand = Brand::find($id);
-            $brandImg = $brand->image;
             if($request->hasFile('image')){
                 if (!empty($brand->image) && file_exists($brand->image)) {
                     unlink($brand->image);
-                    $brandImg = $this->imageUpload($request, 'image', 'uploads/brand');
                 }
+                $brand->image = $this->imageUpload($request, 'image', 'uploads/brand');
             }
             $brand->name = $request->name;
-            $brand->image = $brandImg;
             $brand->updated_by = Auth::id();
             $brand->ip_address = $request->ip();
             $brand->save();

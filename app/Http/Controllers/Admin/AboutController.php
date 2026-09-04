@@ -32,7 +32,19 @@ class AboutController extends Controller
             }
 
             $about->title = $request->title;
+            $about->subtitle = $request->subtitle;
             $about->description = $request->description;
+            $about->checkmarks = array_filter($request->checkmarks ?? []);
+            $about->button_text = $request->button_text;
+            $about->button_link = $request->button_link;
+            $about->button2_text = $request->button2_text;
+            $about->button2_link = $request->button2_link;
+            $about->counter1_number = $request->counter1_number;
+            $about->counter1_label = $request->counter1_label;
+            $about->counter2_number = $request->counter2_number;
+            $about->counter2_label = $request->counter2_label;
+            $about->badge_number = $request->badge_number;
+            $about->badge_label = $request->badge_label;
             $about->updated_by = Auth::id();
             $about->ip_address = $request->ip();
             $about->image = $aboutImg;

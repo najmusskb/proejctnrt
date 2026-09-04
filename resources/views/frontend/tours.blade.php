@@ -200,17 +200,23 @@
 <!-- Filter Bar -->
 <div class="Tours-filter-bar">
     <span class="filter-label">Filter By</span>
-    <select class="filter-select">
-        <option value="">Select Cities</option>
-        <option value="rome">Rome</option>
-        <option value="vatican">Vatican City</option>
-    </select>
-    <select class="filter-select">
-        <option value="">Select Attraction</option>
-        <option value="colosseum">Colosseum</option>
-        <option value="vatican-museums">Vatican Museums</option>
-        <option value="pantheon">Pantheon</option>
-    </select>
+    <form action="{{ route('tours') }}" method="GET" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <select name="attraction" class="filter-select" onchange="this.form.submit()">
+            <option value="">Select Attraction</option>
+            @foreach($destinations as $d)
+            <option value="{{ $d->slug }}" {{ request('attraction') === $d->slug ? 'selected' : '' }}>{{ $d->name }}</option>
+            @endforeach
+        </select>
+        <select name="type" class="filter-select" onchange="this.form.submit()">
+            <option value="">Select Type</option>
+            @foreach($categories as $c)
+            <option value="{{ $c->slug }}" {{ request('type') === $c->slug ? 'selected' : '' }}>{{ ucfirst($c->name) }}</option>
+            @endforeach
+        </select>
+        @if(request('attraction') || request('type'))
+        <a href="{{ route('tours') }}" class="filter-select" style="text-align:center;text-decoration:none;color:#a58530;font-weight:700;width:auto;padding:10px 16px;">&#10006; Reset</a>
+        @endif
+    </form>
 </div>
 
 <!-- Tours Grid -->
@@ -242,6 +248,7 @@
         @empty
         <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0;">
             <h3 style="font-size: 24px; color: #6b7280;">No Tours found.</h3>
+            <p style="color:#9ca3af;margin-top:8px;">Try a different filter or <a href="{{ route('tours') }}" style="color:#a58530;font-weight:700;">view all tours</a>.</p>
         </div>
         @endforelse
     </div>

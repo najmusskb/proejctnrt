@@ -38,6 +38,7 @@
                         <a class="nav-link" href="{{ route('faq.index') }}"><i class="sb-mini-icon fas fa-question-circle"></i> FAQ</a>
                         <a class="nav-link" href="{{ route('why_choose_us.index') }}"><i class="sb-mini-icon fas fa-thumbs-up"></i> Why Choose Us</a>
                         <a class="nav-link" href="{{ route('blog.index') }}"><i class="sb-mini-icon fas fa-blog"></i> Blog</a>
+                        <a class="nav-link" href="{{ route('brands.index') }}"><i class="sb-mini-icon fas fa-handshake"></i> Partners</a>
                     </nav>
                 </div>
 

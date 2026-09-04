@@ -76,7 +76,13 @@
                                     @foreach ($brand as $key => $item)
                                     <tr class="{{ $item->id }}">
                                         <td>{{ $key + 1 }}</td>
-                                        <td><img src="{{ asset($item->image) }}" width="30" height="30" alt=""></td>
+                                        <td>
+                                            @if($item->image)
+                                                <img src="{{ asset($item->image) }}" width="30" height="30" alt="">
+                                            @else
+                                                <span class="badge bg-secondary">No logo</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-edit edit-category"><i class="fas fa-edit"></i></a>

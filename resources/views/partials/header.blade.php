@@ -60,6 +60,8 @@
         </div>
       </li>
       <li><a href="{{ route('tickets') }}" id="navTickets">Tickets</a></li>
+      <li><a href="{{ route('blog.all') }}" id="navBlog">Blog</a></li>
+      <li><a href="{{ route('gallery.all') }}" id="navGallery">Gallery</a></li>
       <li><a href="{{ route('contact') }}" id="navContact">Contact Us</a></li>
     </ul>
 
@@ -150,12 +152,15 @@
 <!-- Mobile Drawer -->
 <div class="nav-mobile-drawer" id="navMobileDrawer">
   <button class="nav-mobile-drawer-close" onclick="toggleMobileNav()" aria-label="Close menu">&#10005;</button>
-  <a href="#" onclick="toggleMobileNav()">Home</a>
-  <a href="#" onclick="toggleMobileNav()">About Us</a>
-  <a href="#destinations" onclick="toggleMobileNav()">Destinations</a>
-  <a href="#tours" onclick="toggleMobileNav()">Tours</a>
-  <a href="#" onclick="toggleMobileNav()">Tickets</a>
-  <a href="#" onclick="toggleMobileNav()">Contact Us</a>
+  <a href="{{ url('/') }}" onclick="toggleMobileNav()">Home</a>
+  <a href="#about" onclick="toggleMobileNav()">About Us</a>
+  <a href="{{ route('destinations') }}" onclick="toggleMobileNav()">Destinations</a>
+  <a href="{{ route('tours') }}" onclick="toggleMobileNav()">Tours</a>
+  <a href="{{ route('tickets') }}" onclick="toggleMobileNav()">Tickets</a>
+  <a href="{{ route('service.index') }}" onclick="toggleMobileNav()">Services</a>
+  <a href="{{ route('blog.all') }}" onclick="toggleMobileNav()">Blog</a>
+  <a href="{{ route('gallery.all') }}" onclick="toggleMobileNav()">Gallery</a>
+  <a href="{{ route('contact') }}" onclick="toggleMobileNav()">Contact Us</a>
 </div>
 
 

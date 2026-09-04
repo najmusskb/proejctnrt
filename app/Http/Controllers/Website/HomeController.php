@@ -51,19 +51,33 @@ class HomeController extends Controller
         ));
     }
 
-    public function tours()
+    public function tours(Request $request)
     {
-        $tours = Product::with(['category', 'destination'])->where('status', 1)->latest()->get();
+        $tours = Product::with(['category', 'destination'])->where('status', 1);
+
+        if ($request->filled('attraction')) {
+            $tours->whereHas('destination', function ($q) use ($request) {
+                $q->where('slug', $request->attraction);
+            });
+        }
+
+        if ($request->filled('type')) {
+            $tours->whereHas('category', function ($q) use ($request) {
+                $q->where('slug', $request->type);
+            });
+        }
+
+        $tours = $tours->latest()->get();
+        $destinations = Destination::where('status', 1)->get();
+        $categories = Category::where('status', 1)->get();
         $company = Companyprofile::first();
         $content = $company;
 
-        return view('frontend.tours', compact('tours', 'company', 'content'));
+        return view('frontend.tours', compact('tours', 'destinations', 'categories', 'company', 'content'));
     }
 
     public function tickets()
     {
-        // For demonstration, we fetch all products or filter by category 'tickets' if it exists.
-        // Assuming we just want to list products as tickets for the design
         $tours = Product::with(['category', 'destination'])->where('status', 1)->latest()->get();
         $company = Companyprofile::first();
         $content = $company;
@@ -153,5 +167,53 @@ class HomeController extends Controller
         $content = $company;
 
         return view('frontend.category-tours', compact('category', 'tours', 'company', 'content'));
+    }
+
+    public function serviceDetail($slug)
+    {
+        $service = Service::where('slug', $slug)->where('status', 1)->firstOrFail();
+        $company = Companyprofile::first();
+        $content = $company;
+        $services = Service::where('status', 1)->where('id', '!=', $service->id)->orderBy('order')->get();
+        $whyChooseUs = WhyChooseUs::where('status', 1)->orderBy('id')->get();
+
+        return view('frontend.service-detail', compact('service', 'services', 'whyChooseUs', 'company', 'content'));
+    }
+
+    public function blogDetail($slug)
+    {
+        $blog = Blog::where('slug', $slug)->where('status', 1)->firstOrFail();
+        $company = Companyprofile::first();
+        $content = $company;
+        $recent = Blog::where('status', 1)->where('id', '!=', $blog->id)->latest()->take(3)->get();
+
+        return view('frontend.blog-detail', compact('blog', 'recent', 'company', 'content'));
+    }
+
+    public function blogs()
+    {
+        $blogs = Blog::where('status', 1)->latest()->paginate(9);
+        $company = Companyprofile::first();
+        $content = $company;
+
+        return view('frontend.blog-index', compact('blogs', 'company', 'content'));
+    }
+
+    public function services()
+    {
+        $services = Service::where('status', 1)->orderBy('order')->get();
+        $company = Companyprofile::first();
+        $content = $company;
+
+        return view('frontend.service-index', compact('services', 'company', 'content'));
+    }
+
+    public function gallery()
+    {
+        $gallery = Gallery::orderBy('id')->get();
+        $company = Companyprofile::first();
+        $content = $company;
+
+        return view('frontend.gallery-index', compact('gallery', 'company', 'content'));
     }
 }

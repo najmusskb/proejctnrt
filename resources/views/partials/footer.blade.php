@@ -58,11 +58,12 @@
       <h4 class="text-[12px] font-bold text-white tracking-[1.2px] uppercase mb-[16px]"><span class="text-gold mr-1.5">&#10022;</span>Quick Links</h4>
       <ul class="list-none space-y-[9px]">
         <li><a href="{{ url('/') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Home</a></li>
-        <li><a href="#tours" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Tours</a></li>
-        <li><a href="#services" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Services</a></li>
-        <li><a href="#about" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">About Us</a></li>
-        <li><a href="#contact" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Contact</a></li>
-        <li><a href="#faq" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">FAQ</a></li>
+        <li><a href="{{ route('tours') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Tours</a></li>
+        <li><a href="{{ route('service.index') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Services</a></li>
+        <li><a href="{{ route('destinations') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Destinations</a></li>
+        <li><a href="{{ route('blog.all') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Blog</a></li>
+        <li><a href="{{ route('gallery.all') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Gallery</a></li>
+        <li><a href="{{ route('contact') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Contact</a></li>
       </ul>
     </div>
 
@@ -77,10 +78,10 @@
       </ul>
       <h4 class="text-[12px] font-bold text-white tracking-[1.2px] uppercase mt-6 mb-[16px]"><span class="text-gold mr-1.5">&#10022;</span>Services</h4>
       <ul class="list-none space-y-[9px]">
-        <li><a href="#services" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Luggage Storage</a></li>
-        <li><a href="#services" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Airport Transfer</a></li>
-        <li><a href="#services" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Private Taxi</a></li>
-        <li><a href="#services" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Golf Cart Tours</a></li>
+        <li><a href="{{ route('service.index') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Luggage Storage</a></li>
+        <li><a href="{{ route('service.index') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Airport Transfer</a></li>
+        <li><a href="{{ route('service.index') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Private Taxi</a></li>
+        <li><a href="{{ route('service.index') }}" class="text-[13px] text-white/65 no-underline transition-all hover:text-gold hover:pl-1">Golf Cart Tours</a></li>
       </ul>
     </div>
 

@@ -1,419 +1,495 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 <style>
-.td-gallery-main img{width:100%;height:100%;object-fit:cover}
-.td-thumb{width:100%;height:100%;object-fit:cover;cursor:pointer;transition:opacity .25s,transform .4s}
-.td-thumb:hover{opacity:.85;transform:scale(1.04)}
-.td-thumb.active{outline:3px solid #c8a84e;outline-offset:-3px;opacity:1}
-.it-day{position:relative}
-.it-day::before{content:'';position:absolute;left:0;top:4px;width:18px;height:18px;border-radius:50%;background:#fff;border:2.5px solid #c8a84e}
-.it-day::after{content:'';position:absolute;left:8.5px;top:26px;bottom:-16px;width:2px;background:#e5d9c0}
-.it-day:last-child::after{display:none}
-.sticky-book{position:sticky;top:90px}
-.bk-step{display:none}
-.bk-step.active{display:block}
-@keyframes bkFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.bk-step.active{animation:bkFade .35s ease}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+/* Smooth scrolling for tab navigation */
+html { scroll-behavior: smooth; }
+
+/* Hide scrollbar for gallery and tabs */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom radio and checkbox styling if needed */
+.custom-radio:checked + div { border-color: #c69c27; background-color: rgba(198, 156, 39, 0.05); }
+.custom-radio:checked + div .radio-inner { background-color: #c69c27; border-color: #c69c27; }
+
+/* Itinerary vertical line */
+.itinerary-line::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    bottom: -10px;
+    width: 2px;
+    background: #e5e7eb; /* gray-200 */
+    z-index: 0;
+}
+.itinerary-item:last-child .itinerary-line::before { display: none; }
+
+/* Tab active state */
+.tab-link.active {
+    background-color: #c69c27;
+    color: white;
+    border-color: #c69c27;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
 </style>
 
-{{-- HEADER / BREADCRUMB --}}
-<div class="relative bg-navy pt-[120px] pb-12 px-6 overflow-hidden">
-  <div class="absolute inset-0 opacity-25" style="background:url('{{ asset($tour->image ?? 'images/no.png') }}') center/cover no-repeat"></div>
-  <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/40"></div>
-  <div class="relative max-w-[1280px] mx-auto">
-    <nav class="text-[12px] tracking-wide text-gold mb-4">
-      <a href="{{ route('index') }}" class="text-white/60 no-underline hover:text-gold transition-colors">Home</a>
-      <span class="mx-2 text-white/40">/</span>
-      <a href="{{ route('index') }}#tours" class="text-white/60 no-underline hover:text-gold transition-colors">Tours</a>
-      <span class="mx-2 text-white/40">/</span>
-      <span class="text-gold">{{ $tour->name }}</span>
-    </nav>
-    <h1 class="font-playfair text-white font-bold leading-tight text-[clamp(26px,4vw,44px)] max-w-[820px]">{{ $tour->name }}</h1>
-    @if($tour->rating)
-    <div class="flex items-center flex-wrap gap-3 mt-4">
-      <div class="flex items-center gap-1.5">
-        <span class="text-[#fbbf24] text-[14px]">{!! str_repeat('&#9733;', round($tour->rating)) !!}</span>
-        <span class="text-white text-[15px] font-bold">{{ $tour->rating }}</span>
-        <span class="text-white/60 text-[13px]">({{ $tour->reviews_count ?? 0 }} reviews)</span>
-      </div>
-      <span class="w-px h-4 bg-white/20"></span>
-      <span class="text-white/80 text-[13px]">&#128336; {{ $tour->duration ?? '2 hours' }}</span>
-      <span class="w-px h-4 bg-white/20"></span>
-      <span class="text-white/80 text-[13px]">&#128101; {{ $tour->group_size ?? 'Small group' }}</span>
-    </div>
-    @endif
-  </div>
-</div>
-
-{{-- MAIN CONTENT --}}
-<div class="max-w-[1280px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
-  {{-- LEFT: gallery + details --}}
-  <div class="lg:col-span-2 space-y-10">
-
-    {{-- IMAGE GALLERY --}}
-    @php
-      $gallery = [asset($tour->image ?? 'images/no.png')];
-      foreach($tour->images as $img) {
-          $gallery[] = asset($img->image);
-      }
-    @endphp
-    <div>
-      <div class="td-gallery-main rounded-2xl overflow-hidden h-[380px] sm:h-[460px] shadow-[0_12px_40px_rgba(0,0,0,.18)] bg-navy">
-        <img id="tdMainImg" src="{{ $gallery[0] }}" alt="{{ $tour->name }}">
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mt-3" id="tdThumbs">
-        @foreach($gallery as $gi => $img)
-        <div class="h-[72px] sm:h-[90px] rounded-xl overflow-hidden"><img class="td-thumb {{ $loop->first ? 'active' : '' }}" data-src="{{ $img }}" src="{{ $img }}" alt="{{ $tour->name }} gallery {{ $gi+1 }}"></div>
-        @endforeach
-      </div>
-    </div>
-
-    {{-- OVERVIEW --}}
-    <div>
-      <h2 class="font-playfair text-navy text-[24px] font-bold mb-4">Tour Overview</h2>
-      <div class="w-12 h-[3px] bg-gold rounded-sm mb-5"></div>
-      <div class="text-[15px] text-[#4b5563] leading-[1.85]">{!! $tour->description !!}</div>
-    </div>
-
-    {{-- ITINERARY --}}
-    @php
-      $itineraryData = json_decode($tour->itinerary, true);
-    @endphp
-    @if(!empty($itineraryData) && count($itineraryData) > 0)
-    <div class="mt-8">
-      <h2 class="font-playfair text-navy text-[24px] font-bold mb-4">Itinerary</h2>
-      <div class="w-12 h-[3px] bg-gold rounded-sm mb-6"></div>
-      <div class="relative">
-        <div class="absolute left-[21px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-gold via-gold/40 to-transparent"></div>
-        <div class="space-y-4">
-          @foreach($itineraryData as $i => $item)
-          <div class="relative flex gap-5 pb-2">
-            <div class="relative z-10 shrink-0 w-[42px] h-[42px] rounded-full bg-[#0b1623] border border-gold/30 flex items-center justify-center shadow-[0_4px_14px_rgba(200,168,78,.25)] text-gold font-bold text-[14px]">
-              {{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}
+{{-- TOP SPACING FOR FIXED HEADER (adjust as needed based on your app layout) --}}
+<div class="pt-[100px] bg-gray-50 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {{-- BREADCRUMBS & ACTIONS --}}
+        <div class="flex flex-col md:flex-row md:items-center justify-between py-4">
+            <nav class="flex items-center text-[13px] font-medium text-gray-500 mb-4 md:mb-0">
+                <a href="{{ route('index') }}" class="hover:text-[#c69c27] transition">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="{{ route('index') }}#tours" class="hover:text-[#c69c27] transition">Tours</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-900 truncate max-w-[200px] sm:max-w-xs">{{ $tour->name }}</span>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 hover:bg-gray-100 transition text-[13px] font-semibold text-gray-700">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                    Share
+                </button>
+                <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 hover:bg-gray-100 transition text-[13px] font-semibold text-gray-700">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    Save
+                </button>
             </div>
-            <div class="flex-1 pt-[6px]">
-              <h3 class="text-[15.5px] font-bold text-navy mb-1 leading-snug">{{ $item }}</h3>
+        </div>
+
+        {{-- HERO TITLE --}}
+        <div class="mb-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">{{ $tour->name }}</h1>
+            @if($tour->rating)
+            <div class="flex flex-wrap items-center gap-4 text-[14px] text-gray-600">
+                <div class="flex items-center gap-1">
+                    <span class="text-[#c69c27]">{!! str_repeat('&#9733;', round($tour->rating)) !!}</span>
+                    <span class="font-bold text-gray-900 ml-1">{{ $tour->rating }}</span>
+                    <span>({{ $tour->reviews_count ?? 0 }} reviews)</span>
+                </div>
+                @if($tour->meeting_point)
+                <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                <div class="flex items-center gap-1.5">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    {{ $tour->meeting_point }}
+                </div>
+                @endif
             </div>
-          </div>
-          @endforeach
-        </div>
-      </div>
-    </div>
-    @endif
-
-    {{-- INCLUDED / NOT INCLUDED --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start mt-8">
-      @php
-        $includedData = json_decode($tour->included, true);
-        $excludedData = json_decode($tour->excluded, true);
-      @endphp
-      
-      @if(!empty($includedData) && count($includedData) > 0)
-      <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.05)]">
-        <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#16a34a]/10 to-[#16a34a]/3 border-b border-[#16a34a]/15">
-          <span class="w-9 h-9 rounded-full bg-[#16a34a] text-white flex items-center justify-center shrink-0"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.2-3.2-1.4 1.4L9 19 20.6 7.4 19.2 6 9 16.2z"/></svg></span>
-          <h3 class="font-playfair text-navy text-[18px] font-bold">What's Included</h3>
-        </div>
-        <ul class="p-6 space-y-[13px]">
-          @foreach($includedData as $it)
-          <li class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center shrink-0 ring-1 ring-[#16a34a]/20"><i class="fas fa-check" style="font-size: 13px;"></i></span>
-            <span class="text-[14px] text-[#374151] font-medium leading-snug">{{ $it }}</span>
-          </li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
-
-      @if(!empty($excludedData) && count($excludedData) > 0)
-      <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.05)]">
-        <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#dc2626]/10 to-[#dc2626]/3 border-b border-[#dc2626]/15">
-          <span class="w-9 h-9 rounded-full bg-[#dc2626] text-white flex items-center justify-center shrink-0"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <h3 class="font-playfair text-navy text-[18px] font-bold">What's Not Included</h3>
-        </div>
-        <ul class="p-6 space-y-[13px]">
-          @foreach($excludedData as $it)
-          <li class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-[#dc2626]/10 text-[#dc2626] flex items-center justify-center shrink-0 ring-1 ring-[#dc2626]/20"><i class="fas fa-times" style="font-size: 14px;"></i></span>
-            <span class="text-[14px] text-[#374151] font-medium leading-snug">{{ $it }}</span>
-          </li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
-    </div>
-
-    {{-- GOOGLE MAPS --}}
-    @if($tour->map_iframe || $tour->meeting_point)
-    <div>
-      <h2 class="font-playfair text-navy text-[24px] font-bold mb-4">Location &amp; Meeting Point</h2>
-      <div class="w-12 h-[3px] bg-gold rounded-sm mb-5"></div>
-      
-      @if($tour->map_iframe)
-      <div class="rounded-2xl overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,.14)]">
-        <iframe src="{{ $tour->map_iframe }}" width="100%" height="360" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      @endif
-      
-      @if($tour->meeting_point)
-      <p class="text-[13px] text-[#6b7280] mt-3 flex items-start gap-2">&#128205; <span>{{ $tour->meeting_point }}</span></p>
-      @endif
-    </div>
-    @endif
-
-    {{-- CANCELLATION POLICY --}}
-    @php
-      $cancelData = json_decode($tour->cancellation_policy, true);
-    @endphp
-    @if(!empty($cancelData) && count($cancelData) > 0)
-    <div class="mt-8">
-      <h2 class="font-playfair text-navy text-[24px] font-bold mb-4">Cancellation Policy</h2>
-      <div class="w-12 h-[3px] bg-gold rounded-sm mb-5"></div>
-      <div class="bg-cream border border-cream-dark rounded-2xl p-6 space-y-2.5">
-        @foreach($cancelData as $i => $cp)
-        <div class="flex items-start gap-3"><span class="w-7 h-7 rounded-full bg-[#16a34a]/12 text-[#16a34a] flex items-center justify-center text-[14px] font-bold shrink-0">{{ $i + 1 }}</span><p class="text-[14px] text-[#4b5563] leading-relaxed">{{ $cp }}</p></div>
-        @endforeach
-      </div>
-    </div>
-    @endif
-
-    {{-- FAQ --}}
-    @php
-      $faqs = json_decode($tour->faqs, true);
-    @endphp
-    @if(!empty($faqs) && count($faqs) > 0)
-    <div class="mt-8">
-      <h2 class="font-playfair text-navy text-[24px] font-bold mb-4">Frequently Asked Questions</h2>
-      <div class="w-12 h-[3px] bg-gold rounded-sm mb-5"></div>
-      <div class="space-y-3">
-        @foreach($faqs as $i => $faq)
-        <div class="faq-item bg-white rounded-xl border border-cream-dark overflow-hidden">
-          <button class="w-full flex items-center justify-between gap-4 px-5 py-4 text-left bg-white cursor-pointer" onclick="tdFaq(this)">
-            <span class="text-[14.5px] font-semibold text-navy">{{ $faq['q'] }}</span>
-            <span class="faq-icon text-gold-dark text-[20px] font-bold shrink-0 transition-transform">+</span>
-          </button>
-          <div class="faq-a text-[13.5px] text-[#6b7280] leading-relaxed px-5" style="padding-top:0">{{ $faq['a'] }}</div>
-        </div>
-        @endforeach
-      </div>
-    </div>
-    @endif
-  </div>
-
-  {{-- RIGHT: STICKY BOOKING CARD --}}
-  <div>
-    <div class="sticky-book bg-white rounded-2xl shadow-[0_16px_50px_rgba(0,0,0,.14)] border border-cream-dark overflow-hidden">
-      {{-- Price block --}}
-      <div class="bg-navy px-6 py-5">
-        <div class="flex items-center justify-between flex-wrap gap-2">
-          <div>
-            @if($tour->old_price && $tour->old_price > $tour->price)
-            <span class="text-white/40 text-[13px] line-through">€{{ $tour->old_price }}</span>
             @endif
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-[30px] font-extrabold text-white">€{{ $tour->price }}</span>
-              <span class="text-[13px] text-white/60">/ person</span>
+        </div>
+
+        {{-- INFO PILLS --}}
+        <div class="flex flex-wrap items-center gap-3 mb-8">
+            <div class="bg-white border border-gray-100 shadow-sm rounded-full px-4 py-2.5 flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                    <div class="text-[11px] text-gray-500 font-medium uppercase tracking-wide">Duration</div>
+                    <div class="text-[13px] font-bold text-gray-900">{{ $tour->duration ?? '2 hours' }}</div>
+                </div>
             </div>
-            @if($tour->old_price && $tour->old_price > $tour->price)
-            <span class="inline-block mt-1 text-[11px] font-bold text-navy bg-[#4ade80] py-0.5 px-2 rounded">Save €{{ $tour->old_price - $tour->price }}</span>
-            @endif
-          </div>
-          @if($tour->rating)
-          <div class="text-center bg-white/10 rounded-xl px-3 py-2">
-            <div class="text-[17px] font-extrabold text-gold">{{ $tour->rating }}</div>
-            <div class="text-[9.5px] text-white/60 tracking-wide uppercase">{{ $tour->reviews_count ?? 0 }} reviews</div>
-          </div>
-          @endif
-        </div>
-      </div>
-
-      {{-- Booking steps --}}
-      <div class="p-6">
-        <div class="flex items-center justify-between mb-5">
-          <span class="text-[13px] font-bold text-navy uppercase tracking-wide">{{ $tour->name }}</span>
-        </div>
-
-        {{-- STEP 1: AVAILABILITY + DATE --}}
-        <div class="bk-step active" id="bkStep1">
-          <label class="text-[12px] font-bold text-navy uppercase tracking-wide mb-1.5 block">1. Choose Your Date</label>
-          <input type="date" id="bkDate" class="w-full border border-cream-dark rounded-lg px-3.5 py-2.5 text-[14px] outline-none focus:border-gold mb-4" min="{{ date('Y-m-d') }}">
-          <p class="text-[12px] text-[#6b7280] mb-4 flex items-center gap-1.5"><span class="text-[#16a34a]">&#11088;</span> Live availability checked instantly</p>
-          <button onclick="tdStep(2)" class="w-full bg-gold text-navy border-none py-3.5 rounded-xl text-[14px] font-bold cursor-pointer transition-all hover:bg-gold-light">Continue &#8594;</button>
+            <div class="bg-white border border-gray-100 shadow-sm rounded-full px-4 py-2.5 flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                    <div class="text-[11px] text-gray-500 font-medium uppercase tracking-wide">Group Size</div>
+                    <div class="text-[13px] font-bold text-gray-900">{{ $tour->group_size ?? 'Small group' }}</div>
+                </div>
+            </div>
+            <div class="bg-white border border-gray-100 shadow-sm rounded-full px-4 py-2.5 flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <div>
+                    <div class="text-[11px] text-gray-500 font-medium uppercase tracking-wide">Tour Type</div>
+                    <div class="text-[13px] font-bold text-gray-900">{{ $tour->category->name ?? 'Guided Tour' }}</div>
+                </div>
+            </div>
         </div>
 
-        {{-- STEP 2: TIME --}}
-        <div class="bk-step" id="bkStep2">
-          <label class="text-[12px] font-bold text-navy uppercase tracking-wide mb-2 block">2. Select a Time Slot</label>
-          <div class="grid grid-cols-3 gap-2 mb-4">
-            @foreach(['08:30','09:00','10:30','12:00','14:00','15:30'] as $t)
-            <button onclick="tdPickTime(this)" class="time-slot border border-cream-dark rounded-lg py-2.5 text-[13px] font-semibold text-navy cursor-pointer transition-all hover:border-gold hover:bg-gold/10">{{ $t }}</button>
+        {{-- GALLERY --}}
+        @php
+            $gallery = [asset($tour->image ?? 'images/no.png')];
+            foreach($tour->images as $img) {
+                $gallery[] = asset($img->image);
+            }
+        @endphp
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+            @foreach($gallery as $img)
+            <a href="{{ $img }}" data-fancybox="gallery" class="relative cursor-pointer hover:opacity-95 transition group h-[300px] sm:h-[400px] md:h-[480px] rounded-[24px] overflow-hidden block">
+                <img src="{{ $img }}" class="w-full h-full object-cover" alt="Gallery image">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition duration-300"></div>
+            </a>
             @endforeach
-          </div>
-          <p class="text-[12px] text-[#6b7280] mb-4">&nbsp;Selling fast — book early to secure your preferred slot</p>
-          <div class="flex gap-2">
-            <button onclick="tdStep(1)" class="flex-1 bg-transparent text-navy border-2 border-navy py-3 rounded-xl text-[13px] font-bold cursor-pointer">Back</button>
-            <button onclick="tdStep(3)" class="flex-1 bg-gold text-navy border-none py-3 rounded-xl text-[13px] font-bold cursor-pointer transition-all hover:bg-gold-light">Continue</button>
-          </div>
         </div>
 
-        {{-- STEP 3: GUESTS --}}
-        <div class="bk-step" id="bkStep3">
-          <label class="text-[12px] font-bold text-navy uppercase tracking-wide mb-2 block">3. Number of Guests</label>
-          <div class="border border-cream-dark rounded-xl p-4 mb-2">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[14px] font-semibold text-navy">Adults</span>
-              <div class="flex items-center gap-3">
-                <button onclick="tdCount('adult',-1)" class="w-8 h-8 rounded-full border border-cream-dark text-navy font-bold cursor-pointer">&#8722;</button>
-                <span class="text-[15px] font-bold text-navy w-4 text-center" id="cntAdult">1</span>
-                <button onclick="tdCount('adult',1)" class="w-8 h-8 rounded-full border border-cream-dark text-navy font-bold cursor-pointer">+</button>
-              </div>
+        {{-- BODY LAYOUT --}}
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            {{-- LEFT CONTENT COLUMN --}}
+            <div class="lg:col-span-8">
+                
+                {{-- STICKY TABS --}}
+                <div class="sticky top-[80px] z-40 bg-gray-50/90 backdrop-blur-md py-4 border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
+                    <div class="flex items-center gap-2 min-w-max">
+                        <a href="#overview" class="tab-link active px-5 py-2.5 rounded-full border border-gray-200 text-[14px] font-semibold text-gray-700 hover:border-gray-300 transition">Overview</a>
+                        @if(!empty(json_decode($tour->itinerary, true)))
+                        <a href="#itinerary" class="tab-link px-5 py-2.5 rounded-full border border-gray-200 text-[14px] font-semibold text-gray-700 hover:border-gray-300 transition">Tour Plan</a>
+                        @endif
+                        <a href="#included" class="tab-link px-5 py-2.5 rounded-full border border-gray-200 text-[14px] font-semibold text-gray-700 hover:border-gray-300 transition">Included</a>
+                        @if($tour->map_iframe || $tour->meeting_point)
+                        <a href="#location" class="tab-link px-5 py-2.5 rounded-full border border-gray-200 text-[14px] font-semibold text-gray-700 hover:border-gray-300 transition">Location</a>
+                        @endif
+                        @if(!empty(json_decode($tour->faqs, true)))
+                        <a href="#faq" class="tab-link px-5 py-2.5 rounded-full border border-gray-200 text-[14px] font-semibold text-gray-700 hover:border-gray-300 transition">FAQ</a>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- SECTION: OVERVIEW --}}
+                <section id="overview" class="scroll-mt-[150px] mb-12">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-5">Tour Overview</h2>
+                    <div class="prose prose-gray max-w-none text-[15px] text-gray-600 leading-relaxed">
+                        {!! $tour->description !!}
+                    </div>
+                </section>
+
+                <hr class="border-gray-200 mb-12">
+
+                {{-- SECTION: ITINERARY --}}
+                @php
+                  $itineraryData = json_decode($tour->itinerary, true);
+                @endphp
+                @if(!empty($itineraryData) && count($itineraryData) > 0)
+                <section id="itinerary" class="scroll-mt-[150px] mb-12">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Tour Plan</h2>
+                    <div class="relative space-y-6 ml-2">
+                        @foreach($itineraryData as $i => $item)
+                        <div class="itinerary-item relative flex items-start gap-5">
+                            <div class="itinerary-line relative z-10 shrink-0 w-10 h-10 rounded-full bg-white border-2 border-[#c69c27] flex items-center justify-center text-[#c69c27] font-bold text-[14px] shadow-sm">
+                                {{ $i + 1 }}
+                            </div>
+                            <div class="flex-1 pt-2 pb-6">
+                                <h3 class="text-[16px] font-bold text-gray-900 mb-2">{{ $item }}</h3>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </section>
+                <hr class="border-gray-200 mb-12">
+                @endif
+
+                {{-- SECTION: INCLUDED / EXCLUDED --}}
+                @php
+                  $includedData = json_decode($tour->included, true);
+                  $excludedData = json_decode($tour->excluded, true);
+                @endphp
+                @if((!empty($includedData) && count($includedData) > 0) || (!empty($excludedData) && count($excludedData) > 0))
+                <section id="included" class="scroll-mt-[150px] mb-12">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-6">What's Included</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        @if(!empty($includedData) && count($includedData) > 0)
+                        <div>
+                            <ul class="space-y-4">
+                                @foreach($includedData as $it)
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 w-6 h-6 rounded-full bg-[#10b981]/10 flex items-center justify-center shrink-0">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                    <span class="text-[15px] text-gray-700 font-medium">{{ $it }}</span>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
+                        @if(!empty($excludedData) && count($excludedData) > 0)
+                        <div>
+                            <ul class="space-y-4">
+                                @foreach($excludedData as $it)
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 w-6 h-6 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                    </div>
+                                    <span class="text-[15px] text-gray-700 font-medium">{{ $it }}</span>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
+                    </div>
+                </section>
+                <hr class="border-gray-200 mb-12">
+                @endif
+
+                {{-- SECTION: LOCATION --}}
+                @if($tour->map_iframe || $tour->meeting_point)
+                <section id="location" class="scroll-mt-[150px] mb-12">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Location & Meeting Point</h2>
+                    @if($tour->meeting_point)
+                    <div class="flex items-start gap-3 mb-6 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-[15px] mb-1">Meeting Point</h3>
+                            <p class="text-[14px] text-gray-600">{{ $tour->meeting_point }}</p>
+                        </div>
+                    </div>
+                    @endif
+
+                    @if($tour->map_iframe)
+                    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-200">
+                        <iframe src="{{ $tour->map_iframe }}" width="100%" height="400" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    @endif
+                </section>
+                <hr class="border-gray-200 mb-12">
+                @endif
+
+                {{-- SECTION: CANCELLATION POLICY --}}
+                @php
+                  $cancelData = json_decode($tour->cancellation_policy, true);
+                @endphp
+                @if(!empty($cancelData) && count($cancelData) > 0)
+                <section id="cancellation" class="scroll-mt-[150px] mb-12">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Cancellation Policy</h2>
+                    <div class="bg-gray-100 rounded-2xl p-6">
+                        <ul class="space-y-3 list-disc pl-5">
+                            @foreach($cancelData as $cp)
+                            <li class="text-[14.5px] text-gray-700 leading-relaxed">{{ $cp }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
+                <hr class="border-gray-200 mb-12">
+                @endif
+
+                {{-- SECTION: FAQ --}}
+                @php
+                  $faqs = json_decode($tour->faqs, true);
+                @endphp
+                @if(!empty($faqs) && count($faqs) > 0)
+                <section id="faq" class="scroll-mt-[150px] mb-12">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Frequently Asked Questions</h2>
+                    <div class="space-y-4">
+                        @foreach($faqs as $i => $faq)
+                        <div class="faq-item bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm transition hover:shadow-md">
+                            <button class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left bg-transparent cursor-pointer outline-none" onclick="toggleFaq(this)">
+                                <span class="text-[15px] font-bold text-gray-900 pr-4">{{ $faq['q'] }}</span>
+                                <span class="faq-icon text-gray-400 text-[20px] shrink-0 transition-transform duration-300">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                </span>
+                            </button>
+                            <div class="faq-answer text-[14.5px] text-gray-600 leading-relaxed px-6 pb-0" style="max-height: 0;">
+                                <div class="pb-5">{{ $faq['a'] }}</div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </section>
+                @endif
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-[14px] font-semibold text-navy">Children <span class="text-[11px] text-[#6b7280]">(under 12)</span></span>
-              <div class="flex items-center gap-3">
-                <button onclick="tdCount('child',-1)" class="w-8 h-8 rounded-full border border-cream-dark text-navy font-bold cursor-pointer">&#8722;</button>
-                <span class="text-[15px] font-bold text-navy w-4 text-center" id="cntChild">0</span>
-                <button onclick="tdCount('child',1)" class="w-8 h-8 rounded-full border border-cream-dark text-navy font-bold cursor-pointer">+</button>
-              </div>
+
+            {{-- RIGHT WIDGET COLUMN --}}
+            <div class="lg:col-span-4">
+                <div class="sticky top-[100px] bg-white rounded-[24px] border border-gray-200 shadow-xl p-6">
+                    
+                    {{-- Price Header --}}
+                    <div class="mb-6">
+                        <span class="text-[13px] text-gray-500 font-medium block mb-1">From</span>
+                        <div class="flex items-end gap-2">
+                            <span class="text-3xl font-extrabold text-gray-900">€{{ $tour->price }}</span>
+                            <span class="text-[14px] text-gray-500 mb-1 font-medium">per person</span>
+                        </div>
+                        @if($tour->old_price && $tour->old_price > $tour->price)
+                        <div class="mt-1 text-[12px] font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-md inline-block">
+                            Save €{{ $tour->old_price - $tour->price }} today!
+                        </div>
+                        @endif
+                    </div>
+
+                    {{-- Form / Inputs --}}
+                    <div class="space-y-4 mb-6">
+                        {{-- Date Select --}}
+                        <div>
+                            <label class="block text-[13px] font-bold text-gray-700 mb-1.5">Select Date</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </div>
+                                <input type="date" id="bkDate" class="w-full border border-gray-300 rounded-xl pl-10 pr-4 py-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#c69c27] focus:ring-1 focus:ring-[#c69c27]" min="{{ date('Y-m-d') }}">
+                            </div>
+                        </div>
+
+                        {{-- Guests Select --}}
+                        <div>
+                            <label class="block text-[13px] font-bold text-gray-700 mb-1.5">Guests</label>
+                            <div class="border border-gray-300 rounded-xl p-3 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-[14px] font-bold text-gray-900">Adults</div>
+                                        <div class="text-[11px] text-gray-500">Age 12+</div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <button onclick="updateGuests('adult', -1)" class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#c69c27] hover:text-[#c69c27] transition focus:outline-none">-</button>
+                                        <span id="qtyAdult" class="w-4 text-center text-[15px] font-bold text-gray-900">1</span>
+                                        <button onclick="updateGuests('adult', 1)" class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#c69c27] hover:text-[#c69c27] transition focus:outline-none">+</button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-[14px] font-bold text-gray-900">Children</div>
+                                        <div class="text-[11px] text-gray-500">Under 12</div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <button onclick="updateGuests('child', -1)" class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#c69c27] hover:text-[#c69c27] transition focus:outline-none">-</button>
+                                        <span id="qtyChild" class="w-4 text-center text-[15px] font-bold text-gray-900">0</span>
+                                        <button onclick="updateGuests('child', 1)" class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#c69c27] hover:text-[#c69c27] transition focus:outline-none">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {{-- Total Price --}}
+                        <div class="flex items-center justify-between pt-2">
+                            <span class="text-[15px] font-bold text-gray-700">Total Price</span>
+                            <span id="totalPrice" class="text-[18px] font-extrabold text-gray-900">€{{ $tour->price }}</span>
+                        </div>
+                    </div>
+
+                    {{-- CTA Buttons --}}
+                    <div class="space-y-3">
+                        <a href="https://wa.me/1234567890?text={{ urlencode('Hello! I want to book: '.$tour->name) }}" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#c69c27] text-white py-3.5 rounded-xl text-[15px] font-bold shadow-lg shadow-[#c69c27]/30 hover:bg-[#b08820] hover:-translate-y-0.5 transition-all">
+                            Check Availability
+                        </a>
+                        <p class="text-center text-[12px] text-gray-500 mt-2">You won't be charged yet</p>
+                    </div>
+
+                    {{-- Trust features --}}
+                    <div class="mt-6 pt-6 border-t border-gray-200 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                            <span class="text-[13px] font-medium text-gray-700">Free Cancellation (24h before)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                            <span class="text-[13px] font-medium text-gray-700">Secure & simple booking</span>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-          <div class="flex items-center justify-between bg-cream rounded-xl px-4 py-3 mb-4">
-            <span class="text-[13px] text-[#4b5563]">Total price</span>
-            <span class="text-[17px] font-extrabold text-navy" id="bkTotal">€{{ $tour->price }}</span>
-          </div>
-          <div class="flex gap-2">
-            <button onclick="tdStep(2)" class="flex-1 bg-transparent text-navy border-2 border-navy py-3 rounded-xl text-[13px] font-bold cursor-pointer">Back</button>
-            <button onclick="tdStep(4)" class="flex-1 bg-gold text-navy border-none py-3 rounded-xl text-[13px] font-bold cursor-pointer transition-all hover:bg-gold-light">Continue</button>
-          </div>
-        </div>
 
-        {{-- STEP 4: BOKUN WIDGET (PLACEHOLDER) --}}
-        <div class="bk-step" id="bkStep4">
-          <label class="text-[12px] font-bold text-navy uppercase tracking-wide mb-2 block">4. Secure Payment — Bókun</label>
-          <div class="border-2 border-dashed border-gold rounded-xl p-4 mb-2 text-center">
-            <div class="w-14 h-14 rounded-full bg-gold/15 flex items-center justify-center mx-auto mb-3 text-[24px]">&#128179;</div>
-            <p class="text-[13.5px] text-[#4b5563] leading-relaxed mb-2">Your booking is being securely processed via <strong>Bókun</strong>, our trusted booking platform.</p>
-            <p class="text-[12px] text-[#6b7280]">Bókun widget placeholder — connect your Bókun API to enable live availability, secure payment &amp; instant confirmation.</p>
-          </div>
-          <button onclick="tdStep(3)" class="w-full bg-transparent text-navy border-2 border-navy py-3 rounded-xl text-[13px] font-bold cursor-pointer mb-2">Back</button>
-          <a href="https://wa.me/1234567890?text={{ urlencode('Hello! I want to book: '.$tour->name) }}" target="_blank" class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white border-none py-3.5 rounded-xl text-[14px] font-bold cursor-pointer no-underline transition-all hover:bg-[#1ebe5d]">&#128172; Complete via WhatsApp</a>
         </div>
-
-        {{-- CONFIRMATION (shown after WhatsApp redirect conceptual) --}}
-        <div class="bk-step" id="bkConfirm">
-          <div class="text-center py-4">
-            <div class="w-16 h-16 rounded-full bg-[#16a34a]/12 text-[#16a34a] flex items-center justify-center mx-auto mb-4 text-[30px]">&#10003;</div>
-            <h3 class="font-playfair text-navy text-[20px] font-bold mb-2">Booking Request Sent!</h3>
-            <p class="text-[13.5px] text-[#6b7280] leading-relaxed mb-4">We've received your request. Our concierge team will confirm availability and send payment details within minutes.</p>
-            <button onclick="tdStep(1)" class="w-full bg-gold text-navy border-none py-3 rounded-xl text-[14px] font-bold cursor-pointer">Book Another Tour</button>
-          </div>
-        </div>
-      </div>
-
-      {{-- Trust badges --}}
-      <div class="border-t border-cream-dark px-6 py-4 bg-cream">
-        <div class="grid grid-cols-3 gap-2 text-center">
-          <div><div class="text-[16px] font-extrabold text-navy">4.8&#9733;</div><div class="text-[9.5px] text-[#6b7280] uppercase">Rating</div></div>
-          <div><div class="text-[16px] font-extrabold text-navy">35K+</div><div class="text-[9.5px] text-[#6b7280] uppercase">Travellers</div></div>
-          <div><div class="text-[16px] font-extrabold text-navy">&#9992;&#65039;</div><div class="text-[9.5px] text-[#6b7280] uppercase">Trusted</div></div>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 
-{{-- RELATED TOURS --}}
-@if($related->count())
-<section class="py-16 px-6 bg-cream">
-  <div class="max-w-[1280px] mx-auto">
-    <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">Keep Exploring</p>
-    <h2 class="font-playfair text-navy font-bold text-center mb-2.5 text-[clamp(26px,3.5vw,38px)]">You May Also Like</h2>
-    <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[17px] mt-10">
-      @foreach($related as $r)
-      <div class="bg-[#0b1623] rounded-2xl overflow-hidden transition-all hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,.24)]">
-        <a href="{{ route('tour.detail', $r->slug) }}" class="block relative h-[170px] overflow-hidden no-underline">
-          <img src="{{ asset($r->image ?? 'images/no.png') }}" alt="{{ $r->name }}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-107"/>
-          <div class="absolute inset-0"></div>
-          <span class="absolute bottom-3 right-3 bg-gold text-navy text-[12px] font-extrabold py-1 px-2.5 rounded-full">€{{ $r->price }}</span>
-        </a>
-        <div class="p-4">
-          <a href="{{ route('tour.detail', $r->slug) }}" class="no-underline block"><h3 class="text-[14px] font-bold text-white leading-snug min-h-[38px] hover:text-gold transition-colors">{{ $r->name }}</h3></a>
-          @if($r->rating)
-          <div class="flex items-center gap-1 mt-1.5">
-            <span class="text-[#fbbf24] text-[12px]">{!! str_repeat('&#9733;', round($r->rating)) !!}</span>
-            <span class="text-white/70 text-[12px]">{{ $r->rating }} ({{ $r->reviews_count ?? 0 }})</span>
-          </div>
-          @endif
-          <a href="{{ route('tour.detail', $r->slug) }}" class="mt-3 inline-block bg-gradient-to-r from-gold to-gold-dark text-navy text-[12px] font-bold py-2 px-4 rounded-lg no-underline transition-all hover:opacity-90">View Tour</a>
-        </div>
-      </div>
-      @endforeach
-    </div>
-  </div>
-</section>
-@endif
-
-{{-- FINAL CTA --}}
-<section class="py-16 px-6 bg-navy">
-  <div class="max-w-[800px] mx-auto text-center">
-    <h2 class="font-playfair text-white font-bold text-[clamp(26px,4vw,38px)] mb-4">Ready to Experience {{ Str::before($tour->name, ':') ?: 'Rome' }}?</h2>
-    <p class="text-white/70 text-[15px] mb-7 leading-relaxed">Book now or chat with our concierge team on WhatsApp for a fully personalised experience.</p>
-    <div class="flex gap-3 flex-wrap justify-center">
-      <a href="#bkStep1" onclick="document.getElementById('bkStep1') && scrollToBook()" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-4 px-9 rounded-xl text-[14px] font-bold no-underline transition-all hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(200,168,78,.5)]">&#127915; Book This Tour</a>
-      <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center gap-2 bg-transparent text-white border-[1.5px] border-white/25 py-4 px-9 rounded-xl text-[14px] font-bold no-underline transition-all hover:border-[#25d366]/60 hover:text-[#25d366]">&#128172; WhatsApp Us</a>
-    </div>
-  </div>
-</section>
-
+{{-- JAVASCRIPT --}}
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 <script>
-function tdFaq(btn){
-  var item=btn.parentElement, icon=btn.querySelector('.faq-icon'), a=item.querySelector('.faq-a');
-  var open=a.style.maxHeight && a.style.maxHeight!=='0px';
-  document.querySelectorAll('.faq-a').forEach(function(x){x.style.maxHeight='0';});
-  document.querySelectorAll('.td-faq-icon').forEach(function(i){i.style.transform='';});
-  if(!open){a.style.maxHeight=a.scrollHeight+'px';icon.style.transform='rotate(45deg)';}
-}
-window.tdPic=function(img){
-  if(!img)return;
-  document.getElementById('tdMainImg').src=img.dataset.src;
-  document.querySelectorAll('.td-thumb').forEach(function(t){t.classList.remove('active');});
-  img.classList.add('active');
-};
-document.addEventListener('DOMContentLoaded',function(){
-  var thumbs=document.querySelectorAll('.td-thumb');
-  thumbs.forEach(function(t){t.addEventListener('click',function(){window.tdPic(t);});});
+Fancybox.bind('[data-fancybox="gallery"]', {
+    // optional fancybox config
 });
-function tdStep(n){
-  document.querySelectorAll('.bk-step').forEach(function(s){s.classList.remove('active');});
-  document.getElementById('bkStep'+n).classList.add('active');
-  var bookEl=document.querySelector('.sticky-book');
-  if(bookEl)bookEl.scrollIntoView({behavior:'smooth',block:'start'});
+
+// FAQ Accordion
+function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const icon = btn.querySelector('.faq-icon svg');
+    
+    // Close all others
+    document.querySelectorAll('.faq-answer').forEach(el => {
+        if (el !== answer) {
+            el.style.maxHeight = null;
+            el.parentElement.querySelector('.faq-icon svg').style.transform = 'rotate(0deg)';
+        }
+    });
+    
+    // Toggle current
+    if (answer.style.maxHeight) {
+        answer.style.maxHeight = null;
+        icon.style.transform = 'rotate(0deg)';
+    } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        icon.style.transform = 'rotate(180deg)';
+    }
 }
-function tdPickTime(btn){
-  document.querySelectorAll('.time-slot').forEach(function(t){t.style.background='';t.style.borderColor='';t.style.color='';});
-  btn.style.background='rgba(200,168,78,.15)';btn.style.borderColor='#c8a84e';btn.style.color='#a58530';
+
+// Guest Counter & Price Calc
+const basePrice = {{ $tour->price }};
+const childPrice = Math.round(basePrice * 0.7);
+
+function updateGuests(type, delta) {
+    const el = document.getElementById(type === 'adult' ? 'qtyAdult' : 'qtyChild');
+    let val = parseInt(el.textContent) + delta;
+    
+    if (val < 0) val = 0;
+    if (type === 'adult' && val < 1) val = 1; // Minimum 1 adult
+    
+    el.textContent = val;
+    
+    // update total
+    const adults = parseInt(document.getElementById('qtyAdult').textContent);
+    const children = parseInt(document.getElementById('qtyChild').textContent);
+    
+    const total = (adults * basePrice) + (children * childPrice);
+    document.getElementById('totalPrice').textContent = '€' + total;
 }
-function tdCount(type,delta){
-  var id=type==='adult'?'cntAdult':'cntChild';
-  var el=document.getElementById(id);
-  var val=parseInt(el.textContent)+delta;
-  if(val<0)val=0;
-  if(type==='adult'&&val<1)val=1;
-  el.textContent=val;
-  var adults=parseInt(document.getElementById('cntAdult').textContent);
-  var children=parseInt(document.getElementById('cntChild').textContent);
-  var unit={{ $tour->price }};
-  var childPrice=Math.round(unit*0.7);
-  document.getElementById('bkTotal').textContent='€'+(adults*unit+children*childPrice);
-}
-function scrollToBook(){
-  var el=document.querySelector('.sticky-book');
-  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-  var d=document.getElementById('bkDate');
-  if(d&&!d.value){d.value=new Date().toISOString().split('T')[0];}
-}
+
+// Active Tab highlight on scroll
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.tab-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const scrollY = window.scrollY;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 200; // offset for sticky header
+            const sectionHeight = section.offsetHeight;
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        if (current) {
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'bg-[#c69c27]', 'text-white');
+                link.classList.add('text-gray-700');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active', 'bg-[#c69c27]', 'text-white');
+                    link.classList.remove('text-gray-700');
+                }
+            });
+        }
+    });
+
+    // Handle click to set active immediately (prevents jitter)
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => {
+                l.classList.remove('active', 'bg-[#c69c27]', 'text-white');
+                l.classList.add('text-gray-700');
+            });
+            this.classList.add('active', 'bg-[#c69c27]', 'text-white');
+            this.classList.remove('text-gray-700');
+        });
+    });
+});
 </script>
 @endsection

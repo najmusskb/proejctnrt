@@ -266,21 +266,22 @@
             
             <!-- Mobile Minimized Filter (Visible only on mobile) -->
             <div class="mobile-slide-filter">
-                <form action="#" method="GET" class="msf-form">
+                <form action="{{ route('tours') }}" method="GET" class="msf-form">
                     <div class="msf-selects">
                         <div class="msf-select-wrapper">
                             <select name="attraction" class="msf-select">
                                 <option value="">Select Attraction</option>
-                                <option value="colosseum">Colosseum</option>
-                                <option value="vatican">Vatican</option>
-                                <option value="pantheon">Pantheon</option>
+                                @foreach($destinations as $d)
+                                <option value="{{ $d->slug }}">{{ $d->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="msf-select-wrapper">
                             <select name="type" class="msf-select">
                                 <option value="">Select Type</option>
-                                <option value="guided">Guided</option>
-                                <option value="audio">Audio</option>
+                                @foreach($homeCategories as $c)
+                                <option value="{{ $c->slug }}">{{ $c->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -290,20 +291,19 @@
             
             <!-- BEAUTIFUL OVERLAPPING FILTER SECTION (Desktop only) -->
             <div class="global-filter-wrapper desktop-global-filter">
-                <form action="#" method="GET" class="cst-global-form">
+                <form action="{{ route('tours') }}" method="GET" class="cst-global-form">
                     <select name="attraction" class="cst-global-select border-right">
                         <option value="">Attraction?</option>
-                        <option value="colosseum">Colosseum</option>
-                        <option value="vatican">Vatican Museums</option>
-                        <option value="pantheon">Pantheon</option>
-                        <option value="st-peters">St. Peter's Basilica</option>
+                        @foreach($destinations as $d)
+                        <option value="{{ $d->slug }}">{{ $d->name }}</option>
+                        @endforeach
                     </select>
                     
                     <select name="type" class="cst-global-select">
                         <option value="">Tour Type?</option>
-                        <option value="guided">Guided Tour</option>
-                        <option value="audio">Audio Guide</option>
-                        <option value="ticket">Entry Ticket</option>
+                        @foreach($homeCategories as $c)
+                        <option value="{{ $c->slug }}">{{ $c->name }}</option>
+                        @endforeach
                     </select>
 
                     <button type="submit" class="cst-global-btn" aria-label="Search">
@@ -388,6 +388,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <button class="ds-arrow ds-arrow-l" id="dsPrev" aria-label="Previous">&#10094;</button>
     <button class="ds-arrow ds-arrow-r" id="dsNext" aria-label="Next">&#10095;</button>
     <div class="ds-dots" id="dsDots"></div>
+    <div class="text-center mt-8">
+      <a href="{{ route('destinations') }}" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-3 px-[34px] rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(200,168,78,.4)]">{{ $homeSetting->dest_btn ?? 'View All Destinations' }} &#8594;</a>
+    </div>
   </div>
 </section>
 
@@ -455,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       @endforeach
     </div>
-    <div class="text-center mt-1.5"><button class="bg-transparent text-navy border-2 border-navy py-3 px-[34px] rounded-[10px] text-[14px] font-bold cursor-pointer transition-all hover:bg-navy hover:text-white" id="smBtn" onclick="showMore()">{{ $homeSetting->tours_btn ?? 'Show More Tours' }}</button></div>
+    <div class="text-center mt-1.5"><a href="{{ route('tours') }}" class="bg-transparent text-navy border-2 border-navy py-3 px-[34px] rounded-[10px] text-[14px] font-bold display-inline-block no-underline transition-all hover:bg-navy hover:text-white">{{ $homeSetting->tours_btn ?? 'Show More Tours' }}</a></div>
   </div>
 </section>
 
@@ -590,9 +593,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="w-12 h-[3px] bg-gold mx-auto mt-3 rounded-sm"></div>
     <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">{{ $homeSetting->srv_desc ?? 'Beyond our signature tours, we handle every detail of your Rome stay &mdash; seamless, stress-free, first-class.' }}</p>
 
-    <div class="service-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="service-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       @foreach($services as $srv)
-      <div class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer">
+      <a href="{{ route('service.detail', $srv->slug) }}" class="group bg-cream rounded-2xl overflow-hidden border border-cream-dark transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(0,0,0,.12)] hover:border-gold/40 cursor-pointer no-underline">
         <div class="relative h-[150px] overflow-hidden">
           <img src="{{ $srv->image }}" alt="{{ $srv->name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
           <div class="absolute inset-0 bg-gradient-to-t from-[#0b1623]/70 to-transparent"></div>
@@ -603,14 +606,14 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="p-5">
           <h3 class="font-playfair text-[17px] font-bold text-navy mb-1.5">{{ $srv->name }}</h3>
           <p class="text-[13px] text-[#6b7280] leading-[1.7] mb-3.5">{{ $srv->short_description }}</p>
-          <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-bold text-gold-dark no-underline transition-all group-hover:gap-2.5">Learn more &rarr;</a>
+          <span class="inline-flex items-center gap-1.5 text-[13px] font-bold text-gold-dark no-underline transition-all group-hover:gap-2.5">Learn more &rarr;</span>
         </div>
-      </div>
+      </a>
       @endforeach
     </div>
 
     <div class="text-center mt-8">
-      <a href="#" class="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy py-3 px-[34px] rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-navy hover:text-white">{{ $homeSetting->srv_btn ?? 'View All Services' }} &#8594;</a>
+      <a href="{{ route('service.index') }}" class="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy py-3 px-[34px] rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-navy hover:text-white">{{ $homeSetting->srv_btn ?? 'View All Services' }} &#8594;</a>
     </div>
   </div>
 </section>
@@ -637,20 +640,73 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- PARTNERS -->
-<section class="bg-cream py-[58px] px-6">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+<style>
+.partner-slider .slick-slide { padding: 0 10px; opacity: .55; transform: scale(.92); transition: all .4s ease; }
+.partner-slider .slick-slide.slick-current, .partner-slider .slick-slide.slick-active { opacity: 1; }
+.partner-slider .slick-slide:hover { opacity: 1; }
+.partner-slider .slick-slide > div { margin: 8px 0; }
+.partner-card { pointer-events: none; }
+.partner-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #e0d4b4; background: #fff; color: #a58530; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.08); transition: all .3s; }
+.partner-nav:hover { background: linear-gradient(135deg,#c8a84e,#a58530); color: #fff; border-color: #c8a84e; }
+.partner-prev { left: -22px; }
+.partner-next { right: -22px; }
+@media (max-width: 768px){ .partner-prev{left:-10px} .partner-next{right:-10px} }
+</style>
+<section class="bg-cream py-[58px] px-6 relative">
   <div class="max-w-[1280px] mx-auto">
     <p class="text-[11px] font-bold tracking-[3px] text-gold uppercase text-center mb-3">{{ $homeSetting->partners_subtitle ?? 'Our Network' }}</p>
-    <h2 class="font-playfair text-navy font-bold text-center mb-[26px] leading-tight text-[clamp(28px,4vw,44px)]">{{ $homeSetting->partners_title ?? 'Our Trusted Partners' }}</h2>
-    <div class="overflow-hidden">
-      <div class="partner-track">
-        @php $partnerNames = $partners->pluck('name')->all(); $pLoop = array_merge($partnerNames, $partnerNames); @endphp
-        @foreach($pLoop as $pname)
-        <div class="bg-white border-[1.5px] border-cream-dark rounded-xl py-[13px] px-6 text-[13px] font-bold text-navy whitespace-nowrap shrink-0 transition-all hover:border-gold hover:text-gold-dark">{{ $pname }}</div>
+    <h2 class="font-playfair text-navy font-bold text-center mb-[34px] leading-tight text-[clamp(28px,4vw,44px)]">{{ $homeSetting->partners_title ?? 'Our Trusted Partners' }}</h2>
+    @if($partners->count())
+    <div class="relative">
+      <div class="partner-slider">
+        @foreach($partners as $p)
+        <div class="partner-card">
+          <div class="bg-white border-[1.5px] border-cream-dark rounded-xl px-6 h-[68px] flex items-center justify-center gap-3 transition-all hover:border-gold hover:shadow-md">
+            @if($p->image)
+            <img src="{{ asset($p->image) }}" alt="{{ $p->name }}" class="h-9 w-auto object-contain mx-auto"/>
+            @else
+            <span class="text-[14px] font-bold text-navy whitespace-nowrap">{{ $p->name }}</span>
+            @endif
+          </div>
+        </div>
         @endforeach
       </div>
+      <button type="button" class="partner-nav partner-prev" aria-label="Previous">&#10094;</button>
+      <button type="button" class="partner-nav partner-next" aria-label="Next">&#10095;</button>
     </div>
+    @else
+    <p class="text-center text-[13px] text-[#6b7280]">No partners added yet.</p>
+    @endif
   </div>
 </section>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof $ !== 'undefined' && $.fn && $.fn.slick) {
+        $('.partner-slider').slick({
+            dots: false,
+            infinite: true,
+            speed: 600,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2200,
+            waitForAnimate: false,
+            prevArrow: '.partner-prev',
+            nextArrow: '.partner-next',
+            responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 4 } },
+                { breakpoint: 768,  settings: { slidesToShow: 3 } },
+                { breakpoint: 520,  settings: { slidesToShow: 2 } }
+            ]
+        });
+    }
+});
+</script>
+
 
 <!-- BLOG -->
 <section class="py-20 px-6 bg-cream">
@@ -661,11 +717,14 @@ document.addEventListener('DOMContentLoaded', function() {
     <p class="text-[15px] text-[#6b7280] text-center max-w-[560px] mx-auto mt-3.5 mb-[42px] leading-[1.7]">{{ $homeSetting->blog_desc ?? 'Insider guides, travel tips and stories from Rome\'s hidden corners.' }}</p>
     <div class="blog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       @foreach($blogs as $blog)
-      <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)]">
+      <a href="{{ route('blog.detail', $blog->slug) }}" class="blog-card bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,.06)] transition-all cursor-pointer hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,.1)] no-underline">
         <div class="blog-card-img h-[194px] overflow-hidden"><img src="{{ $blog->image }}" alt="{{ $blog->title }}" class="w-full h-full object-cover transition-transform duration-300"/></div>
-        <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">{{ $blog->author ?? 'Journal' }}</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">{{ $blog->title }}</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">{{ $blog->short_description }}</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; {{ optional($blog->created_at)->format('M d, Y') }} &nbsp;&middot;&nbsp; {{ $blog->read_time ?? '5' }} min read</p><a href="#" class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</a></div>
-      </div>
+        <div class="p-[18px]"><span class="text-[11px] font-bold tracking-[1.5px] text-gold-dark uppercase mb-[7px] block">{{ $blog->author ?? 'Journal' }}</span><h3 class="font-playfair text-[17px] font-bold text-navy mb-[7px] leading-[1.4]">{{ $blog->title }}</h3><p class="text-[13px] text-[#6b7280] leading-[1.6] mb-[11px]">{{ $blog->short_description }}</p><p class="text-[12px] text-[#6b7280] mb-3">&#128197; {{ optional($blog->created_at)->format('M d, Y') }} &nbsp;&middot;&nbsp; {{ $blog->read_time ?? '5' }} min read</p><span class="text-gold-dark font-semibold no-underline text-[13px]">Read More &rarr;</span></div>
+      </a>
       @endforeach
+    </div>
+    <div class="text-center mt-10">
+      <a href="{{ route('blog.all') }}" class="inline-flex items-center gap-2 bg-transparent text-navy border-2 border-navy py-3 px-[34px] rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-navy hover:text-white">{{ $homeSetting->blog_btn ?? 'View All Posts' }} &#8594;</a>
     </div>
   </div>
 </section>
@@ -887,7 +946,8 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <div class="text-center mt-8">
-      <a href="{{ $company->insta_link ?? '#' }}" target="_blank" class="text-[13px] font-semibold text-gold no-underline transition-colors hover:text-gold-light">Tag {{ $company->insta_handle ?? '@niceinrometour' }} in your photos to be featured &#8594;</a>
+      <a href="{{ route('gallery.all') }}" class="inline-flex items-center gap-2 bg-gold text-navy border-none py-3 px-[34px] rounded-[10px] text-[14px] font-bold no-underline transition-all hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(200,168,78,.4)] mb-4">View All Gallery &#8594;</a>
+      <div><a href="{{ $company->insta_link ?? '#' }}" target="_blank" class="text-[13px] font-semibold text-gold no-underline transition-colors hover:text-gold-light">Tag {{ $company->insta_handle ?? '@niceinrometour' }} in your photos to be featured &#8594;</a></div>
     </div>
   </div>
 </section>

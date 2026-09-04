@@ -36,6 +36,11 @@ Route::get('/all-destinations', [HomeController::class, 'destinations'])->name('
 Route::get('/destination/{slug}', [HomeController::class, 'destination'])->name('destination.detail');
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.detail');
 Route::get('/tour/{slug}', [HomeController::class, 'show'])->name('tour.detail');
+Route::get('/service/{slug}', [HomeController::class, 'serviceDetail'])->name('service.detail');
+Route::get('/blog/{slug}', [HomeController::class, 'blogDetail'])->name('blog.detail');
+Route::get('/blogs', [HomeController::class, 'blogs'])->name('blog.all');
+Route::get('/services', [HomeController::class, 'services'])->name('service.index');
+Route::get('/photo-gallery', [HomeController::class, 'gallery'])->name('gallery.all');
 Route::get('/tickets', [HomeController::class, 'tickets'])->name('tickets');
 Route::get('/tours', [HomeController::class, 'tours'])->name('tours');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
