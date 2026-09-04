@@ -42,6 +42,8 @@ Route::get('/blogs', [HomeController::class, 'blogs'])->name('blog.all');
 Route::get('/services', [HomeController::class, 'services'])->name('service.index');
 Route::get('/photo-gallery', [HomeController::class, 'gallery'])->name('gallery.all');
 Route::get('/tickets', [HomeController::class, 'tickets'])->name('tickets');
+Route::get('/cart', [HomeController::class, 'tours'])->name('cart');
+Route::get('/checkout', [HomeController::class, 'tours'])->name('checkout');
 Route::get('/tours', [HomeController::class, 'tours'])->name('tours');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact-us/submit', [HomeController::class, 'contactSubmit'])->name('contact.submit');

@@ -5,7 +5,7 @@
     <!-- Logo -->
     <a href="{{ url('/') }}" class="nav-logo" aria-label="{{ $content->com_name ?? 'Journey With Mr. J' }} Home">
       @if(isset($content->logo))
-      <img src="{{ asset($content->logo) }}" alt="{{ $content->com_name }}" style="height: 64px; border-radius: 12px; object-fit: contain;">
+      <img src="{{ asset($content->logo) }}" alt="{{ $content->com_name }}" style="height: 40px; border-radius: 8px; object-fit: contain;">
       @else
       <div class="nav-logo-badge">
         <svg width="32" height="32" viewBox="0 0 40 40" fill="none">

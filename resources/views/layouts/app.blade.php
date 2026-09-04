@@ -106,15 +106,11 @@ body{font-family:'Mulish',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x
 }
 .nav-logo-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:32px;
+  font-size:18px;
   font-weight:900;
   letter-spacing:1px;
   display:block;
-  background: linear-gradient(90deg, #ff007f, #ffb300, #00d4ff, #8a2be2, #ff007f);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rainbowText 5s linear infinite;
+  color:#fff;
   filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.5));
 }
 .nav-logo-sub{
@@ -1170,9 +1166,9 @@ body{font-family:'Mulish',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x
   .nav-translate-btn::before { line-height: 1; display: flex; align-items: center; }
   .nav-logo { margin-right: 0; gap: 8px; flex-shrink: 0; min-width: max-content; }
   .nav-logo-text { display: flex !important; }
-  .nav-logo-title { font-size: 16px !important; letter-spacing: 0.5px; white-space: nowrap !important; line-height: 1.1; display: block !important; visibility: visible !important; opacity: 1 !important; }
-  .nav-logo img { height: 46px !important; }
-  .nav-logo-badge { width: 46px; height: 46px; }
+  .nav-logo-title { font-size: 15px !important; letter-spacing: 0.5px; white-space: nowrap !important; line-height: 1.1; display: block !important; visibility: visible !important; opacity: 1 !important; color:#fff !important; }
+  .nav-logo img { height: 34px !important; }
+  .nav-logo-badge { width: 34px; height: 34px; }
   
   .top-bar-inner { padding: 0 16px; justify-content: center; }
   .top-bar-right { display: none; }
@@ -1197,9 +1193,9 @@ body{font-family:'Mulish',sans-serif;background:#f4efe6;color:#1a1a2e;overflow-x
 @media(max-width:480px){
   .nav-logo { min-width: auto; max-width: 100%; overflow: hidden; }
   .nav-logo-text { display: flex !important; }
-  .nav-logo-title { font-size: 15px !important; white-space: normal !important; display: block !important; visibility: visible !important; opacity: 1 !important; letter-spacing: 0.4px; line-height: 1.15; }
-  .nav-logo img { height: 46px !important; }
-  .nav-logo-badge { width: 46px; height: 46px; flex-shrink: 0; }
+  .nav-logo-title { font-size: 14px !important; white-space: normal !important; display: block !important; visibility: visible !important; opacity: 1 !important; letter-spacing: 0.4px; line-height: 1.15; color:#fff !important; }
+  .nav-logo img { height: 32px !important; }
+  .nav-logo-badge { width: 32px; height: 32px; flex-shrink: 0; }
   .nav-translate-label { display: none; }
   .nav-translate-btn::before { content: '\1F310'; margin-right: 4px; font-size: 14px; }
 }
